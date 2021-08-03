@@ -1,0 +1,37 @@
+# 网络安全防护
+
+# 使用iptables对主机上某个服务进行访问限制
+
+> 如果可以的话尽可能从源头解决，实在不方便从源头解决的话可以使用此方法进行访问限制，避免被其他软件扫描出各种“漏洞“
+
+## 主机模式
+
+- 例如本机直接运行tomcat位于8080端口，已知可能正常访问的客户ip来源为：192.168.123.0/24 禁止其他ip段访问，则可通过如下命令实现
+
+```
+#先禁止全部访问
+iptables -I INPUT -p tcp -m tcp --dport 8080 --src 0.0.0.0/0 -j DROP
+#允许合法地址
+iptables -I INPUT -p tcp -m tcp --dport 8080 --src 192.168.123.0/24 -j ACCEPT
+#保存规则
+iptables-save > /etc/iptables.save
+#加开机自动加载
+chmod +x /etc/rc.d/rc.local
+echo 'iptables-restore < /etc/iptables.save' >> /etc/rc.d/rc.local
+```
+
+## 容器模式
+
+- 如果是要对位于容器中的服务进行防护需要指定容器专属的规则链，如下
+
+```
+#先禁止全部访问
+iptables -I DOCKER -p tcp -m tcp --dport 8080 --src 0.0.0.0/0 -j DROP
+#允许合法地址
+iptables -I DOCKER -p tcp -m tcp --dport 8080 --src 192.168.123.0/24 -j ACCEPT
+#保存规则
+iptables-save > /etc/iptables.save
+#加开机自动加载
+chmod +x /etc/rc.d/rc.local
+echo 'iptables-restore < /etc/iptables.save' >> /etc/rc.d/rc.local
+```
