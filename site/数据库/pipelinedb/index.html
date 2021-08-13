@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://wiki.xlz2021.cf/%E6%95%B0%E6%8D%AE%E5%BA%93/pipelinedb/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>pipelinedb流式数据库介绍 - 玄凌子知识库</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/cypher.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/kotlin.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/docker.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">玄凌子知识库</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">关于我</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Docker <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../docker/docker%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3/" class="dropdown-item">docker容器相关</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Linux <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../linux/centos7_selinux/" class="dropdown-item">修复Centos7的SELINUX错误</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos7%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F/" class="dropdown-item">Centos7单用户模式</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos_update_gcc/" class="dropdown-item">CentOS完美升级gcc版本方法</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/cron/" class="dropdown-item">cron定时任务常见问题</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/net_safe/" class="dropdown-item">网络安全防护</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/net_speed_test/" class="dropdown-item">带宽测试</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/nfs/" class="dropdown-item">针对大数据组件的NFS挂载参数</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/nginx/" class="dropdown-item">nginx负载均衡</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/update_centos7_kernel/" class="dropdown-item">Centos7 升级内核版本</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Store <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../store/seaweedfs/" class="dropdown-item">seaweedfs</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">大数据 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/ElasticSearch/" class="dropdown-item">ElasticSearch技巧</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/cdh_spark/" class="dropdown-item">cdh编写spark依赖问题</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/greenplum%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8/" class="dropdown-item">greenplum集群使用</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/greenplum%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">greenplum集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/kafka%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="dropdown-item">Kafka常用命令</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/mysql/" class="dropdown-item">Mysql</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">数据库 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../Postgresql/" class="dropdown-item">Postgresql相关</a>
+</li>
+                                    
+<li>
+    <a href="../mysql_mariadb/" class="dropdown-item">mysql/mariadb</a>
+</li>
+                                    
+<li>
+    <a href="../neo4j/" class="dropdown-item">Neo4j相关</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">pipelinedb流式数据库介绍</a>
+</li>
+                                    
+<li>
+    <a href="../timescaledb/" class="dropdown-item">Timescaledb</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">灵枢 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E7%81%B5%E6%9E%A2/%E7%BB%8F%E7%BB%9C%E5%B9%B2%E6%94%AF/" class="dropdown-item">经络干支</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../neo4j/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../timescaledb/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#pipelinedb" class="nav-link">pipelinedb流式数据库介绍</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#pipelinedb_1" class="nav-link">PipelineDB的长处</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#pipelinedb_2" class="nav-link">PipelineDB的短板</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">功能</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="pipelinedb">pipelinedb流式数据库介绍</h1>
+<blockquote>
+<p>PipelineDB是一个用于在时序数据上持续执行SQL查询的高性能PostgreSQL插件。SQL查询的输出被持久化到普通的表中，可以像其它的表或视图一样进行查询。可以认为持续查询的结果是一个高吞吐量并且快速更新的物化视图。PipelineDB可以在某些任务场景下表现得十分优秀，若超出这个范畴，可能就会同其它数据处理系统一样面临一些问题。 pipelinedb运行原理 比如说我们用这个pipelinedb是要做一件事：我们要多维度实时统计一个大数据集，传统方法是把数据存到表中，查表统计，这个过程太慢了，于是你就需要用到pipelinedb了，它省去了你把数据存入表中的这个步骤，通过一个类似管道的东西把数据交给内存来直接计算，只保存统计结果，过程非常快，与各种统计需求是绝配。 官方文档：https://pipelinedb-doc-cn.readthedocs.io/zh_CN/latest/introduction.html</p>
+</blockquote>
+<h2 id="pipelinedb_1">PipelineDB的长处</h2>
+<ul>
+<li>PipelineDB被设计用来在精简后的流式数据集上进行SQL查询。比如：概要和聚合；基于滑动时间窗口的性能计算；文本索引和过滤；空间信息过滤等。通过减少流数据的输入，PipelineDB可以显著地减少持久化到磁盘中的数据量，因为之后聚合后的结果被存储下来。原始数据（foreign table）一旦被需要它的持续查询读取后就会被销毁。</li>
+<li>大多数写入到PipelineDB中的数据可以被视为 虚拟数据。数据虚拟化是PipelineDB设计的精髓，凭着这种设计，PipelineDB可以只占用较小的硬件资源实现高效的大数据量处理。</li>
+<li>PipelineDB的目标是消除许多数据传输中的ETL过程。原始数据流式写入PipelineDB，被已声明的流式查询实时地转换和提取，这使得它在将成型的输出加载到数据库前不必周期性地处理颗粒数据，前提是这些处理过程可以通过SQL定义。</li>
+<li>在PipelineDB的设计理念中，实用性是第一要素，这也是我们将其包装为PostgreSQL插件的原因。所有数据存储和处理都交由PostgreSQL：一个极其稳定、成熟以及运用广泛的数据库。此外，PipelineDB兼容活跃的PostgreSQL生态中的所有工具。我们没有为PipelineDB设计特有的语法甚至是客户端，因为它可以很好地兼容任何基于PostgreSQL开发的库。</li>
+</ul>
+<h2 id="pipelinedb_2">PipelineDB的短板</h2>
+<ul>
+<li>鉴于流查询需要一些 先验知识，PipelineDB不是一个特定的数据仓库。流式查询的输出可能在特定方式下被访问，所有写入到PipelineDB中的原始数据都不会被持久化因为它们都会在读取后被销毁。此外，如果流式计算不能以SQL的形式表达，PipelineDB可能并不是一个合适的选择！</li>
+</ul>
+<h2 id="_1">功能</h2>
+<h3 id="foreign-table">流（foreign table）</h3>
+<p>流是一种允许客户端将时序数据写入 流视图 的抽象管道。流里面的一行数据（或者简单称作 event），与数据表中的行数据是很相似的，并且二者的写入也是完全一致的。然而，流和数据表的语义是完全不同的。</p>
+<p>换言之，event 只会在被所有的 流视图 消费完之前“存在”于流中。即使这样，用户仍然不能直接从流中 SELECT 数据。流唯一的作用就是充当 流视图 的输入。</p>
+<h3 id="_2">流视图</h3>
+<p>流视图（continuous view）是PipelineDB的基础概念抽象。流视图跟普通的数据库视图非常相似，但它是将流和表中的数据组合后作为输入并进行实时增量更新。 流数据一旦被流视图读取后就会被销毁，流数据不会存储在任何地方。只有诸如 SELECT * FROM that_view 查询返回的结果才会被持久化，也就是说，流视图可以被视为高吞吐量、实时的物化视图。</p>
+<h3 id="_3">流转换</h3>
+<p>流转换可以在不存储时序的情况下对其进行实时转换。由于数据不存储数据，所以流转换不支持聚合操作。转换后的数据既可以作为另一个流的输入，也可以写入到外部数据存储中。</p>
+<h3 id="_4">流聚合</h3>
+<p>PipelineDB最核心的追求之一就是 促进高性能的连续聚合，所以聚合函数毫无疑问是PipelineDB的核心功能。连续聚合在大多数通用场景是非常有用的，它使得PipelineDB中持久化的数据始终与写入的数据保持同步。它可以通过一定的硬件实现稳定和高吞度量的服务。 连续聚合是随着流视图新 event 的生成实时 增量更新的。对于如 count 和 sum 之类的简单聚合，我们很容易理解结果是如何增量更新的–将新值累加到已有结果上而已。 但对更加复杂的聚合而言，如 avg, stddev, percentile_cont 等，需要更优化的架构来支持高效的增量更新，PipelineDB在内部自动实现了这些复杂的逻辑。</p>
+<h3 id="_5">流关联</h3>
+<p>流视图 的并非只靠select 流（foreign table） 产生，也可以通过将输入的时序数据和静态的PipelineDB数据表组合后得到，这可以用称作流-表关联的方式实现。</p>
+<ul>
+<li>流-表关联</li>
+<li>流-表关联在 event到达时 将其与表中匹配的行数据组合。换言之，如果在表数据在 event 被读取后才被插入，即使是匹配的，也不会对流视图产生影响。新数据只会在 event被读取时 产生。即使流-表关联中的表被清空了，流视图中的数据也不会变化。</li>
+<li>流-流关联 目前不支持流之间的关联，这个功能可能会出现在将来的版本中。 <strong><em>译者注： 2019年5月1日，PipelineDB公司宣布加入Confluent（Kafka的公司），官方版将会停留在1.0.0，详情见 官方报道(https://www.pipelinedb.com/blog/pipelinedb-is-joining-confluent)。</em></strong></li>
+</ul>
+<p><strong><em>pipelinedb作者给出建议：1、使用confluent的ksql（商业软件）代替pipelinedb 2、如果还是钟爱pg系列，timescaledb 扩展是一个不错的选择</em></strong></p>
+<h3 id="_6">滑动窗口</h3>
+<p>由于 流视图 是实时增量更新的，PipelineDB可以在更新流视图结果集时考虑当前时间。WHERE 子句中包含与 当前时间 相关信息的查询被称作 滑动窗口查询。滑动的 WHERE 子句过滤或接收到的 event 集合是随时间持续变化的。</p>
+<h3 id="_7">内置函数</h3>
+<p>我们努力保证PipelineDB同PostgreSQL的10.1+和11.0+版本保持完全兼容。因此，所有 PostgreSQL内置函数 都可以直接在PipelineDB中使用。</p>
+<h3 id="pipelinedb_3">PipelineDB特有函数</h3>
+<p>具体查看：https://pipelinedb-doc-cn.readthedocs.io/zh_CN/latest/builtin.html#id4</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
