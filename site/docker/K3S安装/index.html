@@ -227,14 +227,38 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">在线安装</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">离线安装</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
+<h2 id="_1">在线安装</h2>
 <p>K3S作为一种轻量化的k8s方案在简单的环境中非常便于部署</p>
 <p><code>curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -</code></p>
-<p>就这么一行命令就可以安装成功，然后就可以愉快的使用<code>kubectl</code> 之类的命令啦。</p></div>
+<p>就这么一行命令就可以安装成功，然后就可以愉快的使用<code>kubectl</code> 之类的命令啦。</p>
+<h2 id="_2">离线安装</h2>
+<p>离线环境的升级可以通过以下步骤完成：</p>
+<ul>
+<li>
+<p>从<a href="https://github.com/rancher/k3s/releases">K3s GitHub Release</a>页面下载要升级到的 K3s 版本。将 tar 文件放在每个节点的<code>/var/lib/rancher/k3s/agent/images/</code>目录下。删除旧的 tar 文件。</p>
+</li>
+<li>
+<p>复制并替换每个节点上<code>/usr/local/bin</code>中的旧 K3s 二进制文件。复制<a href="https://get.k3s.io/">https://get.k3s.io</a> 的安装脚本（因为它可能在上次发布后发生了变化）。再次运行脚本。</p>
+</li>
+<li>
+<p>重启 K3s 服务。</p>
+</li>
+</ul></div>
             </div>
         </div>
 
