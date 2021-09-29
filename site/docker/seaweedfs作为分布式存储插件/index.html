@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://wiki.xlz2021.cf/docker/docker%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3/">
+        <link rel="canonical" href="https://wiki.xlz2021.cf/docker/seaweedfs%E4%BD%9C%E4%B8%BA%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E6%8F%92%E4%BB%B6/">
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>docker容器相关 - 玄凌子知识库</title>
+        <title>Seaweedfs作为分布式存储插件 - 玄凌子知识库</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -49,11 +49,11 @@
 </li>
                                     
 <li>
-    <a href="./" class="dropdown-item active">docker容器相关</a>
+    <a href="../docker%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3/" class="dropdown-item">docker容器相关</a>
 </li>
                                     
 <li>
-    <a href="../seaweedfs%E4%BD%9C%E4%B8%BA%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E6%8F%92%E4%BB%B6/" class="dropdown-item">Seaweedfs作为分布式存储插件</a>
+    <a href="./" class="dropdown-item active">Seaweedfs作为分布式存储插件</a>
 </li>
                                 </ul>
                             </li>
@@ -205,12 +205,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../K3S%E5%AE%89%E8%A3%85/" class="nav-link">
+                                <a rel="prev" href="../docker%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../seaweedfs%E4%BD%9C%E4%B8%BA%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E6%8F%92%E4%BB%B6/" class="nav-link">
+                                <a rel="next" href="../../linux/centos7_selinux/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -232,7 +232,22 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#docker" class="nav-link">docker容器相关</a>
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">安装插件</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_4" class="nav-link">创建存储卷</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_5" class="nav-link">使用</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_6" class="nav-link">注意事项</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -241,9 +256,36 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="docker">docker容器相关</h1>
+<h2 id="_1">安装插件</h2>
+<h3 id="_2">在线安装</h3>
+<pre><code class="language-bash">#HOST的值是filer的地址和端口，不带http前缀
+docker plugin install --alias seaweedfs katharostech/seaweedfs-volume-plugin HOST=localhost:8888 
+#安装过程中会询问是否允许申请的权限，输入Y回车进行确认
+docker plugin ls #可以看到如下结果
+ID                  NAME                 DESCRIPTION                         ENABLED
+4a08a23cf2eb        seaweedfs:latest     SeaweedFS volume plugin for Docker  true
+</code></pre>
+<h3 id="_3">离线安装</h3>
+<p>在有网络的环境下安装好插件，将插件目录（<code>/var/lib/docker/plugin/*</code>）直接打包起来拿到离线环境下解压到对应目录，然后<code>systemctl restart docker</code>来重启容器后端服务即可通过<code>docker pulgin ls</code>看到该插件了。</p>
+<h2 id="_4">创建存储卷</h2>
+<pre><code class="language-bash">#创建一个持久化存储卷
+docker volume create --driver seaweedfs weed-vol
+#该目录存储于：http://localhost:8888/docker/volumes/weedvol/
+
+</code></pre>
+<h2 id="_5">使用</h2>
+<pre><code class="language-bash">docker run -it --rm -v weed-vol:/data alpine sh
+cd /data
+cp -r /etc/* ./
+ls -alh
+du . -hs
+
+</code></pre>
+<h2 id="_6">注意事项</h2>
 <ul>
-<li>在docker的php:fpm镜像中安装pdo_mysql扩展:docker-php-ext-install pdo_mysql</li>
+<li>生产环境中建议seaweedfs集群使用多个volume来提升并发读写速度。</li>
+<li>如果想将docker的volume绑定到不同的seaweedfs filer的话以另外的名称再安装一个插件，创建容器存储卷时候使用另一个名字作为<code>--driver</code>的值即可。</li>
+<li>插件通过<code>host</code>主机网络接口进行通信。</li>
 </ul></div>
             </div>
         </div>
