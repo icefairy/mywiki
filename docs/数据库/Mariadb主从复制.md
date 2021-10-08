@@ -43,6 +43,10 @@ cd /etc/mysql/mariadb.conf.d
 cat > sec.cnf
 [mysqld]
 server-id=2
+log-bin = mysql-bin
+expire_logs_days=3
+#可选参数
+read-only
 Ctrl+D
 exit
 docker restart secdb
@@ -56,6 +60,7 @@ CHANGE MASTER TO MASTER_HOST='pridb', MASTER_USER='sec', MASTER_PASSWORD='K0Xwkq
 start slave;
 show slave status;
 ```
+
 
 ## 测试
 
@@ -71,4 +76,20 @@ use testdb;
 select * from mytest;
 --即可看到testdb中的mytest表中的数据
 
+```
+
+
+## 主节点故障提升从节点为主节点
+
+```bash
+docker stop pridb
+docker exec -it secdb bash
+mysql -uroot -p
+stop slave;
+reset slave all;
+show slave status;
+#没有从节点的状态数据了
+#如果之前有配置从节点为只读的话需要去除只读选项
+exit
+#完成，此时可以对从节点进行正常使用了（正常情况不建议直接使用从节点，因为从节点做的变更不会被同步到主节点，造成数据差异）
 ```
