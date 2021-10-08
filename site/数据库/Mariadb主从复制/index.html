@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://wiki.xlz2021.cf/%E6%95%B0%E6%8D%AE%E5%BA%93/Postgresql%E9%9B%86%E7%BE%A4/">
+        <link rel="canonical" href="https://wiki.xlz2021.cf/%E6%95%B0%E6%8D%AE%E5%BA%93/Mariadb%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>pg集群搭建 - 玄凌子知识库</title>
+        <title>Mariadb主从复制 - 玄凌子知识库</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -150,7 +150,7 @@
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../Mariadb%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" class="dropdown-item">Mariadb主从复制</a>
+    <a href="./" class="dropdown-item active">Mariadb主从复制</a>
 </li>
                                     
 <li>
@@ -158,7 +158,7 @@
 </li>
                                     
 <li>
-    <a href="./" class="dropdown-item active">pg集群搭建</a>
+    <a href="../Postgresql%E9%9B%86%E7%BE%A4/" class="dropdown-item">pg集群搭建</a>
 </li>
                                     
 <li>
@@ -209,12 +209,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../Postgresql/" class="nav-link">
+                                <a rel="prev" href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/mysql/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../mysql_mariadb/" class="nav-link">
+                                <a rel="next" href="../Postgresql/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -236,46 +236,27 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#pg" class="nav-link">pg集群搭建</a>
-              <ul class="nav flex-column">
             <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">创建容器</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-              </ul>
-            </li>
             
-            <li class="nav-item" data-level="1"><a href="#_2" class="nav-link">测试复制</a>
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">设置主节点</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#_3" class="nav-link">角色升级（故障恢复）</a>
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">配置从节点</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#error-cannot-execute-create-table-in-a-read-only-transaction" class="nav-link">报错ERROR:  cannot execute CREATE TABLE in a read-only transaction</a>
+            <li class="nav-item" data-level="2"><a href="#_4" class="nav-link">测试</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#_4" class="nav-link">升级</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#ddl" class="nav-link">执行后等三秒再执行ddl等语句就可以成功，此时以升级为主节点</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#_5" class="nav-link">增加从节点</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#_6" class="nav-link">测试从节点</a>
+            <li class="nav-item" data-level="2"><a href="#_5" class="nav-link">主节点故障提升从节点为主节点</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -284,25 +265,85 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="pg">pg集群搭建</h1>
 <h2 id="_1">创建容器</h2>
-<p>docker run -d -p 5433:5432 --name pg1 --hostname pg1 --net local livingdocs/postgres:12.4
-docker run -d -p 5434:5432 --name pg2 --hostname pg2  --net local livingdocs/postgres:12.4 standby -d "host=pg1 port=5432 user=postgres target_session_attrs=read-write"</p>
-<h1 id="_2">测试复制</h1>
-<p>docker exec pg1 psql -c "CREATE TABLE hello (value text); INSERT INTO hello(value) VALUES('world');"
-docker exec pg2 psql -c "SELECT * FROM hello;"</p>
-<h1 id="_3">角色升级（故障恢复）</h1>
-<p>docker rm pg1 -f
-docker exec pg2 psql -c "CREATE TABLE hello1 (value text); INSERT INTO hello1(value) VALUES('world');"</p>
-<h1 id="error-cannot-execute-create-table-in-a-read-only-transaction">报错ERROR:  cannot execute CREATE TABLE in a read-only transaction</h1>
-<h1 id="_4">升级</h1>
-<p>docker exec pg2 touch /var/lib/postgresql/data/promote.signal</p>
-<h1 id="ddl">执行后等三秒再执行ddl等语句就可以成功，此时以升级为主节点</h1>
-<p>docker exec pg2 psql -c "CREATE TABLE hello1 (value text); INSERT INTO hello1(value) VALUES('world');"</p>
-<h1 id="_5">增加从节点</h1>
-<p>docker run -d -p 5433:5432 --name pg1 --hostname pg1  --net local livingdocs/postgres:12.4 standby -d "host=pg2 port=5432 user=postgres target_session_attrs=read-write"</p>
-<h1 id="_6">测试从节点</h1>
-<p>docker exec pg1 psql -c "SELECT * FROM hello;"</p></div>
+<pre><code class="language-bash">docker network create mdb
+rootpwd=`openssl rand -base64 16`
+echo $rootpwd
+#K0XwkqGwPH+2g4A8x/OueQ==
+#如果是跨主机部署可以直接指定--net host即可使用主机网络无需映射端口
+docker run -itd --name pridb -e MARIADB_ROOT_PASSWORD=&quot;K0XwkqGwPH+2g4A8x/OueQ==&quot; --net mdb --hostname pridb -p 3306:3306 mariadb:10.5
+docker run -itd --name secdb -e MARIADB_ROOT_PASSWORD=&quot;K0XwkqGwPH+2g4A8x/OueQ==&quot; --net mdb --hostname secdb -p 3307:3306 mariadb:10.5
+</code></pre>
+<h2 id="_2">设置主节点</h2>
+<pre><code class="language-bash">docker exec -it pridb bash
+cd /etc/mysql/mariadb.conf.d
+#可以在下面配置文件中自定义保留logbin的日期，保留的长了会占用更多磁盘空间，短了会存在从节点掉线超过N天就无法再同步的情况，需要自行选择
+cat &gt; pri.cnf
+[mysqld]
+server-id = 1
+log-bin = mysql-bin
+expire_logs_days=3
+Ctrl+D
+exit
+docker restart pridb
+docker exec -it pridb bash
+mysql -uroot -p
+#查看主节点状态
+show master status;
+#创建从节点复制账户
+CREATE USER 'sec'@'%' IDENTIFIED BY 'K0XwkqGwPH';
+GRANT REPLICATION SLAVE ON *.* TO 'sec'@'%';
+
+
+</code></pre>
+<h2 id="_3">配置从节点</h2>
+<pre><code class="language-bash">docker exec -it secdb bash
+cd /etc/mysql/mariadb.conf.d
+cat &gt; sec.cnf
+[mysqld]
+server-id=2
+log-bin = mysql-bin
+expire_logs_days=3
+#可选参数
+read-only
+Ctrl+D
+exit
+docker restart secdb
+docker exec -it pridb bash
+mysql -uroot -p
+#创建账户
+CREATE USER 'sec'@'%' IDENTIFIED BY 'K0XwkqGwPH';
+GRANT REPLICATION SLAVE ON *.* TO 'sec'@'%';
+#下面的值通过在主节点中的show master status获得
+CHANGE MASTER TO MASTER_HOST='pridb', MASTER_USER='sec', MASTER_PASSWORD='K0XwkqGwPH', MASTER_LOG_FILE='mysqld-bin.000001', MASTER_LOG_POS=646;
+start slave;
+show slave status;
+</code></pre>
+<h2 id="_4">测试</h2>
+<pre><code class="language-sql">--在主节点执行
+create database testdb;
+use testdb;
+create table mytest(id int,txt varchar(255));
+insert into mytest values(1,'111');
+--在从节点执行
+show databases;
+use testdb;
+select * from mytest;
+--即可看到testdb中的mytest表中的数据
+
+</code></pre>
+<h2 id="_5">主节点故障提升从节点为主节点</h2>
+<pre><code class="language-bash">docker stop pridb
+docker exec -it secdb bash
+mysql -uroot -p
+stop slave;
+reset slave all;
+show slave status;
+#没有从节点的状态数据了
+#如果之前有配置从节点为只读的话需要去除只读选项
+exit
+#完成，此时可以对从节点进行正常使用了（正常情况不建议直接使用从节点，因为从节点做的变更不会被同步到主节点，造成数据差异）
+</code></pre></div>
             </div>
         </div>
 
