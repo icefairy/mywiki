@@ -81,6 +81,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://wiki.xlz2021.cf/%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E7%9B%B8%E5%85%B3/</loc>
+         <lastmod>2021-10-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://wiki.xlz2021.cf/%E5%A4%A7%E6%95%B0%E6%8D%AE/cdh_spark/</loc>
          <lastmod>2021-10-09</lastmod>
          <changefreq>daily</changefreq>
@@ -92,11 +97,6 @@
     </url>
     <url>
          <loc>https://wiki.xlz2021.cf/%E5%A4%A7%E6%95%B0%E6%8D%AE/greenplum%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</loc>
-         <lastmod>2021-10-09</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://wiki.xlz2021.cf/%E5%A4%A7%E6%95%B0%E6%8D%AE/kafka%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
          <lastmod>2021-10-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
