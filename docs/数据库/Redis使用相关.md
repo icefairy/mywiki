@@ -4,6 +4,16 @@
 
 + 在String、Hashes、Lists、Sets、Sorted Sets几个常用数据类型中结合业务选择合适的类型来存储。
 
+## 常用命令
+
+```bash
+#连接集群（增加-c参数）
+redis-cli -a password -c -h 127.0.0.1
+
+```
+
+
+
 ## 特性
 
 ### 过期策略
@@ -177,4 +187,53 @@ zrank board zhaoliu
 
 + 例如存储全班同学的成绩，其集合value可以是同学的学号，而score就可以是成绩。
 + 排行榜应用，根据得分列出topN的用户等。
+
+
+
+## 分布式锁实现
+
+```xml
+<dependency>
+   <groupId>org.redisson</groupId>
+   <artifactId>redisson</artifactId>
+   <version>3.16.3</version>
+</dependency>  
+```
+
+```java
+// 1. Create config object
+Config config = new Config();
+config.useClusterServers()
+       // use "rediss://" for SSL connection
+      .addNodeAddress("redis://127.0.0.1:7181");
+
+// or read config from file
+config = Config.fromYAML(new File("config-file.yaml")); 
+// 2. Create Redisson instance
+
+// Sync and Async API
+RedissonClient redisson = Redisson.create(config);
+
+// Reactive API
+RedissonReactiveClient redissonReactive = redisson.reactive();
+
+// RxJava3 API
+RedissonRxClient redissonRx = redisson.rxJava();
+// 3. Get Redis based implementation of java.util.concurrent.ConcurrentMap
+RMap<MyKey, MyValue> map = redisson.getMap("myMap");
+
+RMapReactive<MyKey, MyValue> mapReactive = redissonReactive.getMap("myMap");
+
+RMapRx<MyKey, MyValue> mapRx = redissonRx.getMap("myMap");
+// 4. Get Redis based implementation of java.util.concurrent.locks.Lock
+RLock lock = redisson.getLock("myLock");
+
+RLockReactive lockReactive = redissonReactive.getLock("myLock");
+
+RLockRx lockRx = redissonRx.getLock("myLock");
+// 4. Get Redis based implementation of java.util.concurrent.ExecutorService
+RExecutorService executor = redisson.getExecutorService("myExecutorService");
+
+// over 50 Redis based Java objects and services ...
+```
 
