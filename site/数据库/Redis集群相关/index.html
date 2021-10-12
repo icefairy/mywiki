@@ -437,6 +437,9 @@ cluster-require-full-coverage no
 #如果设置为 no，默认情况下，当集群被标记为失败时，Redis 集群中的节点将停止服务所有流量，或者当节点无法访问时达到法定人数或未达到完全覆盖时。这可以防止从不知道集群中的变化的节点读取可能不一致的数据。可以将此选项设置为 yes 以允许在失败状态期间从节点读取，这对于希望优先考虑读取可用性但仍希望防止不一致写入的应用程序非常有用。它也可以用于使用只有一个或两个分片的 Redis Cluster 时，因为它允许节点在主节点发生故障但无法自动故障转移时继续提供写入服务。
 cluster-allow-reads-when-down yes
 requirepass yourpassword
+#从节点连接主节点的密码
+masterauth yourpassword
+#保存的间隔时间和至少变动key数
 save 600 10
 </code></pre>
 <pre><code class="language-bash">#挨个启动每个节点（需要提前将配置文件以及存储路径创建好），我们建立6个节点，其中3个做为主节点（存数据），三个作为从节点，数据在3个主节点之间均分（便于）
@@ -476,6 +479,8 @@ min-slaves-to-write 1
 #数据复制和同步的延迟不能超过 10 秒，如果说一旦所有的 slave，数据复制和同步的延迟都超过了 10 秒钟，那么这个时候，master 就不会再接收任何请求了。
 min-slaves-max-lag 10
 #集群使用 结束
+#日志配置
+loglevel warning
 </code></pre></div>
             </div>
         </div>
