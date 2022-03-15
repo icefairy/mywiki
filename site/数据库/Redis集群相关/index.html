@@ -458,15 +458,15 @@ redis-cli -a yourpassword --cluster create 172.21.0.2:6379 172.21.0.3:6379 172.2
 </code></pre>
 <pre><code class="language-bash">#其他常用集群命令
 #fix命令来修复集群，以便根据每个节点是否具有权威性的哈希槽来迁移密钥。
-redis-cli --cluster fix
+redis-cli -a yourpassword --cluster fix 172.21.0.2:6379
 #check检查集群状态
-redis-cli --cluster check
+redis-cli -a yourpassword --cluster check 172.21.0.2:6379
 #添加主节点add-node后第一个参数为新节点的ip和端口，第二个参数为现有集群中的任意一个ip和端口
 redis-cli -a yourpassword --cluster add-node 172.21.0.8:6379 172.21.0.2:6379
 #添加从节点（可以通过增加--cluster-master-id 对应的主节点id）来指定其成为特定节点的副本，具体节点id可以在节点配置文件（自动）中获取到
 redis-cli -a yourpassword --cluster add-node 172.21.0.9:6379 172.21.0.2:6379 --cluster-slave
 #删除节点del-node后第一个参数为集群中任意一个节点ip和端口，第二个参数为要删除的节点id
-redis-cli --cluster del-node 127.0.0.1:7000 `&lt;node-id&gt;`
+redis-cli -a yourpassword  --cluster del-node 127.0.0.1:7000 `&lt;node-id&gt;`
 </code></pre>
 <h2 id="_13">常用配置</h2>
 <pre><code class="language-yaml">#集群使用 开始
