@@ -61,7 +61,6 @@ start slave;
 show slave status;
 ```
 
-
 ## 测试
 
 ```sql
@@ -78,7 +77,6 @@ select * from mytest;
 
 ```
 
-
 ## 主节点故障提升从节点为主节点
 
 ```bash
@@ -93,3 +91,25 @@ show slave status;
 exit
 #完成，此时可以对从节点进行正常使用了（正常情况不建议直接使用从节点，因为从节点做的变更不会被同步到主节点，造成数据差异）
 ```
+
+
+
+## 设置半同步（semi-synchronous Replication）
+
+解决从节点数据延迟问题
+
+```bash
+#主节点配置
+#执行sql
+SET GLOBAL rpl_semi_sync_master_enabled=on;
+#从节点配置
+#执行sql
+set global rpl_semi_sync_slave_enabled=on;
+#重启IO线程
+STOP SLAVE IO_THREAD;
+START SLAVE IO_THREAD;
+#查看状态
+show variables like 'rpl%';
+
+```
+
