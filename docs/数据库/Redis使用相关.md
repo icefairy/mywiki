@@ -237,3 +237,20 @@ RExecutorService executor = redisson.getExecutorService("myExecutorService");
 // over 50 Redis based Java objects and services ...
 ```
 
+## 订阅发布模式
+
+可以通过订阅发布模式做一个很简单的即时通信组件
+
+```
+#A监听A频道
+subscribe a
+#B给A发消息
+publish a helloworld
+#此时A可以收到helloworld的消息
+```
+
+
+
+## 变相实现给list元素设置有效时间
+
+结合有序集合，加入到有序集合的每个项，我们都将它的score设置为一个时间戳，这个时间戳代表它的过期时间。然后，我们加入一个定时任务，定时移除那些过期的数据即可。
