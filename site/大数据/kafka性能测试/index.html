@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://wiki.xlz2021.cf/%E5%A4%A7%E6%95%B0%E6%8D%AE/kafka%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>[kafka性能测试](https://www.cnblogs.com/runnerjack/p/9105784.html) - 玄凌子知识库</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/cypher.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/kotlin.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/docker.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">玄凌子知识库</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">关于我</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Java <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Java/Maven/" class="dropdown-item">Maven 使用</a>
+</li>
+                                    
+<li>
+    <a href="../../Java/%E4%BF%9D%E7%95%99%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/" class="dropdown-item">保留端口占用问题</a>
+</li>
+                                    
+<li>
+    <a href="../../Java/%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" class="dropdown-item">YYYY和yyyy的区别</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Python <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Python/JupyterNotebook%E5%AE%89%E8%A3%85/" class="dropdown-item">Jupyter Notebook 安装</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Docker <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../docker/K3S%E5%AE%89%E8%A3%85/" class="dropdown-item">K3S安装</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/docker%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3/" class="dropdown-item">docker容器相关</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/seaweedfs%E4%BD%9C%E4%B8%BA%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E6%8F%92%E4%BB%B6/" class="dropdown-item">Seaweedfs作为分布式存储插件</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Linux <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../linux/Alpine%E4%BD%BF%E7%94%A8%E6%B8%85%E5%8D%8E%E6%BA%90/" class="dropdown-item">Alpine使用清华源</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/CentOS%E5%AE%8C%E7%BE%8E%E5%8D%87%E7%BA%A7gcc%E7%89%88%E6%9C%AC%E6%96%B9%E6%B3%95/" class="dropdown-item">CentOS完美升级gcc版本方法</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Centos7%E6%9B%B4%E6%96%B0%E5%86%85%E6%A0%B8/" class="dropdown-item">Centos7更新内核</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/FIO%E6%B5%8B%E8%AF%95%E7%A3%81%E7%9B%98IO/" class="dropdown-item">FIO测试磁盘IO</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Linux_LVM%E5%88%86%E5%8C%BA%E6%89%A9%E5%AE%B9/" class="dropdown-item">LVM分区扩容</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Nginx%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E/" class="dropdown-item">Nginx配置说明</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos7_selinux/" class="dropdown-item">修复Centos7的SELINUX错误</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos7%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F/" class="dropdown-item">Centos7单用户模式</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos_update_gcc/" class="dropdown-item">CentOS完美升级gcc版本方法</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/cron/" class="dropdown-item">cron定时任务常见问题</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/cron%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="dropdown-item">Cron定时任务常见问题</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/iperf3%E5%B8%A6%E5%AE%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">Iperf3带宽测试</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/net_safe/" class="dropdown-item">网络安全防护</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/net_speed_test/" class="dropdown-item">带宽测试</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/nfs/" class="dropdown-item">针对大数据组件的NFS挂载参数</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/nginx/" class="dropdown-item">nginx负载均衡</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/tcpdump%E6%8A%93%E5%8C%85/" class="dropdown-item">tcpdump抓包</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/update_centos7_kernel/" class="dropdown-item">Centos7 升级内核版本</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E4%BF%AE%E5%A4%8DCentos7%E7%9A%84SELINUX%E9%94%99%E8%AF%AF/" class="dropdown-item">修复Centos7的SELINUX错误</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" class="dropdown-item">新服务器基本配置流程</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4/" class="dropdown-item">网络安全防护</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E9%92%88%E5%AF%B9%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E7%9A%84NFS%E6%8C%82%E8%BD%BD%E5%8F%82%E6%95%B0/" class="dropdown-item">针对大数据组件的NFS挂载参数</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Store <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../store/seaweedfs/" class="dropdown-item">seaweedfs</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">中医 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E4%BA%94%E6%AD%A5%E5%AD%A6%E7%BA%AF%E6%AD%A3%E4%B8%AD%E5%8C%BB/" class="dropdown-item">五步学纯正中医</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E5%A4%A7%E5%8C%BB%E7%B2%BE%E8%AF%9A/" class="dropdown-item">大医精诚</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">灵枢</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E4%B8%AD%E5%8C%BB%E5%9F%BA%E7%A1%80/" class="dropdown-item">中医基础</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="dropdown-item">人纪针灸学习笔记</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E5%B8%B8%E7%94%A8%E5%85%BB%E7%94%9F%E7%A9%B4%E4%BD%8D/" class="dropdown-item">常用养生穴位</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E7%83%A7%E5%B1%B1%E7%81%AB%E4%B8%8E%E9%80%8F%E5%A4%A9%E5%87%89%E6%89%8B%E6%B3%95/" class="dropdown-item">烧山火与透天凉手法</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E7%BB%8F%E7%BB%9C%E5%B9%B2%E6%94%AF/" class="dropdown-item">经络天干</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E9%AB%98%E8%A1%80%E5%8E%8B%E8%BE%A8%E8%AF%81%E4%B8%8E%E6%96%B9%E9%92%88/" class="dropdown-item">高血压辨证与方针</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E9%BA%A6%E7%B2%92%E8%82%BF%E8%BE%A9%E8%AF%81%E4%B8%8E%E6%96%B9%E9%92%88/" class="dropdown-item">麦粒肿辩证与方针</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">素问</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E5%B8%B8%E7%94%A8%E6%96%B9%E5%89%82/" class="dropdown-item">常用方剂</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E6%95%91%E5%91%BD%E7%A8%BB%E8%8D%89/" class="dropdown-item">救命稻草</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E6%96%B0%E6%96%87%E6%A1%A3/" class="dropdown-item">新文档</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E9%BB%84%E5%B8%9D%E5%86%85%E7%BB%8F_%E5%85%BB%E7%94%9F/" class="dropdown-item">黄帝内经_养生</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">人工智能 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E4%BC%98%E7%BC%BA%E7%82%B9/" class="dropdown-item">常见算法优缺点</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">大数据 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../ElasticSearch/" class="dropdown-item">ElasticSearch技巧</a>
+</li>
+                                    
+<li>
+    <a href="../ElasticSearch%E6%8A%80%E5%B7%A7/" class="dropdown-item">ElasticSearch技巧</a>
+</li>
+                                    
+<li>
+    <a href="../Flink_sql_ETL%E9%9B%86%E5%90%88/" class="dropdown-item">Flink-sql-ETL集合</a>
+</li>
+                                    
+<li>
+    <a href="../Flink%E5%B8%B8%E7%94%A8%E8%BF%9E%E6%8E%A5%E5%99%A8%E8%AF%BB%E5%86%99%E8%83%BD%E5%8A%9B%E6%B1%87%E6%80%BB/" class="dropdown-item">Flink常用connector支持情况</a>
+</li>
+                                    
+<li>
+    <a href="../GP%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/" class="dropdown-item">GP常用配置项</a>
+</li>
+                                    
+<li>
+    <a href="../Greenplum%E7%A7%BB%E9%99%A4Segment/" class="dropdown-item">Greenplum移除Segment</a>
+</li>
+                                    
+<li>
+    <a href="../Kafka%E7%9B%B8%E5%85%B3/" class="dropdown-item">Kafka相关</a>
+</li>
+                                    
+<li>
+    <a href="../Kafka%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E6%B5%8B%E8%AF%95/" class="dropdown-item">kafka调优</a>
+</li>
+                                    
+<li>
+    <a href="../Kafka%E8%B0%83%E4%BC%98%E7%9B%B8%E5%85%B3/" class="dropdown-item">Kafka调优相关</a>
+</li>
+                                    
+<li>
+    <a href="../cdh_spark/" class="dropdown-item">cdh编写spark依赖问题</a>
+</li>
+                                    
+<li>
+    <a href="../flink%E9%85%8D%E7%BD%AE%E8%B0%83%E4%BC%98/" class="dropdown-item">flink 配置调优</a>
+</li>
+                                    
+<li>
+    <a href="../flink%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">flink集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../gp6%E5%BA%93%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">Gp6库性能测试</a>
+</li>
+                                    
+<li>
+    <a href="../greenplum%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8/" class="dropdown-item">greenplum集群使用</a>
+</li>
+                                    
+<li>
+    <a href="../greenplum%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">greenplum集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">[kafka性能测试](https://www.cnblogs.com/runnerjack/p/9105784.html)</a>
+</li>
+                                    
+<li>
+    <a href="../mysql/" class="dropdown-item">Mysql</a>
+</li>
+                                    
+<li>
+    <a href="../%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83kafka%E9%85%8D%E7%BD%AE/" class="dropdown-item">生产环境kafka配置说明</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">数据库 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Citus%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8/" class="dropdown-item">Citus集群使用</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/GP_MDB%E9%9B%86%E7%BE%A4%E5%86%85%E5%AD%98%E9%85%8D%E7%BD%AE/" class="dropdown-item">gp/mdb集群内存配置</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Lcpg%E5%86%85%E9%83%A8%E5%8F%91%E8%A1%8C%E7%89%88%E4%BD%BF%E7%94%A8/" class="dropdown-item">Lcpg内部发行版使用</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Mariadb%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" class="dropdown-item">Mariadb主从复制</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Mariadb%E5%A4%9A%E4%B8%BB%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">Mariadb多主集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D/" class="dropdown-item">mysql故障恢复</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Neo4j%E7%9B%B8%E5%85%B3/" class="dropdown-item">Neo4j相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Pg%E5%8E%9F%E7%94%9F%E9%9B%86%E7%BE%A4%E5%A4%8D%E5%88%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/" class="dropdown-item">PG原生集群复制配置与高可用</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Postgresql/" class="dropdown-item">Postgresql相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Postgresql%E7%9B%B8%E5%85%B3/" class="dropdown-item">Postgresql相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Postgresql%E9%9B%86%E7%BE%A4/" class="dropdown-item">pg集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3/" class="dropdown-item">Redis相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E9%9B%86%E7%BE%A4%E7%9B%B8%E5%85%B3/" class="dropdown-item">Redis集群相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/gp_mdb%E7%A1%AC%E4%BB%B6%E9%80%89%E5%9E%8B%E8%AE%A1%E5%88%92/" class="dropdown-item">gp与mdb硬件选型计划</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/mysql_mariadb/" class="dropdown-item">mysql/mariadb</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%88%A0%E9%99%A4%E5%A4%A7%E8%A1%A8/" class="dropdown-item">mysql删除大表</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%88%96mariadb/" class="dropdown-item">Mysql或mariadb</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/neo4j/" class="dropdown-item">Neo4j相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/pipelinedb/" class="dropdown-item">pipelinedb流式数据库介绍</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/pipelinedb%E6%B5%81%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D/" class="dropdown-item">Pipelinedb流式数据库介绍</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/timescaledb/" class="dropdown-item">Timescaledb</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" class="dropdown-item">时序数据库</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">架构设计 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/empty/" class="dropdown-item">占位置</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">经济 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E7%BB%8F%E6%B5%8E/%E8%B6%85%E4%BD%8E%E4%BB%B7%E9%A2%84%E5%94%AE%E5%A5%97%E8%B7%AF/" class="dropdown-item">超低价预售套路</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../greenplum%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../mysql/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#kafka" class="nav-link">kafka性能测试</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#1" class="nav-link">1    概述</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#11" class="nav-link">1.1  测试背景</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#12" class="nav-link">1.2  测试目标</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#2" class="nav-link">2    测试条件</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#3" class="nav-link">3    测试数据（部分样例）</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#32-only" class="nav-link">3.2 读取测试(only消费者)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#33" class="nav-link">3.3 生产者&amp;消费者</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="kafka"><a href="https://www.cnblogs.com/runnerjack/p/9105784.html">kafka性能测试</a></h1>
+<p>​            Kafka 压力测试文档</p>
+<h1 id="1">1    概述</h1>
+<h2 id="11">1.1  <strong>测试背景</strong></h2>
+<p>在云平台研发SR IAD的过程中，出现SR IAD对硬件资源消耗较为严重的情况，其中在云平台研发中利用Kafka软件对流式数据进行数据处理。我们针对Kafka高吞吐量的特性，对kafka进行压力测试。</p>
+<h2 id="12">1.2  <strong>测试目标</strong></h2>
+<p>测试kafka的吞吐性能(Producer/Consumer性能)。我们主要对分区、磁盘和线程等影响因素进行测试。</p>
+<h1 id="2">2    测试条件</h1>
+<p>6台配置相同的服务器搭建的两套相同的集群环境</p>
+<p><strong>2.1</strong><strong>测试环境</strong></p>
+<p><strong>硬件条件</strong></p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>硬件</th>
+<th>配置</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>CPU</td>
+<td>E5-2640v2 *2</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>内存</td>
+<td>128G</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>硬盘</td>
+<td>共挂载15块磁盘，剩余空间10T左右</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>网络</td>
+<td>Intel I350 Gigabit Network Connection <em>4Intel 82599ES 10-Gigabit SFI/SFP+ Network Connection </em>2Intel I350 Gigabit Fiber Network Connection *2</td>
+<td>使用万兆网卡</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Kafka</td>
+<td>3台单磁盘服务组成的kafka集群</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>软件版本：</strong></p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>软件</th>
+<th>版本</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>CentOS</td>
+<td>7.3</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Hadoop</td>
+<td>2.7.3</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>HBase</td>
+<td>1.1.7</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Spark</td>
+<td>1.6.2</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Elastic Search</td>
+<td>2.4.1</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Scala</td>
+<td>2.11.8</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Kafka</td>
+<td>2.11-0.10.0.1</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Flume</td>
+<td>1.7</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>系统架构：</strong></p>
+<p><strong>Kafka默认配置：（CDH里的配置）</strong></p>
+<p>（1） broker中默认配置</p>
+<p>1）网络和io操作线程配置</p>
+<p># broker处理消息的最大线程数 （一般不需要修改）</p>
+<p>num.network.threads=3</p>
+<p># broker处理磁盘IO的线程数</p>
+<p>num.io.threads=8</p>
+<p>2）log数据文件刷盘策略</p>
+<p>为了大幅度提高producer写入吞吐量，需要定期批量写文件</p>
+<p>#每当producer写入10000条消息时，刷数据到磁盘</p>
+<p>log.flush.interval.messages=10000</p>
+<p># 每间隔1秒钟时间，刷数据到磁盘</p>
+<p>log.flush.interval.ms=1000</p>
+<p>3）日志保留策略配置</p>
+<p># 保留三天，也可以更短</p>
+<p>log.retention.hours=72</p>
+<p># 段文件配置1GB，有利于快速回收磁盘空间，重启kafka加载也会加快</p>
+<p>log.segment.bytes=1073741824</p>
+<p>4）Replica相关配置</p>
+<p>replica.lag.time.max.ms:10000</p>
+<p>replica.lag.max.messages:4000</p>
+<p>num.replica.fetchers:1</p>
+<p>#用来控制Fetch线程的数量。</p>
+<p>default.replication.factor:1</p>
+<p>#自动创建topic时默认的Replica数量，一般建议在2~3为宜。</p>
+<p>5）其他</p>
+<p>num.partitions:1</p>
+<p>#分区数量</p>
+<p>queued.max.requests:500</p>
+<p>#用于缓存网络请求的队列的最大容量</p>
+<p>compression.codec:none</p>
+<p>#Message落地时是否采用以及采用何种压缩算法。</p>
+<p>in.insync.replicas:1</p>
+<p>#指定每次Producer写操作至少要保证有多少个在ISR的Replica确认，一般配合request.required.acks使用。过高可能会大幅降低吞吐量。</p>
+<p>（2） producer 配置</p>
+<p>buffer.memory:33554432 (32m)</p>
+<p>#在Producer端用来存放尚未发送出去的Message的缓冲区大小。</p>
+<p>compression.type:none</p>
+<p>#生产者生成的所有数据压缩格式，默认发送不进行压缩。若启用压缩，可以大幅度的减缓网络压力和Broker的存储压力，但会对cpu 造成压力。</p>
+<p>linger.ms:0</p>
+<p>#Producer默认会把两次发送时间间隔内收集到的所有Requests进行一次聚合然后再发送，以此提高吞吐量，这个参数为每次发送增加一些delay，以此来聚合更多的Message。</p>
+<p>batch.size:16384</p>
+<p>#Producer会尝试去把发往同一个Partition的多个Requests进行合并，batch.size指明了一次Batch合并后Requests总大小的上限。如果这个值设置的太小，可能会导致所有的Request都不进行Batch。</p>
+<p>acks:1</p>
+<p>#设定发送消息后是否需要Broker端返回确认。</p>
+<p>0: 不需要进行确认，速度最快。存在丢失数据的风险。</p>
+<p>1: 仅需要Leader进行确认，不需要ISR进行确认。是一种效率和安全折中的方式。</p>
+<p>all: 需要ISR中所有的Replica给予接收确认，速度最慢，安全性最高，但是由于ISR可能会缩小到仅包含一个Replica，设置参数为all并不能一定避免数据丢失。</p>
+<p>（3） Consumer</p>
+<p>num.consumer.fetchers:1</p>
+<p>#启动Consumer的个数，适当增加可以提高并发度。</p>
+<p>fetch.min.bytes:1</p>
+<p>#每次Fetch Request至少要获取多少字节的数据才可以返回。</p>
+<p>#在Fetch Request获取的数据至少达到fetch.min.bytes之前，允许等待的最大时长。</p>
+<p>fetch.wait.max.ms:100</p>
+<p>（4） 其他</p>
+<p>zookeeper.session.timeout.ms=6s</p>
+<p>message.max.bytes=1000000B</p>
+<p>replica.fetch.max.bytes=1MB</p>
+<p>num.producers=1</p>
+<p>### Number of Producers</p>
+<p>num.streams=1</p>
+<p>###Number of Consumer Threads</p>
+<p>producer.request.timeout.ms=30s</p>
+<p>consumer.request.timeout.ms=40s</p>
+<p>session.timeout.ms=30s</p>
+<p>kafka.log4j.dir=/var/log/kafka</p>
+<p>##kafka数据的存放地址</p>
+<p><strong>2.2</strong> <strong>测试方法</strong></p>
+<p>压力发起：kafka官方提供的自测脚本</p>
+<p>4项指标：总共发送消息量（以MB为单位），每秒发送消息量（MB/second），发送消息总数，每秒发送消息数（records/second）</p>
+<p>监控信息：自定义脚本来记录服务情况，包括CPU、内存、磁盘、网络等情况。</p>
+<p>（1） 生产者测试脚本kafka-producer-perf-test.sh</p>
+<p>参数说明：</p>
+<p>--topic topic名称，</p>
+<p>--num-records 总共需要发送的消息数，</p>
+<p>--record-size 每个记录的字节数，</p>
+<p>--throughput 每秒钟发送的记录数，</p>
+<p>--producer-props bootstrap.servers=localhost:9092 发送端的配置信息</p>
+<p>（2）消费者测试脚本kafka-consumer-perf-test.sh</p>
+<p>参数说明：</p>
+<p>--zookeeper 指定zookeeper的链接信息，</p>
+<p>--topic 指定topic的名称，</p>
+<p>--fetch-size 指定每次fetch的数据的大小，</p>
+<p>--messages 总共要消费的消息个数，</p>
+<p><strong>2.2.1 producer</strong> <strong>吞吐量测试方法</strong></p>
+<p>1、基于原有配置下对kafka进行数量级的加压，选用一台或三台客户机先测试在没有消费者时的吞吐量。测试影响因素主要包括partitions、磁盘和thread三个主要因素，通过记录每秒钟条数（Records/s）、每秒日志量大小（MB/s）衡量吞吐量，并找到各个因素之间的规律。</p>
+<p>注：</p>
+<p>（1） 线程数的设置根据cpu内核数设置，本测试环境为16核（thread &lt;=16）。</p>
+<p>（2） Broker 基于物理环境设置（broker&lt;=3），三个</p>
+<p>2、通过修改以上3个影响因素测试kafka吞吐量。</p>
+<p>3、测试命令</p>
+<p>（1）创建topic</p>
+<p>1)./kafka-topics.sh --zookeepr IP:2181 --create --topic test --partitions 3 --replication-factor 1</p>
+<p>2)./ppt.sh --topic pc918 --num-records 50000000 --record-size 1000 --throughput 10000000 --threads 3 --producer-props</p>
+<p>bootstrap.servers=192.168.17.57:9092,192.168.17.64:9092,192.168.17.65:9092</p>
+<p>注：ppt.sh 基于kafka-producer-perf-test.sh修改，增加了生产者的thread 选项。</p>
+<p><strong>2.2.2</strong> <strong>consumer</strong> <strong>吞吐量测试方法</strong></p>
+<p>1、基于原有配置下进行消费，并测试主要影响因素partitions、thread和磁盘等因素，选用一台或三台客户机先测试没有生产者时的吞吐量。通过记录Records/second、MB/second衡量吞吐量，并找到各个因素之间的规律。</p>
+<p>2、通过修改影响因素测试kafka吞吐量。</p>
+<p>3、测试命令</p>
+<p>./kafka-consumer-perf-test.sh --zookeeper IP:2181 --topic test1 --fetch-size 1048576 --messages 10000000 --threads 3</p>
+<p><strong>2.2.3</strong> <strong>消费与吞吐量</strong></p>
+<p>分别在一台或三台客户机同时开启生产者和消费者测试命令,进行测试</p>
+<h1 id="3">3    测试数据（部分样例）</h1>
+<p>3<strong>.1</strong> <strong>写入测试(only生产者)</strong></p>
+<h3 id="311-partition-vs-throughput"><strong>3.1.1</strong>   <strong>Partition VS. Throughput</strong></h3>
+<p>​    实验条件:3个Broker,1个Topic, Replication-factor=1，3个磁盘，throughput=1000w,num-records=2000w ，batch-size=16K ,1个客户端，1个producer</p>
+<p>测试项目：分别测试1，3，6，12，15，20，30，50个partition时的吞吐量</p>
+<p>​              表1 partition影响因子</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>partition</th>
+<th>Records/second(avg)</th>
+<th>MB/second(avg)</th>
+<th>延迟时间（avg）</th>
+<th>延迟时间(max)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>partition</td>
+<td>1</td>
+<td>102760</td>
+<td>98</td>
+<td>297.65</td>
+<td>929</td>
+</tr>
+<tr>
+<td>3</td>
+<td>283639</td>
+<td>270.5</td>
+<td>107.1</td>
+<td>1965</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>332457</td>
+<td>317.06</td>
+<td>61.22</td>
+<td>1085</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>305838</td>
+<td>291.67</td>
+<td>39.37</td>
+<td>2842</td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>344245</td>
+<td>328.3</td>
+<td>21.68</td>
+<td>645</td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td>349846</td>
+<td>333.64</td>
+<td>20.51</td>
+<td>618</td>
+<td></td>
+</tr>
+<tr>
+<td>20</td>
+<td>349852</td>
+<td>333.6</td>
+<td>15.06</td>
+<td>371</td>
+<td></td>
+</tr>
+<tr>
+<td>30</td>
+<td>349870</td>
+<td>333.66</td>
+<td>15.47</td>
+<td>843</td>
+<td></td>
+</tr>
+<tr>
+<td>50</td>
+<td>346296</td>
+<td>330.25</td>
+<td>13.07</td>
+<td>619</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>当partition的个数为3时，吞吐量成线性增长，当partition多于broker的个数时增长并不明显，甚至还有所下降。同时随着，partition个数的增多，延迟时间逐渐减少，当partition个数在3-6之间延迟时间降低较快，越大延迟时间降低趋于平稳。</p>
+<h3 id="312-replica-vs-throughput"><strong>3.1.2</strong>   <strong>Replica  VS. Throughput</strong></h3>
+<p>实验条件:3个Broker,1个Topic,3个磁盘，throughput=35w,num-records=5000w ，batch-size=16K ,1个客户端，1个producer</p>
+<p>测试项目：分别测试replication-factor为1，2，3，6时的吞吐量</p>
+<p>​             表2 Repica影响因子</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>replications</th>
+<th>Records/second(avg)</th>
+<th>MB/second(avg)</th>
+<th>延迟时间（avg）</th>
+<th>延迟时间(max)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>replication</td>
+<td>1</td>
+<td>349870</td>
+<td>333.66</td>
+<td>12.69</td>
+<td>713</td>
+</tr>
+<tr>
+<td>2</td>
+<td>349846</td>
+<td>333.64</td>
+<td>10.8</td>
+<td>392</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>345077</td>
+<td>329.09</td>
+<td>36.36</td>
+<td>897</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>错误</td>
+<td>Error while executing topic command : replication factor: 6 larger than available brokers: 3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>由表可知，replication-factor的个数应该不大于broker的个数，否则就会报错。随着replication-factor 个数的增加吞吐量减小，但并非是线性下降，因为多个Follower的数据复制是并行进行的，而非串行进行，因此基于数据的安全性及延迟性考虑，最多选择2-3个副本。</p>
+<h3 id="313-thread-vs-throughput"><strong>3.1.3</strong>   <strong>Thread VS. Throughput</strong></h3>
+<p>实验条件:3个Broker,1个Topic,3个磁盘，3个partitions , throughput=1000w,num-records=1000w ，batch-size=16K ,1个客户端，1个producer</p>
+<p>测试项目：分别测试thread为1，2，3，4，5时的吞吐量</p>
+<p>​           表3 Thread 影响因子</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>partition</th>
+<th>thread</th>
+<th>Records/second(avg)</th>
+<th>MB/second(avg)</th>
+<th>延迟时间（avg）</th>
+<th>延迟时间(max)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>thread</td>
+<td>3</td>
+<td>1</td>
+<td>265505</td>
+<td>253.21</td>
+<td>113.79</td>
+<td>571</td>
+</tr>
+<tr>
+<td>2</td>
+<td>559252</td>
+<td>533.35</td>
+<td>93.75</td>
+<td>388</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>730300</td>
+<td>696.47</td>
+<td>68.96</td>
+<td>337</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>722700</td>
+<td>689.22</td>
+<td>42.49</td>
+<td>343</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>740137</td>
+<td>705.85</td>
+<td>36.88</td>
+<td>283</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>由表可知随着线程数的增加吞吐量不断增加，当线程数小于分区数时增长较快，大于分区数时增长较慢，并趋于平稳。目前单个客户端可以达700MB-800MB/s以上的网速流量。</p>
+<h3 id="314-vs-throughput"><strong>3.1.4</strong>   <strong>磁盘</strong> <strong>VS. Throughput</strong></h3>
+<p>实验条件:3个Broker,1个Topic，throughput=1000w,num-records=1000w ，batch-size=16K ,1个客户端，1个producer</p>
+<p>测试项目：分别测试磁盘个数为3，6，9时的吞吐量</p>
+<p>​          </p>
+<p>表4 磁盘影响因子</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>partition</th>
+<th>磁盘个数</th>
+<th>Records/second(avg)</th>
+<th>MB/second(avg)</th>
+<th>延迟时间（avg）</th>
+<th>延迟时间(max)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>磁盘</td>
+<td>3</td>
+<td>3</td>
+<td>265505</td>
+<td>253.21</td>
+<td>113.79</td>
+<td>571</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td>354886</td>
+<td>338.45</td>
+<td>58.13</td>
+<td>512</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>9</td>
+<td>363240</td>
+<td>346.41</td>
+<td>6.33</td>
+<td>409</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>由表可知，磁盘个数的增加与partition的增加具有相关性，并非越多越好，partition的增加受broker的影响，因此磁盘的个数设置应在broker个数的1-3倍之间较为合适，同时随着磁盘个数的增加，平均延迟时间在逐渐减小，因此磁盘的数量会影响平均延迟时间。</p>
+<h3 id="315-others-vs-throughput"><strong>3.1.5</strong>   <strong>Others VS. Throughput</strong></h3>
+<p><strong>1</strong><strong>、Network线程数</strong></p>
+<p>Network线程数即broker处理消息的最大线程数 （一般不需要修改）。</p>
+<p>实验条件:3个Broker,1个Topic，throughput=1000w,num-records=5000w ，batch-size=16K ,1个客户端，1个producer，9个磁盘，9个partitions</p>
+<p>测试项目：分别测试线程个数为3，8时的吞吐量</p>
+<p>表5 Network网络线程数</p>
+<table>
+<thead>
+<tr>
+<th>net.io.thread</th>
+<th>生产者y99_thread</th>
+<th>Records/second(avg)</th>
+<th>MB/second(avg)</th>
+<th>CPU(max%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>516913</td>
+<td>492.97</td>
+<td>560.5</td>
+</tr>
+<tr>
+<td>6</td>
+<td>528966</td>
+<td>504</td>
+<td>943.2</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>441789</td>
+<td>421.32</td>
+<td>799.3</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>3</td>
+<td>629945</td>
+<td>600.76</td>
+<td>636</td>
+</tr>
+<tr>
+<td>6</td>
+<td>554865</td>
+<td>529.16</td>
+<td>855</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>543371</td>
+<td>518.2</td>
+<td>859</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>由表所示，增加网络线程数可以提高吞吐量，但随着生产者线程数增加逐渐趋于平稳，此时CPU最大值为998.2%，对于16核的CPU约占到10核。</p>
+<p><strong>2</strong><strong>、测试客户机的影响</strong></p>
+<p>由于在单个客户机测试时，网卡硬件条件的限制会影响测试的吞吐量，因此换用3台客户机测试，吞吐量的测试结果即为三个客户机吞吐总量。分别测试6个磁盘和9个磁盘在不同分区和线程数的情况，测试结果如表6所示。</p>
+<p>​             表6 客户机影响因素</p>
+<table>
+<thead>
+<tr>
+<th>topic_partition_thread</th>
+<th>66</th>
+<th>67</th>
+<th>68</th>
+<th>总量</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Records/second(avg)</td>
+<td>MB/second(avg)</td>
+<td>Records/second(avg)</td>
+<td>MB/second(avg)</td>
+<td>Records/second(avg)</td>
+<td>MB/second(avg)</td>
+<td>Records/second(avg)</td>
+<td>MB/second(avg)</td>
+<td></td>
+</tr>
+<tr>
+<td>p66(3)</td>
+<td>439382</td>
+<td>419.03</td>
+<td>461382</td>
+<td>440.01</td>
+<td>449458</td>
+<td>428.64</td>
+<td>1350222</td>
+<td>1287.68</td>
+</tr>
+<tr>
+<td>p66(6)</td>
+<td>471635</td>
+<td>449.79</td>
+<td>468059</td>
+<td>446.38</td>
+<td>466409</td>
+<td>444.8</td>
+<td>1406103</td>
+<td>1340.97</td>
+</tr>
+<tr>
+<td>p66(12)</td>
+<td>145292</td>
+<td>138.56</td>
+<td>145266</td>
+<td>138.54</td>
+<td>144017</td>
+<td>137.35</td>
+<td>434575</td>
+<td>414.45</td>
+</tr>
+<tr>
+<td>p612(3)</td>
+<td>498037</td>
+<td>474.97</td>
+<td>488181</td>
+<td>465.57</td>
+<td>584098</td>
+<td>557.04</td>
+<td>1570316</td>
+<td>1497.58</td>
+</tr>
+<tr>
+<td>p612(6)</td>
+<td>305658</td>
+<td>291.5</td>
+<td>305255</td>
+<td>291.11</td>
+<td>305715</td>
+<td>291.55</td>
+<td>916628</td>
+<td>874.16</td>
+</tr>
+<tr>
+<td>p612(12)</td>
+<td>102037</td>
+<td>97.31</td>
+<td>102032</td>
+<td>97.31</td>
+<td>101951</td>
+<td>97.23</td>
+<td>306020</td>
+<td>291.85</td>
+</tr>
+<tr>
+<td>p99(3)</td>
+<td>473771</td>
+<td>451.82</td>
+<td>481621</td>
+<td>459.31</td>
+<td>498658</td>
+<td>475.56</td>
+<td>1454050</td>
+<td>1386.69</td>
+</tr>
+<tr>
+<td>p99(6)</td>
+<td>207400</td>
+<td>197.79</td>
+<td>207337</td>
+<td>197.73</td>
+<td>206322</td>
+<td>196.76</td>
+<td>621059</td>
+<td>592.28</td>
+</tr>
+<tr>
+<td>p99(12)</td>
+<td>174175</td>
+<td>166.11</td>
+<td>178429</td>
+<td>170.16</td>
+<td>177564</td>
+<td>169.34</td>
+<td>530168</td>
+<td>505.61</td>
+</tr>
+</tbody>
+</table>
+<p>由表6可以看出，在三台测试机下，同时向一个topic产生数据，生产者的数据总量是在增大的。在网络稳定的情况下，曾测试3个磁盘3个partition最大吞吐量在18000条左右 ，大小为1683.31MB/s，如图1所示。</p>
+<p>其中在单个broker上cpu最大上线为700%-800%，内存利用率为10%-20%。在单台测试机情况下，曾测试单台测试下最大吞吐为80w条左右，大小约为80MB/s，由于资源限制三台机器总量可能达不到一台机器3倍的量。</p>
+<p>​    </p>
+<p>​            图1 3台机器的吞吐量</p>
+<p><strong>3</strong><strong>、IO线程数</strong></p>
+<p>IO线程数即broker处理磁盘IO的线程数</p>
+<p>实验条件:3个Broker,1个Topic，throughput=1000w,num-records=5000w ，batch-size=16K ,3个客户端，1个producer，6个磁盘，6个partitions</p>
+<p>测试项目：分别测试线程个数为8，12时的吞吐量</p>
+<p>图2  线程数为8</p>
+<p>​             图3 线程数为12</p>
+<p>由图2，3可知，当线程数增加后，吞吐量有所增加，但增加比较缓和。</p>
+<p><strong>4、生产者的个数</strong></p>
+<p>实验条件:3个Broker,1个Topic，throughput=1000w,num-records=5000w ，batch-size=16K ,3个客户端，1个producer，9个磁盘，9个partitions</p>
+<p>测试项目：分别测试生产者个数为1，2，3时的吞吐量</p>
+<p>表7 不同生产者吞吐量</p>
+<table>
+<thead>
+<tr>
+<th>thread</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1窗口</td>
+<td>1窗口</td>
+<td>2窗口</td>
+<td>1窗口</td>
+<td>2窗口</td>
+<td>3窗口</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>条</td>
+<td>MB</td>
+<td>条</td>
+<td>MB</td>
+<td>条</td>
+<td>MB</td>
+<td>条</td>
+<td>MB/s</td>
+<td>条</td>
+<td>MB/s</td>
+<td>条</td>
+<td>MB/s</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>629945</td>
+<td>600.76</td>
+<td>338900</td>
+<td>323.2</td>
+<td>328357</td>
+<td>313.15</td>
+<td>209465</td>
+<td>199.76</td>
+<td>205923</td>
+<td>196.38</td>
+<td>209129</td>
+<td>199.44</td>
+</tr>
+<tr>
+<td>6</td>
+<td>554865</td>
+<td>529.16</td>
+<td>354172</td>
+<td>337.77</td>
+<td>382564</td>
+<td>364.84</td>
+<td>235881</td>
+<td>224.95</td>
+<td>236085</td>
+<td>225.15</td>
+<td>245225</td>
+<td>233.87</td>
+</tr>
+<tr>
+<td>9</td>
+<td>543371</td>
+<td>518.2</td>
+<td>370090</td>
+<td>352.95</td>
+<td>359056</td>
+<td>342.42</td>
+<td>209646</td>
+<td>199.93</td>
+<td>221790</td>
+<td>211.52</td>
+<td>209058</td>
+<td>199.37</td>
+</tr>
+</tbody>
+</table>
+<p>由表7 可知，在同一客户端下，开启不同的生产者，2个生产者和3个生产的总吞吐量基本等于1个生产者的总量。</p>
+<p><strong>5、压缩因素</strong></p>
+<p>实验条件:3个Broker,1个Topic，throughput=1000w,num-records=5000w ，batch-size=16K ,1个客户端，1个producer，9个磁盘，9个partitions</p>
+<p>测试项目：分别测试不同压缩类型的吞吐量，kafka支持的压缩类型包括none、Snappy、gzip、LZ4。</p>
+<p>测试命令：</p>
+<p>./ppt.sh --topic py --num-records 50000000 --record-size 1000 --throughput 10000000 --threads 3 --producer-props bootstrap.servers=192.168.17.68:9092,192.168.17.69:9092,192.168.17.70:9092 compression.type=gzip</p>
+<p>通过运行时初始化参数看到修改值生效，如图所示。</p>
+<p>​          图4 初始化参数</p>
+<p>​           </p>
+<p>表8 压缩因素</p>
+<table>
+<thead>
+<tr>
+<th>压缩类型</th>
+<th>Records/second(avg)</th>
+<th>MB/second(avg)</th>
+<th>延迟时间（avg）</th>
+<th>延迟时间(max)</th>
+<th>耗时</th>
+<th>cpu max</th>
+<th>cpu avg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>none</td>
+<td>636472</td>
+<td>606</td>
+<td>122.56</td>
+<td>3281</td>
+<td>78s</td>
+<td>899</td>
+<td>545</td>
+</tr>
+<tr>
+<td>Snappy</td>
+<td>392233</td>
+<td>374.06</td>
+<td>50.88</td>
+<td>672</td>
+<td>80s</td>
+<td>670</td>
+<td>574</td>
+</tr>
+<tr>
+<td>gzip</td>
+<td>92653</td>
+<td>88.36</td>
+<td>2.38</td>
+<td>386</td>
+<td>8分59s</td>
+<td>959.5</td>
+<td>522</td>
+</tr>
+<tr>
+<td>LZ4</td>
+<td>618444</td>
+<td>589.79</td>
+<td>4</td>
+<td>329</td>
+<td>81s</td>
+<td>887.7</td>
+<td>480</td>
+</tr>
+</tbody>
+</table>
+<p>由表可知snappy、gzip压缩可以大幅度的减缓网络压力和Broker的存储压力，同时降低平均延迟时间，LZ4压缩在降低平均延迟时间时最显著，gzip在生产数据时耗时最大。</p>
+<h2 id="32-only">3.2 <strong>读取测试(only</strong><strong>消费者)</strong></h2>
+<h3 id="321-thread-vs-throughput"><strong>3.2.1</strong>   <strong>Thread VS. Throughput</strong></h3>
+<p>实验条件:3个Broker,1个Topic,3个磁盘，throughput=1000w,num-records=5000w ，1个客户端</p>
+<p>测试项目：分别测试thread为1，2，3，6时的吞吐量</p>
+<p>​             表9  线程因素</p>
+<table>
+<thead>
+<tr>
+<th>console&amp;thread</th>
+<th>Records/second(avg)</th>
+<th>MB/second(avg)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>p33(11)</td>
+<td>340124</td>
+<td>324</td>
+</tr>
+<tr>
+<td>p33(12)</td>
+<td>799073</td>
+<td>762</td>
+</tr>
+<tr>
+<td>p33(13)</td>
+<td>973551</td>
+<td>928</td>
+</tr>
+<tr>
+<td>p33(16)</td>
+<td>963081</td>
+<td>918</td>
+</tr>
+</tbody>
+</table>
+<p>由表可知，增加线程数会增加消费者的吞吐量，当小于3个线程时吞吐量增速较快，大于3个的时候趋于大体平稳，单个客户端消费者的吞吐量可达到928MB/s。同时，消费者吞吐量大于生产者的吞吐量并且处理消息的时间总大于生产者。因此在合理的配置下可以保证消息被及时处理。</p>
+<h3 id="322-vs-throughput"><strong>3.2.2</strong> <strong>消费者</strong> <strong>VS. Throughput</strong></h3>
+<p>实验条件:3个Broker,1个Topic,3个磁盘，throughput=1000w,num-records=5000w ，3个客户端，即三个消费者</p>
+<p>测试项目：分别测试消费者为1， 3时的吞吐量</p>
+<p>当消费者个数有1增为3时，吞吐量由324MB/s增加到1324MB/s。Consumer消费消息时以Partition为分配单位，当只有1个Consumer时，该Consumer需要同时从3个Partition拉取消息，该Consumer所在机器的I/O成为整个消费过程的瓶颈，而当Consumer个数增加至3个时，多个Consumer同时从集群拉取消息，充分利用了集群的吞吐率。对于同一个组内的消费者只允许一个消费者消费一个partition，不同组之间可以消费相同的partition。</p>
+<h3 id="323-vs-throughput"><strong>3.2.3</strong> <strong>磁盘</strong> <strong>VS. Throughput</strong></h3>
+<p>实验条件:3个Broker,1个Topic, throughput=1000w,num-records=5000w ，1个客户端</p>
+<p>测试项目：分别测试消费者为3，6，9时的吞吐量</p>
+<p>​               表10 磁盘影响因素</p>
+<table>
+<thead>
+<tr>
+<th>console&amp;thread</th>
+<th>Records/second(avg)</th>
+<th>MB/second(avg)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>p36(33)</td>
+<td>938827</td>
+<td>895</td>
+</tr>
+<tr>
+<td>p66(33)</td>
+<td>888458</td>
+<td>847</td>
+</tr>
+<tr>
+<td>p96(33)</td>
+<td>259475</td>
+<td>247</td>
+</tr>
+</tbody>
+</table>
+<p>由表看出，磁盘数增加并不能提高吞吐率，反而吞吐率相应下降。因此，在一定broker和partition 下可以按两者值合理增加磁盘。</p>
+<p><strong>Consumer</strong> <strong>小结</strong></p>
+<p>（1） Consumer 吞吐率远大于生产者，因此可以保证在合理的配置下，消息可被及时处理。</p>
+<p>（2） Consumer 处理消息时所消耗单个broker的CPU一般在70%以下，所占内存也较小，属于轻量级进程。</p>
+<p>（3） 本实验在三台客户端测得Consumer的最大吞吐量在2617MB/s</p>
+<h2 id="33">3.3 生产者&amp;消费者</h2>
+<p>模拟类似真实的环境，生产消费过程</p>
+<p>实验条件:3个Broker,1个Topic, throughput=1000w,num-records=5000w ，3个客户端，即三个消费者</p>
+<p>测试项目：分别测试磁盘为3，6，9时的吞吐量</p>
+<p>（1） Producer</p>
+<p>​      表11 生产者吞吐量</p>
+<table>
+<thead>
+<tr>
+<th>topic</th>
+<th>Records/second(avg)</th>
+<th>MB/second(avg)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pc36(366)</td>
+<td>1023426</td>
+<td>976.02</td>
+</tr>
+<tr>
+<td>p66(366)</td>
+<td>1319431</td>
+<td>1258.31</td>
+</tr>
+<tr>
+<td>p612(366)</td>
+<td>1273905</td>
+<td>1214.88</td>
+</tr>
+<tr>
+<td>p99(366)</td>
+<td>989373</td>
+<td>943.54</td>
+</tr>
+<tr>
+<td>p918(366)</td>
+<td>1159443</td>
+<td>1105.73</td>
+</tr>
+</tbody>
+</table>
+<p>（2） Consumer</p>
+<p>​            表12 消费者吞吐量</p>
+<table>
+<thead>
+<tr>
+<th>topic</th>
+<th>Records/second(avg)</th>
+<th>MB/second(avg)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pc36(366)</td>
+<td>934007</td>
+<td>889</td>
+</tr>
+<tr>
+<td>p66(366)</td>
+<td>2259154</td>
+<td>2153</td>
+</tr>
+<tr>
+<td>p612(366)</td>
+<td>1982417</td>
+<td>1889</td>
+</tr>
+<tr>
+<td>p99(366)</td>
+<td>649876</td>
+<td>618</td>
+</tr>
+<tr>
+<td>p918(366)</td>
+<td>1313163</td>
+<td>1817</td>
+</tr>
+</tbody>
+</table>
+<p>由producer与consumer两表，测得生产的最大吞吐量为1258.31MB/s,消费最大吞吐量为2153MB/s。由此看出，与单生产、单消费时的吞吐量大体相当,所用CPU及内存量并未显著上升。</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
