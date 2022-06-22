@@ -51,7 +51,7 @@ kafka-consumer-perf-test.sh --zookeeper localhost:2181 --topic test --fetch-size
 
 
 
-## 常用配置
+## Kafka常用配置
 
 ```bash
 #设置复制因子为3启用高可用机制
@@ -69,6 +69,52 @@ message.max.bytes=10485760
 #最大队列请求数
 queued.max.requests=1024
 ```
+
+## Kafka用到的系统设置调优
+
+```bash
+#注意下述配置基本都在sysctl中，修改后记得sysctl -p生效
+#文件系统使用ext4或xfs
+#为了更好的性能kafka母公司建议将刷盘时间调整到2分钟以上（单位百分之一秒）
+vm.dirty_writeback_centisecs = 12000
+# 和参数vm.dirty_background_ratio实现相同功能，但两个参数只会有其中一个生效，表示脏页大小达到多少字节后开始触发刷磁盘
+vm.dirty_background_bytes = 0 
+#后台刷盘的百分比阈值
+vm.dirty_background_ratio=20
+#后台刷盘时间30秒（30秒内即使没到20%比例也刷盘一次）
+vm.dirty_expire_centisecs=3000
+#前台刷盘（阻塞应用）百分比阈值
+vm.dirty_ratio = 30
+# 和参数vm.dirty_ratio实现相同功能，但两个参数只会有其中一个生效，表示脏页达到多少字节后停止接收写请求，开始触发刷磁盘
+vm.dirty_bytes = 0 
+#注意：缓存的数据越多，丢数据的风险越大。会定期出现IO峰值，这个峰值时间会较长，在这期间所有新的写IO性能会很差（极端情况直接被hang住）。
+
+```
+
+1、当vm.dirty_background_ratio、vm.dirty_expire_centisecs变大时
+出入流量抖动变大，出现大量突刺；
+
+ IO抖动变大，出现大量突刺，磁盘有连续打满的情况；
+
+出入流量平均大小不受影响；
+
+2、当vm.dirty_background_ratio、vm.dirty_expire_centisecs变小时
+出入流量抖动变小，趋于平滑稳定，无突刺；
+
+磁盘IO抖动变小，无突刺，磁盘IO无打满情况；
+
+出入流量平均大小不受影响；
+
+3、当vm.dirty_ratio变小（低于10）
+出入流量隔一段时间出现一个明显的波谷；这是因为cache数据量超过vm.dirty_ratio设定的值将阻塞写请求，进行刷盘操作。
+
+4、当vm.dirty_ratio变大时（高于40），出入流量无明显的波谷，流量平滑；
+5、当以下三个参数分别为对应值时，出入流量非常平滑，趋于一条直线；
+vm.dirty_background_ratio=1
+
+vm.dirty_ratio=80
+
+vm.dirty_expire_centisecs=1000
 
 ## 动态设置topic的复制因子
 

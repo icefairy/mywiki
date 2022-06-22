@@ -6,8 +6,8 @@ rootpwd=`openssl rand -base64 16`
 echo $rootpwd
 #K0XwkqGwPH+2g4A8x/OueQ==
 #如果是跨主机部署可以直接指定--net host即可使用主机网络无需映射端口
-docker run -itd --name pridb -e MARIADB_ROOT_PASSWORD="K0XwkqGwPH+2g4A8x/OueQ==" --net mdb --hostname pridb -p 3306:3306 mariadb:10.5
-docker run -itd --name secdb -e MARIADB_ROOT_PASSWORD="K0XwkqGwPH+2g4A8x/OueQ==" --net mdb --hostname secdb -p 3307:3306 mariadb:10.5
+docker run -itd --name pridb -e MARIADB_ROOT_PASSWORD="K0XwkqGwPH+2g4A8x/OueQ==" --net mdb --hostname pridb -v /data:/var/lib/mysql -p 3306:3306 mariadb:10.5
+docker run -itd --name secdb -e MARIADB_ROOT_PASSWORD="K0XwkqGwPH+2g4A8x/OueQ==" --net mdb --hostname secdb  -v /data:/var/lib/mysql-p 3307:3306 mariadb:10.5
 ```
 
 ## 设置主节点
