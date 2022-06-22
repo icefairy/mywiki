@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://wiki.xlz2021.cf/%E6%95%B0%E6%8D%AE%E5%BA%93/neo4j/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Neo4j相关 - 玄凌子知识库</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/cypher.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/kotlin.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/docker.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">玄凌子知识库</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">关于我</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Java <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Java/Maven/" class="dropdown-item">Maven 使用</a>
+</li>
+                                    
+<li>
+    <a href="../../Java/%E4%BF%9D%E7%95%99%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/" class="dropdown-item">保留端口占用问题</a>
+</li>
+                                    
+<li>
+    <a href="../../Java/%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" class="dropdown-item">YYYY和yyyy的区别</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Python <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Python/JupyterNotebook%E5%AE%89%E8%A3%85/" class="dropdown-item">Jupyter Notebook 安装</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Docker <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../docker/K3S%E5%AE%89%E8%A3%85/" class="dropdown-item">K3S安装</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/docker%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3/" class="dropdown-item">docker容器相关</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/seaweedfs%E4%BD%9C%E4%B8%BA%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E6%8F%92%E4%BB%B6/" class="dropdown-item">Seaweedfs作为分布式存储插件</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Linux <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../linux/Alpine%E4%BD%BF%E7%94%A8%E6%B8%85%E5%8D%8E%E6%BA%90/" class="dropdown-item">Alpine使用清华源</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/CentOS%E5%AE%8C%E7%BE%8E%E5%8D%87%E7%BA%A7gcc%E7%89%88%E6%9C%AC%E6%96%B9%E6%B3%95/" class="dropdown-item">CentOS完美升级gcc版本方法</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Centos7%E6%9B%B4%E6%96%B0%E5%86%85%E6%A0%B8/" class="dropdown-item">Centos7更新内核</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/FIO%E6%B5%8B%E8%AF%95%E7%A3%81%E7%9B%98IO/" class="dropdown-item">FIO测试磁盘IO</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Linux_LVM%E5%88%86%E5%8C%BA%E6%89%A9%E5%AE%B9/" class="dropdown-item">LVM分区扩容</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Nginx%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E/" class="dropdown-item">Nginx配置说明</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos7_selinux/" class="dropdown-item">修复Centos7的SELINUX错误</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos7%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F/" class="dropdown-item">Centos7单用户模式</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos_update_gcc/" class="dropdown-item">CentOS完美升级gcc版本方法</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/cron/" class="dropdown-item">cron定时任务常见问题</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/cron%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="dropdown-item">Cron定时任务常见问题</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/iperf3%E5%B8%A6%E5%AE%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">Iperf3带宽测试</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/net_safe/" class="dropdown-item">网络安全防护</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/net_speed_test/" class="dropdown-item">带宽测试</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/nfs/" class="dropdown-item">针对大数据组件的NFS挂载参数</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/nginx/" class="dropdown-item">nginx负载均衡</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/tcpdump%E6%8A%93%E5%8C%85/" class="dropdown-item">tcpdump抓包</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/update_centos7_kernel/" class="dropdown-item">Centos7 升级内核版本</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E4%BF%AE%E5%A4%8DCentos7%E7%9A%84SELINUX%E9%94%99%E8%AF%AF/" class="dropdown-item">修复Centos7的SELINUX错误</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" class="dropdown-item">新服务器基本配置流程</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4/" class="dropdown-item">网络安全防护</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E9%92%88%E5%AF%B9%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E7%9A%84NFS%E6%8C%82%E8%BD%BD%E5%8F%82%E6%95%B0/" class="dropdown-item">针对大数据组件的NFS挂载参数</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Store <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../store/seaweedfs/" class="dropdown-item">seaweedfs</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">中医 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E4%BA%94%E6%AD%A5%E5%AD%A6%E7%BA%AF%E6%AD%A3%E4%B8%AD%E5%8C%BB/" class="dropdown-item">五步学纯正中医</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E5%A4%A7%E5%8C%BB%E7%B2%BE%E8%AF%9A/" class="dropdown-item">大医精诚</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">灵枢</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E4%B8%AD%E5%8C%BB%E5%9F%BA%E7%A1%80/" class="dropdown-item">中医基础</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="dropdown-item">人纪针灸学习笔记</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E5%B8%B8%E7%94%A8%E5%85%BB%E7%94%9F%E7%A9%B4%E4%BD%8D/" class="dropdown-item">常用养生穴位</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E7%83%A7%E5%B1%B1%E7%81%AB%E4%B8%8E%E9%80%8F%E5%A4%A9%E5%87%89%E6%89%8B%E6%B3%95/" class="dropdown-item">烧山火与透天凉手法</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E7%BB%8F%E7%BB%9C%E5%B9%B2%E6%94%AF/" class="dropdown-item">经络天干</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E9%AB%98%E8%A1%80%E5%8E%8B%E8%BE%A8%E8%AF%81%E4%B8%8E%E6%96%B9%E9%92%88/" class="dropdown-item">高血压辨证与方针</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E9%BA%A6%E7%B2%92%E8%82%BF%E8%BE%A9%E8%AF%81%E4%B8%8E%E6%96%B9%E9%92%88/" class="dropdown-item">麦粒肿辩证与方针</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">素问</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E5%B8%B8%E7%94%A8%E6%96%B9%E5%89%82/" class="dropdown-item">常用方剂</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E6%95%91%E5%91%BD%E7%A8%BB%E8%8D%89/" class="dropdown-item">救命稻草</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E6%96%B0%E6%96%87%E6%A1%A3/" class="dropdown-item">新文档</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E9%BB%84%E5%B8%9D%E5%86%85%E7%BB%8F_%E5%85%BB%E7%94%9F/" class="dropdown-item">黄帝内经_养生</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">人工智能 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E4%BC%98%E7%BC%BA%E7%82%B9/" class="dropdown-item">常见算法优缺点</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">大数据 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/ElasticSearch/" class="dropdown-item">ElasticSearch技巧</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/ElasticSearch%E6%8A%80%E5%B7%A7/" class="dropdown-item">ElasticSearch技巧</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Flink_sql_ETL%E9%9B%86%E5%90%88/" class="dropdown-item">Flink-sql-ETL集合</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Flink%E5%B8%B8%E7%94%A8%E8%BF%9E%E6%8E%A5%E5%99%A8%E8%AF%BB%E5%86%99%E8%83%BD%E5%8A%9B%E6%B1%87%E6%80%BB/" class="dropdown-item">Flink常用connector支持情况</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/GP%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/" class="dropdown-item">GP常用配置项</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Greenplum%E7%A7%BB%E9%99%A4Segment/" class="dropdown-item">Greenplum移除Segment</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E7%9B%B8%E5%85%B3/" class="dropdown-item">Kafka相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E6%B5%8B%E8%AF%95/" class="dropdown-item">kafka调优</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E8%B0%83%E4%BC%98%E7%9B%B8%E5%85%B3/" class="dropdown-item">Kafka调优相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/cdh_spark/" class="dropdown-item">cdh编写spark依赖问题</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/flink%E9%85%8D%E7%BD%AE%E8%B0%83%E4%BC%98/" class="dropdown-item">flink 配置调优</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/flink%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">flink集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/gp6%E5%BA%93%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">Gp6库性能测试</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/greenplum%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8/" class="dropdown-item">greenplum集群使用</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/greenplum%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">greenplum集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/kafka%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">[kafka性能测试](https://www.cnblogs.com/runnerjack/p/9105784.html)</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/mysql/" class="dropdown-item">Mysql</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83kafka%E9%85%8D%E7%BD%AE/" class="dropdown-item">生产环境kafka配置说明</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">数据库 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../Citus%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8/" class="dropdown-item">Citus集群使用</a>
+</li>
+                                    
+<li>
+    <a href="../GP_MDB%E9%9B%86%E7%BE%A4%E5%86%85%E5%AD%98%E9%85%8D%E7%BD%AE/" class="dropdown-item">gp/mdb集群内存配置</a>
+</li>
+                                    
+<li>
+    <a href="../Lcpg%E5%86%85%E9%83%A8%E5%8F%91%E8%A1%8C%E7%89%88%E4%BD%BF%E7%94%A8/" class="dropdown-item">Lcpg内部发行版使用</a>
+</li>
+                                    
+<li>
+    <a href="../Mariadb%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" class="dropdown-item">Mariadb主从复制</a>
+</li>
+                                    
+<li>
+    <a href="../Mariadb%E5%A4%9A%E4%B8%BB%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">Mariadb多主集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../Mysql%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D/" class="dropdown-item">mysql故障恢复</a>
+</li>
+                                    
+<li>
+    <a href="../Neo4j%E7%9B%B8%E5%85%B3/" class="dropdown-item">Neo4j相关</a>
+</li>
+                                    
+<li>
+    <a href="../Pg%E5%8E%9F%E7%94%9F%E9%9B%86%E7%BE%A4%E5%A4%8D%E5%88%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/" class="dropdown-item">PG原生集群复制配置与高可用</a>
+</li>
+                                    
+<li>
+    <a href="../Postgresql/" class="dropdown-item">Postgresql相关</a>
+</li>
+                                    
+<li>
+    <a href="../Postgresql%E7%9B%B8%E5%85%B3/" class="dropdown-item">Postgresql相关</a>
+</li>
+                                    
+<li>
+    <a href="../Postgresql%E9%9B%86%E7%BE%A4/" class="dropdown-item">pg集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../Redis%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3/" class="dropdown-item">Redis相关</a>
+</li>
+                                    
+<li>
+    <a href="../Redis%E9%9B%86%E7%BE%A4%E7%9B%B8%E5%85%B3/" class="dropdown-item">Redis集群相关</a>
+</li>
+                                    
+<li>
+    <a href="../gp_mdb%E7%A1%AC%E4%BB%B6%E9%80%89%E5%9E%8B%E8%AE%A1%E5%88%92/" class="dropdown-item">gp与mdb硬件选型计划</a>
+</li>
+                                    
+<li>
+    <a href="../mysql_mariadb/" class="dropdown-item">mysql/mariadb</a>
+</li>
+                                    
+<li>
+    <a href="../mysql%E5%88%A0%E9%99%A4%E5%A4%A7%E8%A1%A8/" class="dropdown-item">mysql删除大表</a>
+</li>
+                                    
+<li>
+    <a href="../mysql%E6%88%96mariadb/" class="dropdown-item">Mysql或mariadb</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Neo4j相关</a>
+</li>
+                                    
+<li>
+    <a href="../pipelinedb/" class="dropdown-item">pipelinedb流式数据库介绍</a>
+</li>
+                                    
+<li>
+    <a href="../pipelinedb%E6%B5%81%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D/" class="dropdown-item">Pipelinedb流式数据库介绍</a>
+</li>
+                                    
+<li>
+    <a href="../timescaledb/" class="dropdown-item">Timescaledb</a>
+</li>
+                                    
+<li>
+    <a href="../%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" class="dropdown-item">时序数据库</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">架构设计 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/empty/" class="dropdown-item">占位置</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">经济 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E7%BB%8F%E6%B5%8E/%E8%B6%85%E4%BD%8E%E4%BB%B7%E9%A2%84%E5%94%AE%E5%A5%97%E8%B7%AF/" class="dropdown-item">超低价预售套路</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../mysql%E6%88%96mariadb/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../pipelinedb/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#neo4j" class="nav-link">Neo4j相关</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">关系图谱技术演进</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">关系图存储查询计算解决方案</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">社区版搭建</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_4" class="nav-link">使用</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="neo4j">Neo4j相关</h1>
+<h2 id="_1">关系图谱技术演进</h2>
+<ol>
+<li>传统关系型数据库扁平化存储+sql查询</li>
+<li>优点：实现简单、无额外学习成本。</li>
+<li>缺点：多级关联数据查询麻烦，且受限于传统关系型数据库的设计原理，对图数据没有专门的优化，在查询多级大量数据时性能不佳。</li>
+<li>专用的图数据库例如neo4j</li>
+<li>优点：针对图计算与存储做专门设计提高其性能，cypher专用查询语言较sql能更清楚的表达图之间的关系。</li>
+<li>缺点：需要学习cypher查询语言，数据的增删改查也与传统关系型数据库略有不同。</li>
+</ol>
+<h2 id="_2">关系图存储查询计算解决方案</h2>
+<blockquote>
+<p>通过Neo4j实现人员的批量创建，更新（创建后合并），删除，多级关系查询等</p>
+</blockquote>
+<h2 id="_3">社区版搭建</h2>
+<pre><code class="language-bash">#为了保证性能以及大数据量操作时候不内存溢出，在确保同机器其他组件需求的情况下，尽可能给更多的可用内存
+docker run -itd --name neo4j --restart=always -p 7474:7474 -p 7687:7687 -e=NEO4J_dbms_memory_pagecache_size=8G -e=NEO4J_dbms_memory_heap_initial__size=4G -e=NEO4J_dbms_memory_heap_max__size=32G -v /data/neo4j:/data neo4j:4.2.7
+#下载apoc插件以提供增强功能支持（比如合并节点），地址：https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases 版本号如果没有完全相同的选择接近的也可以
+cd /data/neo4j
+wget https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/4.2.0.4/apoc-4.2.0.4-all.jar
+#复制apoc*.jar到容器中neo4j目录的plugins文件夹中
+docker exec -it neo4j bash
+cp data/apoc-*.jar ./plugins/
+#修改conf/neo4j.conf配置文件，增加如下两行
+dbms.security.procedures.unrestricted=algo.*
+dbms.security.procedures.unrestricted=apoc.*
+#保存后重启容器
+docker restart neo4j
+</code></pre>
+<h2 id="_4">使用</h2>
+<ul>
+<li>索引建立是非常有必要的，一个索引可以很大程度上降低大规模数据的查询速度。（在对节点按照name属性建立了索引之后，截止我写这篇blog的时候，数据量为节点600w+,关系1100w+，查询一个节点以及相关联的节点关系消耗的时间和数据量很小的时候几乎没有什么差别，基本上都稳定在16~20ms左右。链接：https://www.jianshu.com/p/a2497a33390f ）</li>
+</ul>
+<blockquote>
+<p>以下涉及性能的测试相关的机器配置如下:32G内存 8核处理器 机械硬盘</p>
+</blockquote>
+<h3 id="_5"><em>批量操作最佳实践</em></h3>
+<ul>
+<li>批量创建节点采用(纯新增)：批量创建节点（档案表读取）-推荐</li>
+<li>批量创建节点采用(新增以及包含更新)：通过证件号合并方式创建-增量更新推荐</li>
+<li>批量创建关系采用：根据户号创建一家人关系子图事务方式-推荐</li>
+<li>批量创建关系（复杂类型）采用：通过apoc插件批量方式创建人车关系</li>
+<li>批量合并实体节点采用：根据证件号码合并节点-cypher方式(依赖apoc插件)</li>
+<li>批量合并重复关系（主要由合并节点产生）：合并重复关系-cypher方式（依赖apoc插件）</li>
+</ul>
+<h3 id="_6">批量创建节点</h3>
+<pre><code class="language-python">#python dependson:pip install py2neo
+from py2neo import Graph
+from py2neo.bulk import create_nodes
+g = Graph(connectionInfoParam...)
+keys = [&quot;name&quot;, &quot;age&quot;]
+data = [
+   [&quot;Alice&quot;, 33],
+   [&quot;Bob&quot;, 44],
+   [&quot;Carol&quot;, 55],
+]
+create_nodes(g.auto(), data, labels={&quot;Person&quot;}, keys=keys)
+g.nodes.match(&quot;Person&quot;).count()
+</code></pre>
+<h3 id="-">批量创建节点（档案表读取）-纯新增推荐</h3>
+<blockquote>
+<p>写入1万条耗时7秒，写入操作时，测试机器python和java进程的cpu占用较高，内存合计占用7GB，磁盘读写1-3MB/S，初步推测需要提升写入性能的话需要在cpu方面扩容。 结合车辆档案数据测试结果：21个字段1万条数据写入4.5秒 （人的档案46个字段7秒），将全量字段放到数据仓库中，图数据库中只存必要的查询以及直接显示字段可以有效提升写入速度。</p>
+</blockquote>
+<pre><code class="language-python">#py2neo 的bulk接口方式
+from py2neo import Graph
+import psycopg2
+from py2neo.bulk import create_nodes,merge_nodes
+from itertools import islice
+import time
+#读取人员档案数据
+db=psycopg2.connect(&quot;dbname=demo user=postgres password=password hostipaddress port=5432&quot;)
+cur=db.cursor()
+keys=&quot;gmsfhm,xm,xbmc,mzmc,xxmc,jggjmc,jgssxmc,csdjgmc,csdssxmc,csdxz,hjdpcsmc,hjdxz,xzz,lxdh,zzmmmc,zw,zy,byzkmc,whcdmc,hyzkmc,zjxymc,hklxmc,hkxzmc,hh,yhzgxdm,yhzgxmc,fqgmsfhm,fqxm,mqgmsfhm,mqxm,pogmsfhm,poxm,idcard_url,province,city,country&quot;
+keyss=keys.split(',')
+limit=10_000
+#固定读取N条数据用来测试合并节点
+# sqls=&quot;select &quot;+keys+&quot; from czrkjbxx order by hh limit &quot;+str(limit)
+#随机读取N条数据
+sqls=&quot;select &quot;+keys+&quot; from czrkjbxx order by hh asc  offset floor(random()*1000) limit &quot;+str(limit)
+nodes=[]
+#连接neo4j
+graph = Graph(&quot;bolt://ipaddress:7687&quot;, auth=(&quot;neo4j&quot;, &quot;neo4jpassword&quot;))
+#多少条数据保存一次
+batch_size=10000
+if batch_size&gt;limit:
+   batch_size=limit
+try:
+   cur.execute(sqls)
+   print('query:%s' % sqls)
+   data=cur.fetchmany(batch_size)
+   ta0=time.time()
+   cnt=0
+   while data:
+       cnt=cnt+1
+       print('load data size:%s' % len(data))
+       for d in data:
+           p={'xm':''}
+           for i in range(len(keyss)):
+               p[keyss[i]]=d[i]
+           nodes.append(p)
+           if len(nodes)&gt;=batch_size:
+               #启动节点创建
+               ta=time.time()
+               create_nodes(graph.auto(),nodes,labels={'Person'})
+               nodes.clear()
+               print(&quot;提交 %s 次，耗时:%s秒&quot; % (cnt,round(time.time()-ta)))
+           #启动一个自动提交的事务
+       if len(nodes)&gt;0:
+           create_nodes(graph.auto(),nodes,labels={'Person'})
+           nodes.clear()
+       data=cur.fetchmany(batch_size)
+
+except(IOError):
+   print('发生错误')
+print(&quot;neo4j中有%s条数据,总耗时:%s秒&quot; % (str(graph.nodes.match('Person').count()),round(time.time()-ta0)))
+cur.close()
+db.close()
+</code></pre>
+<h3 id="-_1">通过证件号合并方式创建-增量更新推荐</h3>
+<blockquote>
+<p>1万条耗时283秒</p>
+</blockquote>
+<pre><code class="language-python">from py2neo import Graph
+import psycopg2
+from py2neo.bulk import create_nodes,merge_nodes
+from itertools import islice
+import time
+#读取人员档案数据
+db=psycopg2.connect(&quot;dbname=demo user=postgres password=password host=ip port=5432&quot;)
+cur=db.cursor()
+keys=&quot;gmsfhm,xm,xbmc,mzmc,xxmc,jggjmc,jgssxmc,csdjgmc,csdssxmc,csdxz,hjdpcsmc,hjdxz,xzz,lxdh,zzmmmc,zw,zy,byzkmc,whcdmc,hyzkmc,zjxymc,hklxmc,hkxzmc,hh,yhzgxdm,yhzgxmc,fqgmsfhm,fqxm,mqgmsfhm,mqxm,pogmsfhm,poxm,idcard_url,province,city,country&quot;
+keyss=keys.split(',')
+limit=10_000
+#固定读取N条数据用来测试合并节点
+# sqls=&quot;select &quot;+keys+&quot; from czrkjbxx order by hh limit &quot;+str(limit)
+#随机读取N条数据
+sqls=&quot;select &quot;+keys+&quot; from czrkjbxx order by hh asc  offset floor(random()*1000) limit &quot;+str(limit)
+nodes=[]
+#连接neo4j
+graph = Graph(&quot;bolt://ip:7687&quot;, auth=(&quot;neo4j&quot;, &quot;password&quot;))
+#多少条数据保存一次
+batch_size=10000
+if batch_size&gt;limit:
+   batch_size=limit
+try:
+   cur.execute(sqls)
+   print('query:%s' % sqls)
+   data=cur.fetchmany(batch_size)
+   ta0=time.time()
+   cnt=0
+   while data:
+       cnt=cnt+1
+       print('load data size:%s' % len(data))
+       for d in data:
+           p={'xm':''}
+           for i in range(len(keyss)):
+               p[keyss[i]]=d[i]
+           nodes.append(p)
+           if len(nodes)&gt;=batch_size:
+               #启动节点创建
+               ta=time.time()
+               merge_nodes(graph.auto(),nodes,('Person','gmsfhm'),labels={'Person'})
+               nodes.clear()
+               print(&quot;提交 %s 次，耗时:%s秒&quot; % (cnt,round(time.time()-ta)))
+           #启动一个自动提交的事务
+       if len(nodes)&gt;0:
+           merge_nodes(graph.auto(),nodes,('Person','gmsfhm'),labels={'Person'})
+           nodes.clear()
+       data=cur.fetchmany(batch_size)
+
+except(IOError):
+   print('发生错误')
+print(&quot;neo4j中有%s条数据,总耗时:%s秒&quot; % (str(graph.nodes.match('Person').count()),round(time.time()-ta0)))
+cur.close()
+db.close()
+</code></pre>
+<h3 id="apoc">通过apoc插件批量创建节点</h3>
+<blockquote>
+<p>写入1000条耗时217秒，不推荐</p>
+</blockquote>
+<pre><code class="language-python">#通过apoc插件批量创建
+from py2neo import Graph
+import psycopg2
+from itertools import islice
+import time
+import simplejson
+
+def custJson(d):
+   s=&quot;{&quot;
+   if len(d)&gt;0:
+       for k in d:
+           if d[k]:
+               s=s+k+':&quot;'+d[k]+'&quot;,'
+           else:
+               s=s+k+':&quot;&quot;,'
+       if len(s)&gt;2:
+           return s[0:-1]+'}'
+       else:
+           return '{}'
+   else:
+       return '{}'
+
+#读取人员档案数据
+db=psycopg2.connect(&quot;dbname=demo user=postgres password=password host=ip port=5432&quot;)
+cur=db.cursor()
+keys=&quot;gmsfhm,xm,xbmc,mzmc,xxmc,jggjmc,jgssxmc,csdjgmc,csdssxmc,csdxz,hjdpcsmc,hjdxz,xzz,lxdh,zzmmmc,zw,zy,byzkmc,whcdmc,hyzkmc,zjxymc,hklxmc,hkxzmc,hh,yhzgxmc,fqgmsfhm,fqxm,mqgmsfhm,mqxm,pogmsfhm,poxm,idcard_url,province,city,country&quot;
+keyss=keys.split(',')
+limit=1_000
+#固定读取N条数据用来测试合并节点
+# sqls=&quot;select &quot;+keys+&quot; from czrkjbxx order by hh limit &quot;+str(limit)
+#随机读取N条数据
+sqls=&quot;select &quot;+keys+&quot; from czrkjbxx order by hh asc  offset floor(random()*1000) limit &quot;+str(limit)
+nodes=&quot;[&quot;
+#连接neo4j
+graph = Graph(&quot;bolt://ip:7687&quot;, auth=(&quot;neo4j&quot;, &quot;password&quot;))
+#多少条数据保存一次
+batch_size=1000
+cnt=0
+try:
+   cur.execute(sqls)
+   data=cur.fetchall()
+   for d in data:
+       p={'xm':''}
+       for i in range(len(keyss)):
+           p[keyss[i]]=d[i]
+       nodes=nodes+custJson(p)+','
+       cnt=cnt+1
+#         print(nodes)
+       if cnt&gt;=batch_size:
+           #启动节点创建
+           ta=time.time()
+           graph.run('call apoc.create.nodes([&quot;Person&quot;],%s)' % (nodes[0:-1]+']'))
+           nodes='['
+           cnt=0
+           print('耗时:%s' % ((time.time()-ta)))
+       #启动一个自动提交的事务
+   if cnt&gt;0:
+       graph.run('call apoc.create.nodes([&quot;Person&quot;],%s)' % (nodes[0:-1]+']'))
+       nodes='['
+       cnt=0
+#     merge_nodes(graph.auto(),)
+
+except(IOError):
+   print('发生错误')
+print(&quot;neo4j中有%s条数据,总耗时:%s&quot; % (str(graph.nodes.match('Person').count()),round(time.time()-ta)))
+cur.close()
+db.close()
+</code></pre>
+<h3 id="_7">通过子图方式批量创建节点</h3>
+<blockquote>
+<p>耗时和py2neo的批量接口create_nodes基本一样</p>
+</blockquote>
+<pre><code class="language-python">#通过subgraph加事务批量创建节点
+from py2neo import Graph,Node,Subgraph
+import psycopg2
+from itertools import islice
+import time
+import simplejson
+
+def custJson(d):
+   s=&quot;{&quot;
+   if len(d)&gt;0:
+       for k in d:
+           if d[k]:
+               s=s+k+':&quot;'+d[k]+'&quot;,'
+           else:
+               s=s+k+':&quot;&quot;,'
+       if len(s)&gt;2:
+           return s[0:-1]+'}'
+       else:
+           return '{}'
+   else:
+       return '{}'
+
+#读取人员档案数据
+db=psycopg2.connect(&quot;dbname=demo user=postgres password=password host=ip port=5432&quot;)
+cur=db.cursor()
+keys=&quot;gmsfhm,xm,xbmc,mzmc,xxmc,jggjmc,jgssxmc,csdjgmc,csdssxmc,csdxz,hjdpcsmc,hjdxz,xzz,lxdh,zzmmmc,zw,zy,byzkmc,whcdmc,hyzkmc,zjxymc,hklxmc,hkxzmc,hh,yhzgxmc,fqgmsfhm,fqxm,mqgmsfhm,mqxm,pogmsfhm,poxm,idcard_url,province,city,country&quot;
+keyss=keys.split(',')
+limit=10_000
+#固定读取N条数据用来测试合并节点
+# sqls=&quot;select &quot;+keys+&quot; from czrkjbxx order by hh limit &quot;+str(limit)
+#随机读取N条数据
+sqls=&quot;select &quot;+keys+&quot; from czrkjbxx order by hh asc  offset floor(random()*1000) limit &quot;+str(limit)
+nodes=&quot;[&quot;
+#连接neo4j
+graph = Graph(&quot;bolt://ipaddress:7687&quot;, auth=(&quot;neo4j&quot;, &quot;password&quot;))
+tx = graph.begin()
+nodes=[]
+cur.execute(sqls)
+data=cur.fetchall()
+ta=time.time()
+for line in data:
+   oneNode = Node()
+   for ki in range(len(keyss)):
+       k=keyss[ki]
+       oneNode[k]=line[ki]
+   nodes.append(oneNode)
+nodes=Subgraph(nodes)
+tx.create(nodes)
+tx.commit()
+print('耗时:%s' % ((time.time()-ta)))
+</code></pre>
+<h3 id="-cypherapoc">根据证件号码合并节点-cypher方式(依赖apoc插件)</h3>
+<blockquote>
+<p>2万条数据，实际有1万条不重复数据，执行耗时2秒，推荐 190万数据实际不重复的100万，执行时间4秒</p>
+</blockquote>
+<pre><code class="language-cypher">--cypher 语法实现
+match(p:Person) with p.gmsfhm as sfz,collect(p) as nodelist,count(*) as cnt where cnt&gt;1 call apoc.refactor.mergeNodes(nodelist,{properties:&quot;combine&quot;,mergeRels:true}) yield node return node
+</code></pre>
+<h3 id="-cypherapoc_1">合并重复关系-cypher方式（依赖apoc插件）</h3>
+<pre><code class="language-sql">MATCH (a:Person)-[r:rel]-(b:Person)
+WITH a, b, collect(r) as rels
+CALL apoc.refactor.mergeRelationships(rels)
+YIELD rel 
+RETURN count(rel)
+--如果有太多重复数据最好每次只处理一部分，避免全加载到内存中造成内存溢出，如下
+match(p:Person) with p.gmsfhm as sfz,collect(p) as nodelist,count(*) as cnt where cnt&gt;1  call apoc.refactor.mergeNodes(nodelist) yield node return node limit 10000
+--查询有多少组重复数据
+match(p:Person) with p.gmsfhm as sfz,collect(p) as nodelist,count(*) as cnt where cnt&gt;1 return count(nodelist)
+</code></pre>
+<h3 id="-python">根据证件号合并节点-python方式</h3>
+<blockquote>
+<p>2万条数据，实际有1万条不重复数据，执行耗时365秒，不推荐</p>
+</blockquote>
+<pre><code class="language-python">#合并
+from py2neo import Graph
+import time
+from py2neo.bulk import create_nodes,merge_nodes
+graph = Graph(&quot;bolt://ip:7687&quot;, auth=(&quot;neo4j&quot;, &quot;password&quot;))
+print(&quot;count:&quot;+str(graph.nodes.match('Person').count()))
+nodes=graph.nodes.match('Person')
+# mdata=[]
+# for n in nodes:
+#     mdata.append({'gmsfhm':n['gmsfhm']})
+
+# print(mdata[0])
+ta=time.time()
+merge_nodes(tx=graph.auto(),data=nodes,merge_key=('Person','gmsfhm'))
+print(&quot;using time:&quot;+str(round(time.time()-ta)))
+print(&quot;count:&quot;+str(graph.nodes.match('Person').count()))
+</code></pre>
+<h3 id="cql">索引（cql）</h3>
+<pre><code class="language-sql">CREATE INDEX ON:Person(hh)
+--创建多字段的话使用时候必须也传多字段
+CREATE INDEX ON:Person(gmsfhm)
+--查看索引
+:schema
+--删除索引
+DROP INDEX ON :Person(gmsfhm,hh)
+</code></pre>
+<h3 id="-_2">根据户号创建一家人关系子图事务方式-推荐</h3>
+<blockquote>
+<p>耗时0.04秒，实测重复执行不会导致建立多个重复关系</p>
+</blockquote>
+<pre><code class="language-python">#根据户号创建一家人的关系-子图事务方式(推荐)
+from py2neo import Graph,Relationship,Subgraph
+import time
+from py2neo.matching import *
+graph = Graph(&quot;bolt://ip:7687&quot;, auth=(&quot;neo4j&quot;, &quot;password&quot;))
+nodeM=NodeMatcher(graph)
+#找一家人
+hh='361024002267449'
+nodes=nodeM.match('Person',hh=hh).all()
+hz=nodeM.match('Person',hh=hh,yhzgxdm='02').first()
+print(hz)
+if hz:
+    print('家人数量:%s' % len(nodes))
+    ta=time.time()
+    mData=[]
+    tx = graph.begin()
+    for n in nodes:
+        if n['yhzgxdm']!='02':
+            mData.append(Relationship(hz,'rel',n,relation=n['yhzgxmc']))
+    if len(mData)&gt;0:
+        A=Subgraph(relationships=mData)
+        graph.create(A)
+    tx.commit()
+    print('over time:%s' % ((time.time()-ta)))
+else:
+    print('没有户主的非法数据')
+</code></pre>
+<h3 id="_8">根据户号创建一家人的关系(不推荐，仅供参考)</h3>
+<blockquote>
+<p>耗时183秒(不推荐使用，保留下来作为其他可能场景的应用)</p>
+</blockquote>
+<pre><code class="language-python">#根据户号创建一家人的关系
+from py2neo import Graph
+import time
+from py2neo.bulk import create_nodes,merge_nodes,create_relationships
+from py2neo.matching import *
+graph = Graph(&quot;bolt://ip:7687&quot;, auth=(&quot;neo4j&quot;, &quot;password&quot;))
+nodeM=NodeMatcher(graph)
+#找一家人
+hh='110101007156971'
+nodes=nodeM.match('Person',hh=hh).all()
+print('家人数量:%s' % len(nodes))
+rels=&quot;38,68,10,45,51,63,52,99&quot;.split(',')
+relsmc=&quot;儿媳,配偶的曾祖父母,配偶,(外)孙媳妇,父亲,外祖父,母亲,迁出或死亡&quot;.split(',')
+ta=time.time()
+mData=[]
+for rel in range(len(rels)):
+    relItem=rels[rel]
+    relmcItem=relsmc[rel]
+    print('relItem:%s mc:%s' % (relItem,relmcItem))
+    query=&quot;MATCH (p:Person{hh:'%s',yhzgxdm:'02'}),(p2:Person{hh:'%s',yhzgxdm:'%s'}) where p2['gmsfhm'] is not null MERGE (p)-[:rel{relation:'%s'}]-&gt;(p2)&quot; % (hh,hh,relItem,relmcItem)
+    print(&quot;query:%s&quot; % query)
+    graph.run(query)
+print('over use time:%s r:%s' % (round(time.time()-ta),r))
+</code></pre>
+<h3 id="apoc_1">通过apoc插件批量方式创建人车关系</h3>
+<blockquote>
+<p>此方法可以避免同时操作数据过多带来的内存溢出等问题。</p>
+</blockquote>
+<pre><code class="language-sql">call apoc.periodic.iterate(&quot;match(v:Vehicle) return v&quot;,&quot;match(p:Person{gmsfhm:v.sfzmhm}) merge (p)-[:car {relation:'车主'}]-&gt;(v) return v&quot;,{batchSize:10000,parallel:true})
+</code></pre>
+<h3 id="n-cypher">根据指定条件查询N层关系人以及关系数据-cypher方式</h3>
+<pre><code class="language-sql">--查询idcard为'idcard'的人为主体，并返回其3层关系人以及关系数据
+match data=(na:Person{idcard:'idcard'})-[*1..3]-(nb:Person) return data
+</code></pre>
+<h3 id="_9">避免内存溢出的清理数据（危险！！！）</h3>
+<pre><code class="language-sql">call apoc.periodic.iterate(&quot;match(p:Person) return p&quot;,&quot;delete p return p&quot;,{batchSize:10000, parallel:true})
+</code></pre>
+<h3 id="cypherlabel">cypher将Label标签作为查询条件</h3>
+<pre><code class="language-sql">match data=(na:Person)-[*1..3]-(nb) where any(label in labels(nb) WHERE label in ['Qb', 'Person']) and na.gmsfhm='123456' return data limit 100
+</code></pre>
+<h3 id="cypher">cypher将多关系、多标签和可变步长作为查询条件</h3>
+<pre><code class="language-sql">--查询idcard为'123456'的人为主体，关系为rel1和rel2 节点标签为label1和label2 且1-3层的关系数据
+match data=(na:Person)-[:rel1|rel2*1..3]-(nb) where na.gmsfhm in ['123456']and any(label in labels(nb) WHERE label in ['label1','label2']) return data
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

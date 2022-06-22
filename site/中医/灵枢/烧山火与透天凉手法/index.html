@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://wiki.xlz2021.cf/%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E7%83%A7%E5%B1%B1%E7%81%AB%E4%B8%8E%E9%80%8F%E5%A4%A9%E5%87%89%E6%89%8B%E6%B3%95/">
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>烧山火与透天凉手法 - 玄凌子知识库</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/cypher.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/kotlin.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/docker.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">玄凌子知识库</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../../.." class="nav-link">关于我</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Java <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../Java/Maven/" class="dropdown-item">Maven 使用</a>
+</li>
+                                    
+<li>
+    <a href="../../../Java/%E4%BF%9D%E7%95%99%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/" class="dropdown-item">保留端口占用问题</a>
+</li>
+                                    
+<li>
+    <a href="../../../Java/%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" class="dropdown-item">YYYY和yyyy的区别</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Python <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../Python/JupyterNotebook%E5%AE%89%E8%A3%85/" class="dropdown-item">Jupyter Notebook 安装</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Docker <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../docker/K3S%E5%AE%89%E8%A3%85/" class="dropdown-item">K3S安装</a>
+</li>
+                                    
+<li>
+    <a href="../../../docker/docker%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3/" class="dropdown-item">docker容器相关</a>
+</li>
+                                    
+<li>
+    <a href="../../../docker/seaweedfs%E4%BD%9C%E4%B8%BA%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E6%8F%92%E4%BB%B6/" class="dropdown-item">Seaweedfs作为分布式存储插件</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Linux <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../linux/Alpine%E4%BD%BF%E7%94%A8%E6%B8%85%E5%8D%8E%E6%BA%90/" class="dropdown-item">Alpine使用清华源</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/CentOS%E5%AE%8C%E7%BE%8E%E5%8D%87%E7%BA%A7gcc%E7%89%88%E6%9C%AC%E6%96%B9%E6%B3%95/" class="dropdown-item">CentOS完美升级gcc版本方法</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/Centos7%E6%9B%B4%E6%96%B0%E5%86%85%E6%A0%B8/" class="dropdown-item">Centos7更新内核</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/FIO%E6%B5%8B%E8%AF%95%E7%A3%81%E7%9B%98IO/" class="dropdown-item">FIO测试磁盘IO</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/Linux_LVM%E5%88%86%E5%8C%BA%E6%89%A9%E5%AE%B9/" class="dropdown-item">LVM分区扩容</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/Nginx%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E/" class="dropdown-item">Nginx配置说明</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/centos7_selinux/" class="dropdown-item">修复Centos7的SELINUX错误</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/centos7%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F/" class="dropdown-item">Centos7单用户模式</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/centos_update_gcc/" class="dropdown-item">CentOS完美升级gcc版本方法</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/cron/" class="dropdown-item">cron定时任务常见问题</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/cron%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="dropdown-item">Cron定时任务常见问题</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/iperf3%E5%B8%A6%E5%AE%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">Iperf3带宽测试</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/net_safe/" class="dropdown-item">网络安全防护</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/net_speed_test/" class="dropdown-item">带宽测试</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/nfs/" class="dropdown-item">针对大数据组件的NFS挂载参数</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/nginx/" class="dropdown-item">nginx负载均衡</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/tcpdump%E6%8A%93%E5%8C%85/" class="dropdown-item">tcpdump抓包</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/update_centos7_kernel/" class="dropdown-item">Centos7 升级内核版本</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/%E4%BF%AE%E5%A4%8DCentos7%E7%9A%84SELINUX%E9%94%99%E8%AF%AF/" class="dropdown-item">修复Centos7的SELINUX错误</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" class="dropdown-item">新服务器基本配置流程</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4/" class="dropdown-item">网络安全防护</a>
+</li>
+                                    
+<li>
+    <a href="../../../linux/%E9%92%88%E5%AF%B9%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E7%9A%84NFS%E6%8C%82%E8%BD%BD%E5%8F%82%E6%95%B0/" class="dropdown-item">针对大数据组件的NFS挂载参数</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Store <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../store/seaweedfs/" class="dropdown-item">seaweedfs</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">中医 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E4%BA%94%E6%AD%A5%E5%AD%A6%E7%BA%AF%E6%AD%A3%E4%B8%AD%E5%8C%BB/" class="dropdown-item">五步学纯正中医</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E5%8C%BB%E7%B2%BE%E8%AF%9A/" class="dropdown-item">大医精诚</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">灵枢</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../%E4%B8%AD%E5%8C%BB%E5%9F%BA%E7%A1%80/" class="dropdown-item">中医基础</a>
+</li>
+            
+<li>
+    <a href="../%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="dropdown-item">人纪针灸学习笔记</a>
+</li>
+            
+<li>
+    <a href="../%E5%B8%B8%E7%94%A8%E5%85%BB%E7%94%9F%E7%A9%B4%E4%BD%8D/" class="dropdown-item">常用养生穴位</a>
+</li>
+            
+<li>
+    <a href="./" class="dropdown-item active">烧山火与透天凉手法</a>
+</li>
+            
+<li>
+    <a href="../%E7%BB%8F%E7%BB%9C%E5%B9%B2%E6%94%AF/" class="dropdown-item">经络天干</a>
+</li>
+            
+<li>
+    <a href="../%E9%AB%98%E8%A1%80%E5%8E%8B%E8%BE%A8%E8%AF%81%E4%B8%8E%E6%96%B9%E9%92%88/" class="dropdown-item">高血压辨证与方针</a>
+</li>
+            
+<li>
+    <a href="../%E9%BA%A6%E7%B2%92%E8%82%BF%E8%BE%A9%E8%AF%81%E4%B8%8E%E6%96%B9%E9%92%88/" class="dropdown-item">麦粒肿辩证与方针</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">素问</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../%E7%B4%A0%E9%97%AE/%E5%B8%B8%E7%94%A8%E6%96%B9%E5%89%82/" class="dropdown-item">常用方剂</a>
+</li>
+            
+<li>
+    <a href="../../%E7%B4%A0%E9%97%AE/%E6%95%91%E5%91%BD%E7%A8%BB%E8%8D%89/" class="dropdown-item">救命稻草</a>
+</li>
+            
+<li>
+    <a href="../../%E7%B4%A0%E9%97%AE/%E6%96%B0%E6%96%87%E6%A1%A3/" class="dropdown-item">新文档</a>
+</li>
+            
+<li>
+    <a href="../../%E7%B4%A0%E9%97%AE/%E9%BB%84%E5%B8%9D%E5%86%85%E7%BB%8F_%E5%85%BB%E7%94%9F/" class="dropdown-item">黄帝内经_养生</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">人工智能 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E4%BC%98%E7%BC%BA%E7%82%B9/" class="dropdown-item">常见算法优缺点</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">大数据 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/ElasticSearch/" class="dropdown-item">ElasticSearch技巧</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/ElasticSearch%E6%8A%80%E5%B7%A7/" class="dropdown-item">ElasticSearch技巧</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Flink_sql_ETL%E9%9B%86%E5%90%88/" class="dropdown-item">Flink-sql-ETL集合</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Flink%E5%B8%B8%E7%94%A8%E8%BF%9E%E6%8E%A5%E5%99%A8%E8%AF%BB%E5%86%99%E8%83%BD%E5%8A%9B%E6%B1%87%E6%80%BB/" class="dropdown-item">Flink常用connector支持情况</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/GP%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/" class="dropdown-item">GP常用配置项</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Greenplum%E7%A7%BB%E9%99%A4Segment/" class="dropdown-item">Greenplum移除Segment</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E7%9B%B8%E5%85%B3/" class="dropdown-item">Kafka相关</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E6%B5%8B%E8%AF%95/" class="dropdown-item">kafka调优</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E8%B0%83%E4%BC%98%E7%9B%B8%E5%85%B3/" class="dropdown-item">Kafka调优相关</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/cdh_spark/" class="dropdown-item">cdh编写spark依赖问题</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/flink%E9%85%8D%E7%BD%AE%E8%B0%83%E4%BC%98/" class="dropdown-item">flink 配置调优</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/flink%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">flink集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/gp6%E5%BA%93%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">Gp6库性能测试</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/greenplum%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8/" class="dropdown-item">greenplum集群使用</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/greenplum%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">greenplum集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/kafka%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">[kafka性能测试](https://www.cnblogs.com/runnerjack/p/9105784.html)</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/mysql/" class="dropdown-item">Mysql</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E5%A4%A7%E6%95%B0%E6%8D%AE/%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83kafka%E9%85%8D%E7%BD%AE/" class="dropdown-item">生产环境kafka配置说明</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">数据库 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/Citus%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8/" class="dropdown-item">Citus集群使用</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/GP_MDB%E9%9B%86%E7%BE%A4%E5%86%85%E5%AD%98%E9%85%8D%E7%BD%AE/" class="dropdown-item">gp/mdb集群内存配置</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/Lcpg%E5%86%85%E9%83%A8%E5%8F%91%E8%A1%8C%E7%89%88%E4%BD%BF%E7%94%A8/" class="dropdown-item">Lcpg内部发行版使用</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/Mariadb%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" class="dropdown-item">Mariadb主从复制</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/Mariadb%E5%A4%9A%E4%B8%BB%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">Mariadb多主集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D/" class="dropdown-item">mysql故障恢复</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/Neo4j%E7%9B%B8%E5%85%B3/" class="dropdown-item">Neo4j相关</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/Pg%E5%8E%9F%E7%94%9F%E9%9B%86%E7%BE%A4%E5%A4%8D%E5%88%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/" class="dropdown-item">PG原生集群复制配置与高可用</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/Postgresql/" class="dropdown-item">Postgresql相关</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/Postgresql%E7%9B%B8%E5%85%B3/" class="dropdown-item">Postgresql相关</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/Postgresql%E9%9B%86%E7%BE%A4/" class="dropdown-item">pg集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3/" class="dropdown-item">Redis相关</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E9%9B%86%E7%BE%A4%E7%9B%B8%E5%85%B3/" class="dropdown-item">Redis集群相关</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/gp_mdb%E7%A1%AC%E4%BB%B6%E9%80%89%E5%9E%8B%E8%AE%A1%E5%88%92/" class="dropdown-item">gp与mdb硬件选型计划</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/mysql_mariadb/" class="dropdown-item">mysql/mariadb</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%88%A0%E9%99%A4%E5%A4%A7%E8%A1%A8/" class="dropdown-item">mysql删除大表</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%88%96mariadb/" class="dropdown-item">Mysql或mariadb</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/neo4j/" class="dropdown-item">Neo4j相关</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/pipelinedb/" class="dropdown-item">pipelinedb流式数据库介绍</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/pipelinedb%E6%B5%81%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D/" class="dropdown-item">Pipelinedb流式数据库介绍</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/timescaledb/" class="dropdown-item">Timescaledb</a>
+</li>
+                                    
+<li>
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" class="dropdown-item">时序数据库</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">架构设计 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/empty/" class="dropdown-item">占位置</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">经济 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../%E7%BB%8F%E6%B5%8E/%E8%B6%85%E4%BD%8E%E4%BB%B7%E9%A2%84%E5%94%AE%E5%A5%97%E8%B7%AF/" class="dropdown-item">超低价预售套路</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../%E5%B8%B8%E7%94%A8%E5%85%BB%E7%94%9F%E7%A9%B4%E4%BD%8D/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../%E7%BB%8F%E7%BB%9C%E5%B9%B2%E6%94%AF/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">注意事项</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">烧山火</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#_3" class="nav-link">操作方法#：将所刺腧穴的深度分作浅、中、深三层（天、地、人三部）。</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_4" class="nav-link">透天凉</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#_5" class="nav-link">操作方法#：将所刺腧穴的深度分作浅、中、深三层（天、地、人三部）。</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_6" class="nav-link">其他名家手法</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="_1">注意事项</h2>
+<p>使用#烧山火#和#透天凉#的手法进行#补泻#的前提必须辩证清楚寒热虚实！否则误治会更加麻烦！</p>
+<blockquote>
+<p>从西北针王郑魁山的一位弟子那里才真正领会到天人地三部的真谛。这位老师说，其实在针进去穴位时第一次得气是就天部，再深进第二次得气即是人部，随之再深进第三次得气是地部了。嗯，郑老的寒热手法是做的很溜，名震四方，因此他弟子的话可信度是很高的。
+</p>
+</blockquote>
+<h2 id="_2"><strong>烧山火</strong></h2>
+<pre><code>   《针灸大成-三衢杨氏补泻》记载“烧山火，能除寒，**三进一退**热涌涌”。 所以，用烧山火，要分三层进到地部，然后一退直接回到天部。
+
+    操作：进针后，第一次得气【天部】，行复式补法，然后再深入，第二次得气【人部】，再来一次复式补法，最后再深入，第三次得气【地部】，行复式补法， **此为三进** ，而后针在地部直接一退回到天部， **此为一退** 。这就是烧山火的三部行针方法，而不是想象中的在浅层扎扎，在中层扎扎，在深层扎扎。
+
+    举一个不搭边例子，好比，一好心人想给一穷人送钱，因此他在第一部的ATM取了钱，觉得不够，又在第二部的ATM取钱，觉得还不够，最后去第三部ATM取钱，嗯，终于取够钱了，可以接济这位幸运的穷人。不过这位好人还怕穷人不想要他的钱，要还回他，所以把钱送到穷人那里就赶紧就跑了。这像是烧山火要分3部进去，而后在地部直接回到天部。
+</code></pre>
+<p><img alt="" src="https://pic-1256216313.cos.ap-chengdu.myqcloud.com/img/wps42AB.tmp-20210928111554-2ura09a.png" /></p>
+<h1 id="_3">操作方法#：将所刺腧穴的深度分作浅、中、深三层（天、地、人三部）。</h1>
+<ul>
+<li>进针时，医者重用指切押手。</li>
+<li>令病人自然地鼻吸口呼，随其呼气时，将针刺入浅层（天部）得气。</li>
+<li>得气后，重插轻提，连续重复9次（行九阳数）。</li>
+<li>再将针刺入中层（人部），重插轻提，连续重复9次（行九阳数）。</li>
+<li>其后将针刺入深层（地部），重插轻提，连续重复9次（行九阳数）。此时，如果针下产生热感，少待片刻。</li>
+<li>随病人吸气时将针1次提到浅层，此为一度。如果针下未产生热感可随病人呼气时，再施前法，一般不过三度。</li>
+<li>手法操作完毕后，留针15~20分钟，待针下松弛时，侯病人吸气时将针快速拔出，急按针孔。</li>
+</ul>
+<h2 id="_4"><strong>透天凉</strong></h2>
+<pre><code>    如果是，透天凉呢？《针灸大成》说“透天凉，能除热，**三退一进**冷冰冰”，就是一口气一进到地部， **此为一进** ，然后地部行针得气（第一次得气）。需要注意的是， **在进针期间尽量不要在天部、人部得气** ，等到了地部才得气，故也叫偷针法。
+
+    好比，警察要抓一个逃犯（邪气），必须悄无声息，要偷偷地进入房间，这才能突击抓住逃犯，让其措手不及，跑不掉。
+
+    之后，针上提，第二次得气【人部】，行复式泻法，再上提，第三次得气【天部】，行复式泻法， **此为三退** ，最后大摇针孔，不留针，不按穴位。
+
+    好比，把这逃犯抓住后，警察揍了他1次、2次，还要再揍第3次，最后逃犯被打得想跑都跑不了，就可以一口抓出来，此为祛邪。
+</code></pre>
+<p><img alt="" src="https://pic-1256216313.cos.ap-chengdu.myqcloud.com/img/wps42AC.tmp-20210928111554-n5gl8cb.png" /></p>
+<pre><code>    最后，其实，分天人地3部来做，无非就是加大刺激的量，就像使劲摩擦生热， **由量变产生质变，这其实不是烧山火、透天凉的成功的必要条件** ，因此可以分2层来做，分1层来做都可以，随施术者的习惯。
+</code></pre>
+<h1 id="_5">操作方法#：将所刺腧穴的深度分作浅、中、深三层（天、地、人三部）。</h1>
+<ul>
+<li>在进针时，医者轻用押手。</li>
+<li>令病人自然地鼻呼口吸，随其吸气将针刺入深层（地部）得气。</li>
+<li>得气后，轻插重提，如此6次（行六阴数）。</li>
+<li>再将针提至中层（人部），轻插重提，连续6次（行六阴数）。</li>
+<li>再将针提至浅层（天部），轻插重提，如此6次（行六阴数）。</li>
+</ul>
+<p>此时，针下产生凉感，称为1度。如果针下未出现凉感，可将针1次下插至深部，再施前法。但一般不超过三度。凉感不论在地部、人部或天部出现，可停止手法操作。</p>
+<ul>
+<li>手法操作结束后，可随病人呼气将针缓慢拔出，不按针孔或者缓按针孔。</li>
+</ul>
+<h2 id="_6">其他名家手法</h2>
+<h3 id="_7">焦勉斋的烧山火、透天凉</h3>
+<p>烧山火：进针气至后，先将针上提至浅部，用紧按慢提，三进一退的手法（不限于三一之数，以进多出少为原则，透天凉则以少进多出为原则）配合医者之呼吸运气，向下插针时，用紧按法，口鼻呼吸；向上退针时用慢提法，微微吸气，这样提插进退配合，约5分钟即有热感。</p>
+<p>透天凉：进针气至后，先将针插至深部，用紧提慢按，合医者呼吸运气而施术，向上提针时，医者吸气并用力捻转针柄，向下插针时徐徐口鼻呼气，进退提插配合，约5分钟即有凉感。</p>
+<h3 id="_8">陆瘦燕的烧山火、透天凉</h3>
+<p>烧山火：先进针至天部（腧穴深度的上1/3处），慢提紧按九次，按针时左转；次进至人部（腧穴深度的中1/3处），提插、捻转如前数；再进至地部（腧穴深度的下1/3处），施术同前；然后从地部一次退至天部，这样为一度。反复三度，倘热至，出针揉闭孔穴；如无热感，可反复再施，直到热至。(中医五运六气公众号.整理)</p>
+<p>透天凉：进针直至地部，在该部紧提慢按六次，提针时右转；次退至人部，同前提插、捻转六次；再退至天部，亦同前法施术；这样一进三退，称为一度。操作三度，若凉生，则可出针，出针前摇大其孔，不闭其穴。如无凉感，应反复再施，直至凉生。</p>
+<h3 id="_9">周树东、周楣声的烧山火、透天凉</h3>
+<p>烧山火：烧山火可补虚寒，法取三才逐步探三按拇前呼始入，一提拇后吸相关由浅渐深天至地，慢提紧按九成三疾以出针当疾扪，热生针下效非凡。</p>
+<p>有歌曰：“烧山之火能除寒，一退三飞病自安。始是五分终一寸，三番出入慢提看。”分天、地、人三部徐徐进针。</p>
+<p>初进针时可将针直入至适当深度，得气后将针向上提至天部，随即用紧按慢提，三进一退。因患者之呼吸而运用手法，目视患者，手不离针。当患者呼气时向下三次进针为主，吸气时一次退针为辅。呼气时口唇微闭，如吹风状，三次从口呼出。吸气时即闭合其口，一次由鼻吸入。向下进针时用紧按法，拇前食后行九阳数。停针时要用力按针不动。向上退针时是用慢提法，食前拇后，在天部提三按九，左捻多右捻少，呼进吸退；热生以后将针从人部再至地部时，也同样行之。患者即感有针下发热，并能沿经传布，上下周流。当针深入地部后，将针再提至人部，如此反复行之。最后一次出针至天部，少停再尽出针，疾扪其穴。</p>
+<p>透天凉：透天凉可除烦热，直针至地徐后撤紧提随吸食指前，慢按随呼食后说针下凉生再上提，三退一进热自夺退针至天再入深，如此反复同前撤。</p>
+<p>有歌曰：“透天凉法退热烧，一进三飞冷风飘。先针一寸退五分，三出三入紧提消”。</p>
+<p>先一次进针至应有深度，再先深后浅，分地、人、天三部徐徐退针。直针入地得气后，注视患者呼吸，紧提慢按，三退一进，目视患者，手不离针。当患者吸气时向上三次提针为主，并用食前拇后稍向右捻，行六阴数。呼气时一次按针为辅，同时拇前食后稍向左捻。吸气时口唇微开，三次用口吸入。呼气时即闭其口，一次用鼻呼出。当针下发凉时，即退针至人部，施术如前。能使凉气循经传导，最后遍体清凉。出针时不按针孔。所谓一进三飞或一退三飞者，意即连续前进三次或后退三次，轻巧快捷，犹如鸟之飞翔也。</p>
+<h3 id="_10">彭静山的烧山火、透天凉</h3>
+<p>烧山火补法：适用于虚寒症。选好穴位，针刺得气以后，这时拇指用力向前作龙眼推旋，当拇指向前推旋完毕，左手拇、食两指用力夹住针柄上端，不使针向回松劲，急用右手拇指指甲，从上向下刮动针柄。这时病人酸麻的感觉，就变为热的感觉。这种热由针穴局部向远处传导。</p>
+<p>透天凉泻法：适用于实热症。选好穴位，针刺得气后，拇指用力以凤眼法向后拉捻，急用左手拇、食二指夹住针柄上端，夹的紧点，固定针柄，不使它向回松劲，然后用右手小指指甲，从下向上刮动针柄。这时病人已产生的酸麻感觉，就会变成凉的感觉。其凉从内向外，直透出来，颇感愉快。</p>
+<h3 id="_11">吴倬仙的烧山火、透天凉</h3>
+<p>灵枢经云：“刺诸热者如以手探汤。刺寒清者如人不欲行。”此即继起者用透天凉烧山火之两手法。针灸家师承有云：提针为热。插针为寒。内转为泻。外转为补。补泻之法。可停针侯气。迟迟转之。提插之法。不可偏用。盖尽量插之。而至于骨。则不可再插。尽量提之。而针以外出。则不能再用。故定为三提一插。提针呼气。插针吸气。为烧山火。盖提数多。则气之出于卫分者多振振恶寒之证。用此手法。阳日用偶数。阴日用奇数。必能使之发热。</p>
+<p>反言之，三插一提，插针吸气，提针呼气，为透天凉。盖插数多，则气之入于营分者多蒸蒸发热之证。用此手法，阳日用奇数，阴日用偶数，必能使其退热。除寒退热，乃针灸家必要之手法，故灵枢经列于第一篇九针十二原之末，等于冠诸本腧篇之首也。以上所言烧山火透天凉之正法，乃男用于午前，女用于午后。如男子午后，有大寒证大热证，当用烧山火透天凉者，则反而用之；如女子午前有大寒证大热证，当用烧山火透天凉者，以反而用之。歌曰：三插一提透天凉，三提一插火烧山，提针吹气插针吸，女午后兮男午前。</p>
+<h3 id="_12">刘炳权的烧山火、透天凉</h3>
+<p>烧山火：烧山火（热补法）是指施术后病人自觉穴位针下有热感。此法常用于治疗寒证、虚证。它将穴位分天、人、地三部分进行操作，表层为天，中间为人，深层为地。方法是进针得气后浅层为天部，操作拇指向前单方向捻转（顺时针），捻转度为120度，频率为每分钟80~100次，捻转同时将针提插，插时用力要重，提时用力要轻，称重按轻提。天部捻转提插9次，完毕，然后将针进入人部，同法施术，完毕，再将针进入地部，同法施术，完毕后将针提至天部可重复上述操作3~4次，直至病人有热感，每隔5~7分钟行针一次。</p>
+<p>透天凉：透天凉（凉泻法）是指施术后病人穴位针下自觉凉感，常用于治疗热证、实证。它亦是将穴位分天、人、地三部进行，但此法与烧山火操作相反，由深层即地部开始，操作拇指向后单方向捻转（逆时针），捻转度为140度左右，频率每分钟60~80次，捻转同时将针提插，插时用力要轻，提时用力要重，称轻按重提。地部捻转提插6次，完毕，然后将针退至人部，同法施术完毕，再将针退至天部，同法施术，完毕后将针进入地部，可重复上述操作，直至病人有凉感，每隔5~7分钟行针一次。</p>
+<h3 id="_13">罗逸仙、张鹳一的烧山火、透天凉</h3>
+<p>罗老先生烧山火：拇指与中指夹针，成兰花式，待病人呼气时进针天部（应刺深度的上1/3处），左捻九数；再呼，再进入人部（应刺深度的中1/3处），行九数；再呼，再进入地部（下1/3处），行九数。侯病人吸气时，将针一次提至天部，反复行之，共九九八十一捻，则病人自觉热气内生矣。</p>
+<p>行此法须注意四点：</p>
+<p>一是适宜于虚证、寒证，凡火证、实证均禁用之；</p>
+<p>二是行针时，聚精会神，细心观察病人呼吸与捻转节律，不可紊乱；</p>
+<p>三是捻力轻徐均衡，不可忽轻忽重，忽快忽慢；</p>
+<p>四是吸气提针时，以净巾掩病人口鼻。</p>
+<p>透天凉：拇指与食指持针，成展翅式，待病人吸气时，将针一次进入地部，右捻六数，呼气时将针慢提至人部，行六数；再呼，再提至天部，行六数。如此再吸再插，反复行之，六六三十六数，则病人自觉寒冷内生矣。</p>
+<p>行此法亦须注意四点：</p>
+<p>一是适用于火证、实证；</p>
+<p>二要聚精会神，捻转合拍；</p>
+<p>三要捻重、提慢、插快，指力均衡；</p>
+<p>四令病人以鼻呼气，以口吸气。</p>
+<h3 id="_14">楼百层的烧山火、透天凉</h3>
+<p>烧山火：将针刺入应针深度的1/2时，行左右捻转手法9次以侯气，若觉针下沉紧，再刺入应刺深度，急行三出三入，慢提紧按的提插捻转手法，一般可使针下产生热感。</p>
+<p>透天凉：将针刺入应针深度，即行左右捻转手法6次以侯气，若觉针下沉紧，再将针提起1/2，急行三入三出，紧提慢按的提插捻转手法，一般能使针下产生凉感。</p>
+<h3 id="_15">管正斋的烧山火、透天凉</h3>
+<p>烧山火：</p>
+<p>（1）行降阴法：用左手押准穴位，右手持针刺入穴内。针分3次渐次的下降，先进至皮下天部，次进至人部，再进至地部，最后再由地部直接提出于皮肤外面。此法的要点是先浅后深，使针力着重于深部，徐内疾出。</p>
+<p>（2）在酸麻胀重感觉的基础上捻针时，使指力向下，将针向左方向捻转，每次180度~360度，即将针刺的右手（刺手）拇指向前进、食指后退的捻转方向，反复行之，有的患者即可产生热的感觉。</p>
+<p>（3）慢按紧提，此“紧”字的涵义作“重”字解。“慢”字的涵义作“轻”字解。进针在天人地部提插针时，要用重插轻提。</p>
+<p>（4）行九阳数：（周易：单数、奇数为阳，九数为老阳，七数为少阳。）进针在天人地部捻转（或提插）3次，三三得九，为九阳数（亦可在每部各行九阳数）可少停，反复行之。管老在行九阳数时，强调实效，不泥于古数，注重病人体质、敏感程度等客观情况，所以有时仅用三三得九，有时用三九二十七……灵活运用。</p>
+<p>（5）随而济之：随顺其经气的流行而补其气，如手之三阴经及足之三阳经，是从上而下，于刺针后捻插时，使麻酸胀重感觉，向下传达，与经气的去路相顺。管老不仅重视针刺方向顺行经气，更强调针感顺应经气，并且巧妙地应用押手、循经、阻压等辅助手法屡能达到针感顺经之目的。</p>
+<p>（6）行震刮术：先用左手指固定针体，再用右手拇指向下震刮针柄，或右手食指做固定，右手拇指向下震刮针柄，震刮30~60次，每可产生热的感觉。</p>
+<p>（7）乘病人呼气进针，吸气出针。</p>
+<p>（8）出针后，立即以指（或棉球）按揉针孔，以扶正气，使真气存留，不任已入之阳气外逸。</p>
+<p>透天凉：</p>
+<p>（1）行升阳法：押手及刺手式，同烧山火。不同之点是，将针直刺入地部，然后分3次，作阶梯状，经人部天部提出于皮肤外。此法的要点是先深后浅，使针力着重于浅层，疾内徐出。</p>
+<p>（2）在酸麻胀重感觉的基础上捻针时，使指力向上，将针向右方向捻转，每次90度~180度，即将持针的右手（刺手）拇指退后、食指前进的捻转方向，反复行之，有的患者即可产生凉的感觉。</p>
+<p>（3）紧提慢按，退针在地人天部提插针时，用重提轻插。</p>
+<p>（4）行六阴数：（周易：双数、偶数为阴，六数为老阴，八数为少阴。）退针在地人天部捻转（或提插）时，针尖向上提起，使力在针体，每部各捻转（或提插）2次，二三得六，为六阴数（亦可在每部各行六阴数）可少停，反复行之。</p>
+<p>（5）迎而夺之：与经络循行的来源去路相反，如手之三阳及足之三阴经，是从下向上，于刺针捻插时，使酸麻胀重感觉向下传达，与经气的来路相逆。</p>
+<p>（6）行震刮术：先用左手拇指固定针体，再用右手食指（或拇指）向上震刮针柄，或以右手食指固定，右手拇指向上震刮针柄，震刮30~60次，每可产生凉的感觉。</p>
+<p>（7）乘病人吸气进针，呼气出针。</p>
+<p>（8）出针时，将针摇动，使针孔扩大，去针后不揉针孔，以泻散其邪气。</p>
+<h3 id="_16">郑毓琳、郑魁山、李志明的简易凉热补泻法</h3>
+<p>热补法：医生左手食指或拇指紧按针穴，右手将针刺入穴内，候其气至，左手加重压力，右手拇指向前连续捻按3-5次，候针下沉紧，针尖拉着有感应的部位，连续紧按慢提3-5次，拇指再向前连续捻按3-5次，针尖顶着产生感觉的部位守气，使针下继续沉紧，产生热感。根据病情留针后，缓慢将针拔出，速闭针孔。</p>
+<p>凉泻法：医生左手食指或拇指紧按针穴，右手持针刺入穴内，候其气至，左手减轻压力，右手拇指向后连续捻提3-5次，候针下沉紧，提退一分许，针尖向有感应的部位，连续紧提慢按3-5次；拇指向后再连续捻提3-5次，针尖拉着产生感觉的部位守气，使针下松滑，产生凉感。根据病情留针后，急速将针拔出，不扪针孔。</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js" defer></script>
+        <script src="../../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://wiki.xlz2021.cf/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Redis相关 - 玄凌子知识库</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/cypher.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/kotlin.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/docker.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">玄凌子知识库</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">关于我</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Java <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Java/Maven/" class="dropdown-item">Maven 使用</a>
+</li>
+                                    
+<li>
+    <a href="../../Java/%E4%BF%9D%E7%95%99%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/" class="dropdown-item">保留端口占用问题</a>
+</li>
+                                    
+<li>
+    <a href="../../Java/%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" class="dropdown-item">YYYY和yyyy的区别</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Python <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Python/JupyterNotebook%E5%AE%89%E8%A3%85/" class="dropdown-item">Jupyter Notebook 安装</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Docker <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../docker/K3S%E5%AE%89%E8%A3%85/" class="dropdown-item">K3S安装</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/docker%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3/" class="dropdown-item">docker容器相关</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/seaweedfs%E4%BD%9C%E4%B8%BA%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E6%8F%92%E4%BB%B6/" class="dropdown-item">Seaweedfs作为分布式存储插件</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Linux <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../linux/Alpine%E4%BD%BF%E7%94%A8%E6%B8%85%E5%8D%8E%E6%BA%90/" class="dropdown-item">Alpine使用清华源</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/CentOS%E5%AE%8C%E7%BE%8E%E5%8D%87%E7%BA%A7gcc%E7%89%88%E6%9C%AC%E6%96%B9%E6%B3%95/" class="dropdown-item">CentOS完美升级gcc版本方法</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Centos7%E6%9B%B4%E6%96%B0%E5%86%85%E6%A0%B8/" class="dropdown-item">Centos7更新内核</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/FIO%E6%B5%8B%E8%AF%95%E7%A3%81%E7%9B%98IO/" class="dropdown-item">FIO测试磁盘IO</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Linux_LVM%E5%88%86%E5%8C%BA%E6%89%A9%E5%AE%B9/" class="dropdown-item">LVM分区扩容</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Nginx%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E/" class="dropdown-item">Nginx配置说明</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos7_selinux/" class="dropdown-item">修复Centos7的SELINUX错误</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos7%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F/" class="dropdown-item">Centos7单用户模式</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos_update_gcc/" class="dropdown-item">CentOS完美升级gcc版本方法</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/cron/" class="dropdown-item">cron定时任务常见问题</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/cron%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="dropdown-item">Cron定时任务常见问题</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/iperf3%E5%B8%A6%E5%AE%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">Iperf3带宽测试</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/net_safe/" class="dropdown-item">网络安全防护</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/net_speed_test/" class="dropdown-item">带宽测试</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/nfs/" class="dropdown-item">针对大数据组件的NFS挂载参数</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/nginx/" class="dropdown-item">nginx负载均衡</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/tcpdump%E6%8A%93%E5%8C%85/" class="dropdown-item">tcpdump抓包</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/update_centos7_kernel/" class="dropdown-item">Centos7 升级内核版本</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E4%BF%AE%E5%A4%8DCentos7%E7%9A%84SELINUX%E9%94%99%E8%AF%AF/" class="dropdown-item">修复Centos7的SELINUX错误</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" class="dropdown-item">新服务器基本配置流程</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4/" class="dropdown-item">网络安全防护</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E9%92%88%E5%AF%B9%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E7%9A%84NFS%E6%8C%82%E8%BD%BD%E5%8F%82%E6%95%B0/" class="dropdown-item">针对大数据组件的NFS挂载参数</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Store <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../store/seaweedfs/" class="dropdown-item">seaweedfs</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">中医 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E4%BA%94%E6%AD%A5%E5%AD%A6%E7%BA%AF%E6%AD%A3%E4%B8%AD%E5%8C%BB/" class="dropdown-item">五步学纯正中医</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E5%A4%A7%E5%8C%BB%E7%B2%BE%E8%AF%9A/" class="dropdown-item">大医精诚</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">灵枢</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E4%B8%AD%E5%8C%BB%E5%9F%BA%E7%A1%80/" class="dropdown-item">中医基础</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="dropdown-item">人纪针灸学习笔记</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E5%B8%B8%E7%94%A8%E5%85%BB%E7%94%9F%E7%A9%B4%E4%BD%8D/" class="dropdown-item">常用养生穴位</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E7%83%A7%E5%B1%B1%E7%81%AB%E4%B8%8E%E9%80%8F%E5%A4%A9%E5%87%89%E6%89%8B%E6%B3%95/" class="dropdown-item">烧山火与透天凉手法</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E7%BB%8F%E7%BB%9C%E5%B9%B2%E6%94%AF/" class="dropdown-item">经络天干</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E9%AB%98%E8%A1%80%E5%8E%8B%E8%BE%A8%E8%AF%81%E4%B8%8E%E6%96%B9%E9%92%88/" class="dropdown-item">高血压辨证与方针</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E9%BA%A6%E7%B2%92%E8%82%BF%E8%BE%A9%E8%AF%81%E4%B8%8E%E6%96%B9%E9%92%88/" class="dropdown-item">麦粒肿辩证与方针</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">素问</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E5%B8%B8%E7%94%A8%E6%96%B9%E5%89%82/" class="dropdown-item">常用方剂</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E6%95%91%E5%91%BD%E7%A8%BB%E8%8D%89/" class="dropdown-item">救命稻草</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E6%96%B0%E6%96%87%E6%A1%A3/" class="dropdown-item">新文档</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E9%BB%84%E5%B8%9D%E5%86%85%E7%BB%8F_%E5%85%BB%E7%94%9F/" class="dropdown-item">黄帝内经_养生</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">人工智能 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E4%BC%98%E7%BC%BA%E7%82%B9/" class="dropdown-item">常见算法优缺点</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">大数据 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/ElasticSearch/" class="dropdown-item">ElasticSearch技巧</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/ElasticSearch%E6%8A%80%E5%B7%A7/" class="dropdown-item">ElasticSearch技巧</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Flink_sql_ETL%E9%9B%86%E5%90%88/" class="dropdown-item">Flink-sql-ETL集合</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Flink%E5%B8%B8%E7%94%A8%E8%BF%9E%E6%8E%A5%E5%99%A8%E8%AF%BB%E5%86%99%E8%83%BD%E5%8A%9B%E6%B1%87%E6%80%BB/" class="dropdown-item">Flink常用connector支持情况</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/GP%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/" class="dropdown-item">GP常用配置项</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Greenplum%E7%A7%BB%E9%99%A4Segment/" class="dropdown-item">Greenplum移除Segment</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E7%9B%B8%E5%85%B3/" class="dropdown-item">Kafka相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E6%B5%8B%E8%AF%95/" class="dropdown-item">kafka调优</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E8%B0%83%E4%BC%98%E7%9B%B8%E5%85%B3/" class="dropdown-item">Kafka调优相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/cdh_spark/" class="dropdown-item">cdh编写spark依赖问题</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/flink%E9%85%8D%E7%BD%AE%E8%B0%83%E4%BC%98/" class="dropdown-item">flink 配置调优</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/flink%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">flink集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/gp6%E5%BA%93%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">Gp6库性能测试</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/greenplum%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8/" class="dropdown-item">greenplum集群使用</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/greenplum%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">greenplum集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/kafka%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">[kafka性能测试](https://www.cnblogs.com/runnerjack/p/9105784.html)</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/mysql/" class="dropdown-item">Mysql</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83kafka%E9%85%8D%E7%BD%AE/" class="dropdown-item">生产环境kafka配置说明</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">数据库 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../Citus%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8/" class="dropdown-item">Citus集群使用</a>
+</li>
+                                    
+<li>
+    <a href="../GP_MDB%E9%9B%86%E7%BE%A4%E5%86%85%E5%AD%98%E9%85%8D%E7%BD%AE/" class="dropdown-item">gp/mdb集群内存配置</a>
+</li>
+                                    
+<li>
+    <a href="../Lcpg%E5%86%85%E9%83%A8%E5%8F%91%E8%A1%8C%E7%89%88%E4%BD%BF%E7%94%A8/" class="dropdown-item">Lcpg内部发行版使用</a>
+</li>
+                                    
+<li>
+    <a href="../Mariadb%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" class="dropdown-item">Mariadb主从复制</a>
+</li>
+                                    
+<li>
+    <a href="../Mariadb%E5%A4%9A%E4%B8%BB%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">Mariadb多主集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../Mysql%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D/" class="dropdown-item">mysql故障恢复</a>
+</li>
+                                    
+<li>
+    <a href="../Neo4j%E7%9B%B8%E5%85%B3/" class="dropdown-item">Neo4j相关</a>
+</li>
+                                    
+<li>
+    <a href="../Pg%E5%8E%9F%E7%94%9F%E9%9B%86%E7%BE%A4%E5%A4%8D%E5%88%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/" class="dropdown-item">PG原生集群复制配置与高可用</a>
+</li>
+                                    
+<li>
+    <a href="../Postgresql/" class="dropdown-item">Postgresql相关</a>
+</li>
+                                    
+<li>
+    <a href="../Postgresql%E7%9B%B8%E5%85%B3/" class="dropdown-item">Postgresql相关</a>
+</li>
+                                    
+<li>
+    <a href="../Postgresql%E9%9B%86%E7%BE%A4/" class="dropdown-item">pg集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Redis相关</a>
+</li>
+                                    
+<li>
+    <a href="../Redis%E9%9B%86%E7%BE%A4%E7%9B%B8%E5%85%B3/" class="dropdown-item">Redis集群相关</a>
+</li>
+                                    
+<li>
+    <a href="../gp_mdb%E7%A1%AC%E4%BB%B6%E9%80%89%E5%9E%8B%E8%AE%A1%E5%88%92/" class="dropdown-item">gp与mdb硬件选型计划</a>
+</li>
+                                    
+<li>
+    <a href="../mysql_mariadb/" class="dropdown-item">mysql/mariadb</a>
+</li>
+                                    
+<li>
+    <a href="../mysql%E5%88%A0%E9%99%A4%E5%A4%A7%E8%A1%A8/" class="dropdown-item">mysql删除大表</a>
+</li>
+                                    
+<li>
+    <a href="../mysql%E6%88%96mariadb/" class="dropdown-item">Mysql或mariadb</a>
+</li>
+                                    
+<li>
+    <a href="../neo4j/" class="dropdown-item">Neo4j相关</a>
+</li>
+                                    
+<li>
+    <a href="../pipelinedb/" class="dropdown-item">pipelinedb流式数据库介绍</a>
+</li>
+                                    
+<li>
+    <a href="../pipelinedb%E6%B5%81%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D/" class="dropdown-item">Pipelinedb流式数据库介绍</a>
+</li>
+                                    
+<li>
+    <a href="../timescaledb/" class="dropdown-item">Timescaledb</a>
+</li>
+                                    
+<li>
+    <a href="../%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" class="dropdown-item">时序数据库</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">架构设计 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/empty/" class="dropdown-item">占位置</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">经济 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E7%BB%8F%E6%B5%8E/%E8%B6%85%E4%BD%8E%E4%BB%B7%E9%A2%84%E5%94%AE%E5%A5%97%E8%B7%AF/" class="dropdown-item">超低价预售套路</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../Postgresql%E9%9B%86%E7%BE%A4/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../Redis%E9%9B%86%E7%BE%A4%E7%9B%B8%E5%85%B3/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#redis" class="nav-link">Redis相关</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">惯例</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">常用命令</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">特性</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_6" class="nav-link">数据类型及特点</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_7" class="nav-link">分布式锁实现</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_8" class="nav-link">订阅发布模式</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#list" class="nav-link">变相实现给list元素设置有效时间</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="redis">Redis相关</h1>
+<h2 id="_1">惯例</h2>
+<ul>
+<li>在String、Hashes、Lists、Sets、Sorted Sets几个常用数据类型中结合业务选择合适的类型来存储。</li>
+</ul>
+<h2 id="_2">常用命令</h2>
+<pre><code class="language-bash">#连接集群（增加-c参数）
+redis-cli -a password -c -h 127.0.0.1
+
+</code></pre>
+<h2 id="_3">特性</h2>
+<h3 id="_4">过期策略</h3>
+<ul>
+<li>定时删除</li>
+<li>默认Redis每100MS随机抽取一部分key对其进行检测是否过期需要删除。</li>
+<li>不全部执行的原因在于数据较多时候全部检测会耗费太多CPU，无法保证性能。</li>
+<li>惰性(LRU)删除</li>
+<li>在用户获取某个key的时候会检测是否过期，如果过期了删除并返回空。</li>
+<li>数据残留问题</li>
+<li>上述两种策略无法对全部数据进行过期删除，可能会造成实际的可用内存空间浪费，此时应配合内存淘汰机制配置。</li>
+</ul>
+<h3 id="_5">内存淘汰机制</h3>
+<ul>
+<li>noeviction: 当内存不足以容纳新写入数据时，新写入操作会报错，这个一般没人用吧，实在是太恶心了。</li>
+<li>allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的 key（这个是最常用的）。</li>
+<li>allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机移除某个 key，这个一般没人用吧，为啥要随机，肯定是把最近最少使用的 key 给干掉啊。</li>
+<li>volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的 key（这个一般不太合适）。</li>
+<li>volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个 key。</li>
+<li>volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的 key 优先移除。</li>
+</ul>
+<h2 id="_6">数据类型及特点</h2>
+<h3 id="string">String</h3>
+<p>string 是 redis 最基本的类型，你可以理解成与 Memcached 一模一样的类型，一个 key 对应一个 value。</p>
+<p>string 类型是二进制安全的。意思是 redis 的 string 可以包含任何数据。比如jpg图片或者序列化的对象。</p>
+<p>string 类型是 Redis 最基本的数据类型，string 类型的值最大能存储 512MB。</p>
+<p>常用命令：set、get、decr、incr、mget等。</p>
+<p>注意：一个键最大能存储512MB。</p>
+<h3 id="hashes">Hashes</h3>
+<p>Redis hash 是一个键值(key=&gt;value)对集合；是一个 string 类型的 field 和 value 的映射表，hash 特别适合用于存储对象（对象不能嵌套其他对象）。</p>
+<p>每个 hash 可以存储 232 -1 键值对（40多亿）。</p>
+<p>常用命令：hget、hset、hgetall等。</p>
+<p>应用场景：存储一些结构化的数据，比如用户的昵称、年龄、性别、积分等，存储一个用户信息对象数据。</p>
+<pre><code class="language-bash">hset person name bingo
+hset person age 20
+hset person id 1
+hget person name
+(person = {
+  &quot;name&quot;: &quot;bingo&quot;,
+  &quot;age&quot;: 20,
+  &quot;id&quot;: 1
+})
+</code></pre>
+<h3 id="lists">Lists</h3>
+<p>Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）。</p>
+<p>list类型经常会被用于消息队列的服务，以完成多程序之间的消息交换。</p>
+<p>常用命令：lpush、rpush、lpop、rpop、lrange等。</p>
+<p>列表最多可存储 232 - 1 元素 (4294967295, 每个列表可存储40多亿)。</p>
+<p>应用场景：</p>
+<ul>
+<li>
+<p>比如可以通过 list 存储一些列表型的数据结构，类似粉丝列表、文章的评论列表之类的东西。</p>
+</li>
+<li>
+<p>比如可以通过 lrange 命令，读取某个闭区间内的元素，可以基于 list 实现分页查询，这个是很棒的一个功能，基于 Redis 实现简单的高性能分页，可以做类似微博那种下拉不断分页的东西，性能高，就一页一页走。</p>
+</li>
+</ul>
+<p><code># 0开始位置，-1结束位置，结束位置为-1时，表示列表的最后一个位置，即查看所有。
+  lrange mylist 0 -1</code></p>
+<ul>
+<li>比如可以搞个简单的消息队列，从 list 头怼进去，从 list 尾巴那里弄出来。</li>
+</ul>
+<p>```
+  lpush mylist 1
+  lpush mylist 2
+  lpush mylist 3 4 5</p>
+<p># 1
+  rpop mylist
+  ```</p>
+<h3 id="sets">Sets</h3>
+<p>Redis的Set是string类型的无序集合(会自动去重。)。和列表一样，在执行插入和删除和判断是否存在某元素时，效率是很高的。集合最大的优势在于可以进行交集并集差集操作。Set可包含的最大元素数量是4294967295。
+集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。</p>
+<p>应用场景：</p>
+<ul>
+<li>可以玩儿交集、并集、差集的操作，比如交集吧，可以把两个人的粉丝列表整一个交集，看看俩人的共同好友是谁，把两个大 V 的粉丝都放在两个 set 中，对两个 set 做交集：</li>
+</ul>
+<p><code>#-------操作一个set-------
+  # 添加元素
+  sadd mySet 1
+  # 查看全部元素
+  smembers mySet
+  # 判断是否包含某个值
+  sismember mySet 3
+  # 删除某个/些元素
+  srem mySet 1
+  srem mySet 2 4
+  # 查看元素个数
+  scard mySet
+  # 随机删除一个元素
+  spop mySet
+  #-------操作多个set-------
+  # 将一个set的元素移动到另外一个set
+  smove yourSet mySet 2
+  # 求两set的交集
+  sinter yourSet mySet
+  # 求两set的并集
+  sunion yourSet mySet
+  # 求在yourSet中而不在mySet中的元素
+  sdiff yourSet mySet</code></p>
+<ul>
+<li>
+<p>利用唯一性，可以统计访问网站的所有独立IP。</p>
+</li>
+<li>
+<p>好友推荐的时候根据tag求交集，大于某个threshold（临界值的）就可以推荐。</p>
+</li>
+</ul>
+<p>常用命令：sadd、spop、smembers、sunion等。</p>
+<p>集合中最大的成员数为 232 - 1(4294967295, 每个集合可存储40多亿个成员)。</p>
+<h3 id="zsetssorted-sets">zsets（Sorted Sets）</h3>
+<p>Redis zset 和 set 一样也是string类型元素的集合,且不允许重复的成员。</p>
+<p>不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。</p>
+<p>zset的成员是唯一的,但分数(score)却可以重复。</p>
+<p>sorted set是插入有序的，即自动排序。</p>
+<p>常用命令：zadd、zrange、zrem、zcard等。</p>
+<p>当你需要一个有序的并且不重复的集合列表时，那么可以选择sorted set数据结构。</p>
+<p>写入数据时候带一个分数值，将自动按照分数进行排序。</p>
+<pre><code>zadd board 85 zhangsan
+zadd board 72 lisi
+zadd board 96 wangwu
+zadd board 63 zhaoliu
+# 获取排名前三的用户（默认是升序，所以需要 rev 改为降序）
+zrevrange board 0 3
+# 获取某用户的排名
+zrank board zhaoliu
+</code></pre>
+<p>应用举例：</p>
+<ul>
+<li>例如存储全班同学的成绩，其集合value可以是同学的学号，而score就可以是成绩。</li>
+<li>排行榜应用，根据得分列出topN的用户等。</li>
+</ul>
+<h2 id="_7">分布式锁实现</h2>
+<pre><code class="language-xml">&lt;dependency&gt;
+   &lt;groupId&gt;org.redisson&lt;/groupId&gt;
+   &lt;artifactId&gt;redisson&lt;/artifactId&gt;
+   &lt;version&gt;3.16.3&lt;/version&gt;
+&lt;/dependency&gt;  
+</code></pre>
+<pre><code class="language-java">// 1. Create config object
+Config config = new Config();
+config.useClusterServers()
+       // use &quot;rediss://&quot; for SSL connection
+      .addNodeAddress(&quot;redis://127.0.0.1:7181&quot;);
+
+// or read config from file
+config = Config.fromYAML(new File(&quot;config-file.yaml&quot;)); 
+// 2. Create Redisson instance
+
+// Sync and Async API
+RedissonClient redisson = Redisson.create(config);
+
+// Reactive API
+RedissonReactiveClient redissonReactive = redisson.reactive();
+
+// RxJava3 API
+RedissonRxClient redissonRx = redisson.rxJava();
+// 3. Get Redis based implementation of java.util.concurrent.ConcurrentMap
+RMap&lt;MyKey, MyValue&gt; map = redisson.getMap(&quot;myMap&quot;);
+
+RMapReactive&lt;MyKey, MyValue&gt; mapReactive = redissonReactive.getMap(&quot;myMap&quot;);
+
+RMapRx&lt;MyKey, MyValue&gt; mapRx = redissonRx.getMap(&quot;myMap&quot;);
+// 4. Get Redis based implementation of java.util.concurrent.locks.Lock
+RLock lock = redisson.getLock(&quot;myLock&quot;);
+
+RLockReactive lockReactive = redissonReactive.getLock(&quot;myLock&quot;);
+
+RLockRx lockRx = redissonRx.getLock(&quot;myLock&quot;);
+// 4. Get Redis based implementation of java.util.concurrent.ExecutorService
+RExecutorService executor = redisson.getExecutorService(&quot;myExecutorService&quot;);
+
+// over 50 Redis based Java objects and services ...
+</code></pre>
+<h2 id="_8">订阅发布模式</h2>
+<p>可以通过订阅发布模式做一个很简单的即时通信组件</p>
+<pre><code>#A监听A频道
+subscribe a
+#B给A发消息
+publish a helloworld
+#此时A可以收到helloworld的消息
+</code></pre>
+<h2 id="list">变相实现给list元素设置有效时间</h2>
+<p>结合有序集合，加入到有序集合的每个项，我们都将它的score设置为一个时间戳，这个时间戳代表它的过期时间。然后，我们加入一个定时任务，定时移除那些过期的数据即可。</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

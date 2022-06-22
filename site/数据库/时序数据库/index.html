@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://wiki.xlz2021.cf/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>时序数据库 - 玄凌子知识库</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/cypher.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/kotlin.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/docker.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">玄凌子知识库</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">关于我</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Java <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Java/Maven/" class="dropdown-item">Maven 使用</a>
+</li>
+                                    
+<li>
+    <a href="../../Java/%E4%BF%9D%E7%95%99%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/" class="dropdown-item">保留端口占用问题</a>
+</li>
+                                    
+<li>
+    <a href="../../Java/%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" class="dropdown-item">YYYY和yyyy的区别</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Python <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Python/JupyterNotebook%E5%AE%89%E8%A3%85/" class="dropdown-item">Jupyter Notebook 安装</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Docker <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../docker/K3S%E5%AE%89%E8%A3%85/" class="dropdown-item">K3S安装</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/docker%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3/" class="dropdown-item">docker容器相关</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/seaweedfs%E4%BD%9C%E4%B8%BA%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E6%8F%92%E4%BB%B6/" class="dropdown-item">Seaweedfs作为分布式存储插件</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Linux <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../linux/Alpine%E4%BD%BF%E7%94%A8%E6%B8%85%E5%8D%8E%E6%BA%90/" class="dropdown-item">Alpine使用清华源</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/CentOS%E5%AE%8C%E7%BE%8E%E5%8D%87%E7%BA%A7gcc%E7%89%88%E6%9C%AC%E6%96%B9%E6%B3%95/" class="dropdown-item">CentOS完美升级gcc版本方法</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Centos7%E6%9B%B4%E6%96%B0%E5%86%85%E6%A0%B8/" class="dropdown-item">Centos7更新内核</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/FIO%E6%B5%8B%E8%AF%95%E7%A3%81%E7%9B%98IO/" class="dropdown-item">FIO测试磁盘IO</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Linux_LVM%E5%88%86%E5%8C%BA%E6%89%A9%E5%AE%B9/" class="dropdown-item">LVM分区扩容</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Nginx%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E/" class="dropdown-item">Nginx配置说明</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos7_selinux/" class="dropdown-item">修复Centos7的SELINUX错误</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos7%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F/" class="dropdown-item">Centos7单用户模式</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos_update_gcc/" class="dropdown-item">CentOS完美升级gcc版本方法</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/cron/" class="dropdown-item">cron定时任务常见问题</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/cron%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="dropdown-item">Cron定时任务常见问题</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/iperf3%E5%B8%A6%E5%AE%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">Iperf3带宽测试</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/net_safe/" class="dropdown-item">网络安全防护</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/net_speed_test/" class="dropdown-item">带宽测试</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/nfs/" class="dropdown-item">针对大数据组件的NFS挂载参数</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/nginx/" class="dropdown-item">nginx负载均衡</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/tcpdump%E6%8A%93%E5%8C%85/" class="dropdown-item">tcpdump抓包</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/update_centos7_kernel/" class="dropdown-item">Centos7 升级内核版本</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E4%BF%AE%E5%A4%8DCentos7%E7%9A%84SELINUX%E9%94%99%E8%AF%AF/" class="dropdown-item">修复Centos7的SELINUX错误</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" class="dropdown-item">新服务器基本配置流程</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4/" class="dropdown-item">网络安全防护</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E9%92%88%E5%AF%B9%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E7%9A%84NFS%E6%8C%82%E8%BD%BD%E5%8F%82%E6%95%B0/" class="dropdown-item">针对大数据组件的NFS挂载参数</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Store <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../store/seaweedfs/" class="dropdown-item">seaweedfs</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">中医 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E4%BA%94%E6%AD%A5%E5%AD%A6%E7%BA%AF%E6%AD%A3%E4%B8%AD%E5%8C%BB/" class="dropdown-item">五步学纯正中医</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E5%A4%A7%E5%8C%BB%E7%B2%BE%E8%AF%9A/" class="dropdown-item">大医精诚</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">灵枢</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E4%B8%AD%E5%8C%BB%E5%9F%BA%E7%A1%80/" class="dropdown-item">中医基础</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="dropdown-item">人纪针灸学习笔记</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E5%B8%B8%E7%94%A8%E5%85%BB%E7%94%9F%E7%A9%B4%E4%BD%8D/" class="dropdown-item">常用养生穴位</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E7%83%A7%E5%B1%B1%E7%81%AB%E4%B8%8E%E9%80%8F%E5%A4%A9%E5%87%89%E6%89%8B%E6%B3%95/" class="dropdown-item">烧山火与透天凉手法</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E7%BB%8F%E7%BB%9C%E5%B9%B2%E6%94%AF/" class="dropdown-item">经络天干</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E9%AB%98%E8%A1%80%E5%8E%8B%E8%BE%A8%E8%AF%81%E4%B8%8E%E6%96%B9%E9%92%88/" class="dropdown-item">高血压辨证与方针</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E9%BA%A6%E7%B2%92%E8%82%BF%E8%BE%A9%E8%AF%81%E4%B8%8E%E6%96%B9%E9%92%88/" class="dropdown-item">麦粒肿辩证与方针</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">素问</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E5%B8%B8%E7%94%A8%E6%96%B9%E5%89%82/" class="dropdown-item">常用方剂</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E6%95%91%E5%91%BD%E7%A8%BB%E8%8D%89/" class="dropdown-item">救命稻草</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E6%96%B0%E6%96%87%E6%A1%A3/" class="dropdown-item">新文档</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E9%BB%84%E5%B8%9D%E5%86%85%E7%BB%8F_%E5%85%BB%E7%94%9F/" class="dropdown-item">黄帝内经_养生</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">人工智能 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E4%BC%98%E7%BC%BA%E7%82%B9/" class="dropdown-item">常见算法优缺点</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">大数据 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/ElasticSearch/" class="dropdown-item">ElasticSearch技巧</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/ElasticSearch%E6%8A%80%E5%B7%A7/" class="dropdown-item">ElasticSearch技巧</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Flink_sql_ETL%E9%9B%86%E5%90%88/" class="dropdown-item">Flink-sql-ETL集合</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Flink%E5%B8%B8%E7%94%A8%E8%BF%9E%E6%8E%A5%E5%99%A8%E8%AF%BB%E5%86%99%E8%83%BD%E5%8A%9B%E6%B1%87%E6%80%BB/" class="dropdown-item">Flink常用connector支持情况</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/GP%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/" class="dropdown-item">GP常用配置项</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Greenplum%E7%A7%BB%E9%99%A4Segment/" class="dropdown-item">Greenplum移除Segment</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E7%9B%B8%E5%85%B3/" class="dropdown-item">Kafka相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E6%B5%8B%E8%AF%95/" class="dropdown-item">kafka调优</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E8%B0%83%E4%BC%98%E7%9B%B8%E5%85%B3/" class="dropdown-item">Kafka调优相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/cdh_spark/" class="dropdown-item">cdh编写spark依赖问题</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/flink%E9%85%8D%E7%BD%AE%E8%B0%83%E4%BC%98/" class="dropdown-item">flink 配置调优</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/flink%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">flink集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/gp6%E5%BA%93%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">Gp6库性能测试</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/greenplum%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8/" class="dropdown-item">greenplum集群使用</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/greenplum%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">greenplum集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/kafka%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">[kafka性能测试](https://www.cnblogs.com/runnerjack/p/9105784.html)</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/mysql/" class="dropdown-item">Mysql</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83kafka%E9%85%8D%E7%BD%AE/" class="dropdown-item">生产环境kafka配置说明</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">数据库 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../Citus%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8/" class="dropdown-item">Citus集群使用</a>
+</li>
+                                    
+<li>
+    <a href="../GP_MDB%E9%9B%86%E7%BE%A4%E5%86%85%E5%AD%98%E9%85%8D%E7%BD%AE/" class="dropdown-item">gp/mdb集群内存配置</a>
+</li>
+                                    
+<li>
+    <a href="../Lcpg%E5%86%85%E9%83%A8%E5%8F%91%E8%A1%8C%E7%89%88%E4%BD%BF%E7%94%A8/" class="dropdown-item">Lcpg内部发行版使用</a>
+</li>
+                                    
+<li>
+    <a href="../Mariadb%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" class="dropdown-item">Mariadb主从复制</a>
+</li>
+                                    
+<li>
+    <a href="../Mariadb%E5%A4%9A%E4%B8%BB%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">Mariadb多主集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../Mysql%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D/" class="dropdown-item">mysql故障恢复</a>
+</li>
+                                    
+<li>
+    <a href="../Neo4j%E7%9B%B8%E5%85%B3/" class="dropdown-item">Neo4j相关</a>
+</li>
+                                    
+<li>
+    <a href="../Pg%E5%8E%9F%E7%94%9F%E9%9B%86%E7%BE%A4%E5%A4%8D%E5%88%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/" class="dropdown-item">PG原生集群复制配置与高可用</a>
+</li>
+                                    
+<li>
+    <a href="../Postgresql/" class="dropdown-item">Postgresql相关</a>
+</li>
+                                    
+<li>
+    <a href="../Postgresql%E7%9B%B8%E5%85%B3/" class="dropdown-item">Postgresql相关</a>
+</li>
+                                    
+<li>
+    <a href="../Postgresql%E9%9B%86%E7%BE%A4/" class="dropdown-item">pg集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../Redis%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3/" class="dropdown-item">Redis相关</a>
+</li>
+                                    
+<li>
+    <a href="../Redis%E9%9B%86%E7%BE%A4%E7%9B%B8%E5%85%B3/" class="dropdown-item">Redis集群相关</a>
+</li>
+                                    
+<li>
+    <a href="../gp_mdb%E7%A1%AC%E4%BB%B6%E9%80%89%E5%9E%8B%E8%AE%A1%E5%88%92/" class="dropdown-item">gp与mdb硬件选型计划</a>
+</li>
+                                    
+<li>
+    <a href="../mysql_mariadb/" class="dropdown-item">mysql/mariadb</a>
+</li>
+                                    
+<li>
+    <a href="../mysql%E5%88%A0%E9%99%A4%E5%A4%A7%E8%A1%A8/" class="dropdown-item">mysql删除大表</a>
+</li>
+                                    
+<li>
+    <a href="../mysql%E6%88%96mariadb/" class="dropdown-item">Mysql或mariadb</a>
+</li>
+                                    
+<li>
+    <a href="../neo4j/" class="dropdown-item">Neo4j相关</a>
+</li>
+                                    
+<li>
+    <a href="../pipelinedb/" class="dropdown-item">pipelinedb流式数据库介绍</a>
+</li>
+                                    
+<li>
+    <a href="../pipelinedb%E6%B5%81%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D/" class="dropdown-item">Pipelinedb流式数据库介绍</a>
+</li>
+                                    
+<li>
+    <a href="../timescaledb/" class="dropdown-item">Timescaledb</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">时序数据库</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">架构设计 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/empty/" class="dropdown-item">占位置</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">经济 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E7%BB%8F%E6%B5%8E/%E8%B6%85%E4%BD%8E%E4%BB%B7%E9%A2%84%E5%94%AE%E5%A5%97%E8%B7%AF/" class="dropdown-item">超低价预售套路</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../timescaledb/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/empty/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">时序数据的几个特点</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">业务方常见需求</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">常见业务场景</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_4" class="nav-link">需要解决的几个问题</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#_5" class="nav-link">常见时序数据库</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<blockquote>
+<p>时间序列数据库简称时序数据库(Time Series Database)，用于处理带时间标签(按照时间的顺序变化，即时间序列化)的数据，带时间标签的数据也称为时间序列数据。
+</p>
+</blockquote>
+<h2 id="_1">时序数据的几个特点</h2>
+<ul>
+<li>基本上都是插入，没有更新的需求。</li>
+<li>写多于读：95%-99%的操作都是写操作</li>
+<li>顺序写：由于是时间序列数据，因此数据多为追加式写入，而且几乎都是实时写入，很少会写入几天前的数据。</li>
+<li>很少更新：数据写入之后，不会更新</li>
+<li>区块（bulk）删除：基本没有随机删除，多数是从一个时间点开始到某一时间点结束的整段数据删除。比如删除上个月，或者7天前的数据。很少出现删除单独某个指标的数据，或者跳跃时间段的数据。</li>
+<li>数据读取（查询）</li>
+<li>顺序读：基本都是按照时间顺序读取一段时间内的数据。</li>
+<li>基数大：基本数据大，超过内存大小，要选取的只是其一小部分，且没有规律，缓存几乎不起任何作用。</li>
+<li>即使读取操作相对写来说较少，但是读操作的响应时间要求很高，除非你是只做后台报表生成，否则一旦有交互性操作，必须要求快速响应。为了提高读取的响应时间，有两种策略：</li>
+<li>一是以写性能优先，不为读取做存储优化，但是通过分布式和并发读，来提高读取的速度。</li>
+<li>二就是在写入的时候就考虑到读的性能问题，将统一指标、时间段的数据写入到同一数据块中，为读取进行写入优化。</li>
+<li>分布式（集群）</li>
+<li>TSDB 应该天生就要考虑到分布式和分区等特性，将存储和查询分发到不同的服务器，以支撑大规模的数据采集和查询请求。</li>
+<li>同时，它也应该是能扩展和自动失败切换（Fault-tolerant）的。随着数据量的增长，所需服务器的台数也会增加，能动态的增减服务器则是一个基本要求。同时，随着服务器的增多，各种服务器软件或者网络故障发生的概率也会增大，这时候失败切换也显得很重要，不能因为一台机器的失效而导致整个集群不可工作。</li>
+<li>数据基本上都有时间属性，随着时间的推移不断产生新的数据。</li>
+<li>数据量大，每秒钟需要写入千万、上亿条数据</li>
+<li>保留策略（Retention Policies，或自动删除、压缩）</li>
+<li>自动删除就是为数据设置 TTL，过了指定的 TTL 则自动删除相关数据，以节省存储空间同时提高查询性能。如果不删除数据，也可以对数据进行压缩，或者再采样（Resampling），比如对最近 1 天的数据我们可能需要精确到秒，而查询 1 年的数据时，我们只需要精确到天，这时候，海量的数据一年只需要 365 个点来存储，大大节省了存储空间。</li>
+</ul>
+<h2 id="_2">业务方常见需求</h2>
+<ul>
+<li>获取最新状态，查询最近的数据(例如传感器最新的状态)</li>
+<li>展示区间统计，指定时间范围，查询统计信息，例如平均值，最大值，最小值，计数等。。。</li>
+<li>获取异常数据，根据指定条件，筛选异常数据</li>
+</ul>
+<h2 id="_3">常见业务场景</h2>
+<ul>
+<li>监控软件系统： 虚拟机、容器、服务、应用</li>
+<li>监控物理系统： 水文监控、制造业工厂中的设备监控、国家安全相关的数据监控、通讯监控、传感器数据、血糖仪、血压变化、心率等</li>
+<li>资产跟踪应用： 汽车、卡车、物理容器、运货托盘</li>
+<li>金融交易系统： 传统证券、新兴的加密数字货币</li>
+<li>事件应用程序： 跟踪用户、客户的交互数据</li>
+<li>商业智能工具： 跟踪关键指标和业务的总体健康情况</li>
+<li>在互联网行业中，也有着非常多的时序数据，例如用户访问网站的行为轨迹，应用程序产生的日志数据等等。</li>
+<li>一些基本概念(不同的时序数据库称呼略有不同)</li>
+<li>Metric: 度量，相当于关系型数据库中的 table。</li>
+<li>Data point: 数据点，相当于关系型数据库中的 row。</li>
+<li>Timestamp：时间戳，代表数据点产生的时间。</li>
+<li>Field: 度量下的不同字段。比如位置这个度量具有经度和纬度两个 field。一般情况下存放的是随时间戳而变化的数据。</li>
+<li>Tag: 标签。一般存放的是不随时间戳变化的信息。timestamp 加上所有的 tags 可以视为 table 的 primary key。</li>
+<li>例如采集有关风的数据，度量为 Wind，每条数据都有时间戳timestamp，两个字段 field：direction(风向)、speed(风速)，两个tag：sensor(传感器编号)、city(城市)。第一行和第三行，存放的都是 sensor 编号为86F-2RT8的设备，城市是深圳。随着时间的变化，风向和风速发生了改变，风向从56.4变为45.6，风速从2.9变为3.6。</li>
+</ul>
+<h2 id="_4">需要解决的几个问题</h2>
+<ul>
+<li>时序数据的写入：如何支持每秒钟成千上亿条数据的写入。</li>
+<li>时序数据的读取：如何支持在秒级对上亿条数据的分组聚合运算。</li>
+<li>成本敏感：海量数据存储带来的成本问题。如何以更低成本存储数据，将成为时序数据库需要解决的重中之重。</li>
+</ul>
+<h2 id="_5">常见时序数据库</h2>
+<p>时序数据库出现的时间较晚，目前较成熟的时序数据库都仅有2、3年的历史。 InfluxDB(单机版免费，集群版收费)最成熟，Kairosdb(底层使用Cassandra)，OpenTsdb(底层使用HBase)，beringei(Facebook开源)，TimeScaleDB(底层基于PostgreSQL)，TSDB(百度开源)，HiTSDB(阿里开源，底层是PostgreSQL)，MatrixDB（国产，据说写入性能比InfluxDB快几十倍：https://zhuanlan.zhihu.com/p/374151291 ）</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
