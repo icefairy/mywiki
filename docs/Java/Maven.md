@@ -1,5 +1,39 @@
 # Maven 使用
 
+同时引入一个包的多个版本方法
+```xml
+<dependency>
+
+    <groupId>cn.hutool</groupId>
+
+    <artifactId>hutool-core</artifactId>
+
+</dependency>
+
+<!--添加同一依赖的不同版本：groupId后加.-->
+
+<dependency>
+
+    <groupId>cn.hutool.</groupId>
+
+    <artifactId>hutool-core</artifactId>
+
+    <version>4.1.12</version>
+
+</dependency>
+
+<!--添加同一依赖的不同版本：groupId后加..-->
+
+<dependency>
+
+    <groupId>cn.hutool..</groupId>
+
+    <artifactId>hutool-core</artifactId>
+
+    <version>4.5.1</version>
+
+</dependency>
+```
 ```bash
 #复制依赖到lib文件夹
 mvn dependency:copy-dependencies -DoutputDirectory=target\lib -DincludeScope=compile

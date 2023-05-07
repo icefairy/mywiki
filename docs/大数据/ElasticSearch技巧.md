@@ -70,8 +70,6 @@ person_warn                 0 p STARTED          28   172kb 10.0.2.105 esdata2
 curl -XPUT -H 'Content-Type: application/json' 'ip:9200/index/_settings' -d ' { "index" : { "number_of_replicas" : 0 } }'
 ```
 
-
-
 ## 解除只读
 
 curl -XPUT -H 'Content-Type:application/json' http://ip:9200/_all/_settings -d '{"index.blocks.read_only_allow_delete":null}'
@@ -106,7 +104,6 @@ post 192.168.240.14:9200/_cluster/reroute
   }
 ```
 
-
 ## 踢出节点
 
 PUT _cluster/settings
@@ -123,3 +120,70 @@ PUT _cluster/settings
 http://ip:9200/_cat/nodes?v&h=http,version,disk.total,disk.used,disk.used_percent
 ```
 
+## es状态处理
+
+查看集群状态
+http://1.2.3.156:9200/_cluster/health?pretty
+{
+  "cluster_name" : "docker-cluster",
+  "status" : "green",
+  "timed_out" : false,
+  "number_of_nodes" : 10,
+  "number_of_data_nodes" : 10,
+  "active_primary_shards" : 486,
+  "active_shards" : 962,
+  "relocating_shards" : 20, #这里代表在平衡数据
+  "initializing_shards" : 0,
+  "unassigned_shards" : 0,
+  "delayed_unassigned_shards" : 0,
+  "number_of_pending_tasks" : 2,
+  "number_of_in_flight_fetch" : 0,
+  "task_max_waiting_in_queue_millis" : 695,
+  "active_shards_percent_as_number" : 100.0
+}
+
+查看每个节点的磁盘占用情况，来分析是否数据不均衡（磁盘容量差不多的前提下）
+http://1.2.3.156:9200/_cat/allocation?v
+
+查看分片状态（包括正在迁移的分片）
+http://1.2.3.156:9200/_cat/shards?v
+
+查看节点状态（负载，内存占用等）
+http://1.2.3.156:9200/_cat/nodes?v
+
+查看索引数据量以及占用磁盘情况
+http://1.2.3.156:9200/_cat/indices?v
+
+查看挂起的任务
+http://1.2.3.156:9200/_cat/pending_tasks?v
+
+查看索引别名
+http://1.2.3.156:9200/_cat/aliases?v
+
+查看线程池
+http://1.2.3.156:9200/_cat/thread_pool?v
+
+查看bulk线程池（如果这里某个节点出现大量排队或者拒绝就需要做出处理了）
+http://1.2.3.156:9200/_cat/thread_pool/bulk/?v
+
+
+
+## 迁移数据到新的索引
+
+```
+POST localhost:9200/_reindex
+{
+  "source": {
+    "index": "indexName",
+    "type": "typeName",
+    "query": {
+      "term": {
+        "name": "shao"
+      }
+    }
+  },
+  "dest": {
+    "index": "newIndexName"
+  }
+}
+```
