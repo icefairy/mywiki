@@ -8,7 +8,7 @@
         
         <link rel="canonical" href="https://wiki.xlz2021.cf/store/seaweedfs/">
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>seaweedfs - 玄凌子知识库</title>
+        <title>Seaweedfs - 玄凌子知识库</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -221,7 +221,11 @@
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="./" class="dropdown-item active">seaweedfs</a>
+    <a href="./" class="dropdown-item active">Seaweedfs</a>
+</li>
+                                    
+<li>
+    <a href="../%E5%90%8C%E7%A8%8B%E6%97%85%E8%A1%8Cseaweedfs%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" class="dropdown-item">同程旅行Seaweedfs最佳实践</a>
 </li>
                                 </ul>
                             </li>
@@ -237,6 +241,18 @@
     <a href="../../%E4%B8%AD%E5%8C%BB/%E5%A4%A7%E5%8C%BB%E7%B2%BE%E8%AF%9A/" class="dropdown-item">大医精诚</a>
 </li>
                                     
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E6%84%9F%E5%86%92%E7%BB%8F%E6%96%B9%E9%80%89%E8%8D%AF%E5%9B%BE/" class="dropdown-item">感冒经方选药图</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E6%B1%A4%E6%B6%B2%E7%BB%8F%E6%B3%95/" class="dropdown-item">汤液经法</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E8%8D%AF%E9%A3%9F%E5%90%8C%E6%BA%90%E7%9B%AE%E5%BD%952023/" class="dropdown-item">药食同源目录2023</a>
+</li>
+                                    
   <li class="dropdown-submenu">
     <a href="#" class="dropdown-item">灵枢</a>
     <ul class="dropdown-menu">
@@ -247,6 +263,10 @@
             
 <li>
     <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="dropdown-item">人纪针灸学习笔记</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E5%B0%8F%E5%84%BF%E4%B8%80%E8%88%AC%E6%84%9F%E5%86%92%E9%87%8D%E6%84%9F%E5%86%92%E7%A7%AF%E9%A3%9F%E7%9A%84%E6%8E%A8%E6%8B%BF%E6%89%8B%E6%B3%95/" class="dropdown-item">**小儿一般感冒重感冒积食的推拿手法**</a>
 </li>
             
 <li>
@@ -550,7 +570,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../../%E4%B8%AD%E5%8C%BB/%E4%BA%94%E6%AD%A5%E5%AD%A6%E7%BA%AF%E6%AD%A3%E4%B8%AD%E5%8C%BB/" class="nav-link">
+                                <a rel="next" href="../%E5%90%8C%E7%A8%8B%E6%97%85%E8%A1%8Cseaweedfs%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -594,6 +614,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="2"><a href="#seaweedfs_1" class="nav-link">seaweedfs空间清理</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -601,15 +625,15 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="seaweedfs">seaweedfs</h1>
 <blockquote>
 <p>简介:seaweedfs是一套基于go语言开发的分布式存储系统，目前最佳的海量小文件存储解决方案（大中型文件存储也没问题），支持fuse加载、支持api方式调用、支持设置有效期自动清理、支持多机房多机柜异地容灾等,项目地址：https://github.com/chrislusf/seaweedfs</p>
 </blockquote>
+<h1 id="seaweedfs">seaweedfs</h1>
 <h2 id="_1">搭建</h2>
 <pre><code class="language-bash">#最小化集群（master+volume+filer）
 ./weed server -dir data/vol1 -filer -ip localhost -master.dir data/mdir -volume.images.fix.orientation -volume.max 5000 - volume.port 9334
 #在另外的机器加一个vol节点
-./weed volume -dir data/vol2 -images.fix.orientation -port 9335 -ip localhost -max 5000 
+./weed volume -dir data/vol2 -images.fix.orientation -port 9335 -ip localhost -max 5000 -mserver master1:9333,master2:9333
 #在另外的机器加一个master节点（master节点需要单数个）
 ./weed master -ip localhost -mdir data/mdir -port 9333 -peers masterip1:9333,masterip2:9333
 #在另外机器加filer节点
@@ -621,14 +645,18 @@
 <li>使用seaweedfs的filer组件存储图片如果出现502、503、各种timeout的错误在排除网络带宽、filer.toml设置的最大数据库连接数 的因素后可以尝试分流filer服务的流量，因为根据seaweedfs的wiki中说的filer要处理文件内容并完成网络请求的分发所以压力比较大，所以适时地扩充更多的filer节点能有效的降低或避免50x以及timeout的发生</li>
 </ul>
 <h2 id="_3">使用</h2>
-<pre><code class="language-bash">#curl通过filer上传图片
+<pre><code class="language-bash">#通过master直接上传
+curl -F file=@/home/chris/myphoto.jpg http://localhost:9333/submit
+{&quot;fid&quot;:&quot;3,01fbe0dc6f1f38&quot;,&quot;fileName&quot;:&quot;myphoto.jpg&quot;,&quot;fileUrl&quot;:&quot;localhost:8080/3,01fbe0dc6f1f38&quot;,&quot;size&quot;:68231}
+# time to live, examples, 3m: 3 minutes, 4h: 4 hours, 5d: 5 days, 6w: 6 weeks, 7M: 7 months, 8y: 8 years
+#curl通过filer上传图片
 curl http://ipaddr:8888/testjpg.jpg -F &quot;img=@/tmp/testjpg.jpg&quot;
 #curl通过filer上传图片图片有效期1年
 curl http://ipaddr:8888/testjpg.jpg?ttl=1y -F &quot;img=@/tmp/testjpg.jpg&quot;
 
 #不使用filer上传
 curl http://ipaddr:9333/dir/assign
-#不使用filer上传图片有效期1个月
+#不使用filer上传图片有效期1分钟
 curl http://ipaddr:9333/dir/assign?ttl=1m
 #返回:
 {&quot;fid&quot;:&quot;123,12312321312&quot;,&quot;url&quot;:&quot;ipaddrreturnbymaster:9334&quot;,&quot;publicUrl&quot;:&quot;ipaddr:9334&quot;,&quot;count&quot;:1}
@@ -636,6 +664,8 @@ curl http://ipaddr:9333/dir/assign?ttl=1m
 curl http://ipaddrreturnbymaster:9334/123,12312321312 -F &quot;img=@/tmp/testjpg.jpg&quot;
 #通过filer将文件挂载到本地操作
 weed mount -filer=localhost:8888 -dir=/some/existing/dir -filer.path=/one/remote/folder
+#通过api接口遍历文件
+curl -H &quot;Accept: application/json&quot; &quot;http://filerip:port/?pretty=y&quot;
 </code></pre>
 <ul>
 <li>通过kotlin调用（java类似）</li>
@@ -728,6 +758,16 @@ ulimit -n 10240
 </ul>
 <pre><code>weed shell -master masterip:9333
 volume.fix.replication
+</code></pre>
+<h2 id="seaweedfs_1">seaweedfs空间清理</h2>
+<p>当filer中有文件被<strong>删除</strong>后，seaweedfs不会立即清理而是会每15分钟检测一次，当达到30%的空间占用后</p>
+<ul>
+<li>使用Seaweedfs_java_client中的测试代码测试N次后本地data/vol1占用空间1.4GB，当前集群中实际存储文件共660MB</li>
+<li>通过调用强制清理：<code>http://localhost:9333/vol/vacuum?garbageThreshold=0.0001</code>后占用空间661MB</li>
+<li>或者使用shell <code>weed shell</code>执行(代表文件占用体积达到0.1%就执行回收，假如总空间特别大的话，此比例可以再放小些，否则没达到指定的比例不会执行回收操作)</li>
+</ul>
+<pre><code class="language-bash">lock
+volume.vacuum -garbageThreshold 0.001
 </code></pre></div>
             </div>
         </div>

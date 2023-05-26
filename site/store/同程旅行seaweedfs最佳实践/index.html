@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://wiki.xlz2021.cf/store/%E5%90%8C%E7%A8%8B%E6%97%85%E8%A1%8Cseaweedfs%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>同程旅行Seaweedfs最佳实践 - 玄凌子知识库</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/cypher.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/kotlin.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/docker.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">玄凌子知识库</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">关于我</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Java <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Java/Maven/" class="dropdown-item">Maven 使用</a>
+</li>
+                                    
+<li>
+    <a href="../../Java/%E4%BF%9D%E7%95%99%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/" class="dropdown-item">保留端口占用问题</a>
+</li>
+                                    
+<li>
+    <a href="../../Java/%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" class="dropdown-item">YYYY和yyyy的区别</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Python <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../Python/JupyterNotebook%E5%AE%89%E8%A3%85/" class="dropdown-item">Jupyter Notebook 安装</a>
+</li>
+                                    
+<li>
+    <a href="../../Python/pypi%E6%BA%90/" class="dropdown-item">Pypi源</a>
+</li>
+                                    
+<li>
+    <a href="../../Python/%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99%E6%9C%AF/" class="dropdown-item">图片隐写术</a>
+</li>
+                                    
+<li>
+    <a href="../../Python/%E5%AE%89%E8%A3%85ta-lib/" class="dropdown-item">安装ta lib</a>
+</li>
+                                    
+<li>
+    <a href="../../Python/%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B7/" class="dropdown-item">打包工具</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Docker <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../docker/Centos%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85docker/" class="dropdown-item">Centos在线安装docker</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/K3S%E5%AE%89%E8%A3%85/" class="dropdown-item">K3S安装</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/Linux%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85docker/" class="dropdown-item">Linux在线安装docker</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/Pg14%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/" class="dropdown-item">Pg14生产环境镜像构建</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/Swarm%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" class="dropdown-item">Swarm集群使用说明</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/debian%E6%9B%B4%E6%96%B0source/" class="dropdown-item">debian容器更新source.list</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/docker%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3/" class="dropdown-item">docker容器相关</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/seaweedfs%E4%BD%9C%E4%B8%BA%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E6%8F%92%E4%BB%B6/" class="dropdown-item">Seaweedfs作为分布式存储插件</a>
+</li>
+                                    
+<li>
+    <a href="../../docker/%E5%AE%B9%E5%99%A8%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="dropdown-item">容器使用注意事项</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Linux <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../linux/Alpine%E4%BD%BF%E7%94%A8%E6%B8%85%E5%8D%8E%E6%BA%90/" class="dropdown-item">Alpine使用清华源</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/CentOS%E5%AE%8C%E7%BE%8E%E5%8D%87%E7%BA%A7gcc%E7%89%88%E6%9C%AC%E6%96%B9%E6%B3%95/" class="dropdown-item">CentOS完美升级gcc版本方法</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Centos7%E6%9B%B4%E6%96%B0%E5%86%85%E6%A0%B8/" class="dropdown-item">Centos7更新内核</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/FIO%E6%B5%8B%E8%AF%95%E7%A3%81%E7%9B%98IO/" class="dropdown-item">FIO测试磁盘IO</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Linux_LVM%E5%88%86%E5%8C%BA%E6%89%A9%E5%AE%B9/" class="dropdown-item">LVM分区扩容</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/Nginx%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E/" class="dropdown-item">Nginx配置说明</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos7_selinux/" class="dropdown-item">修复Centos7的SELINUX错误</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos7%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F/" class="dropdown-item">Centos7单用户模式</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/centos_update_gcc/" class="dropdown-item">CentOS完美升级gcc版本方法</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/cron/" class="dropdown-item">cron定时任务常见问题</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/cron%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="dropdown-item">Cron定时任务常见问题</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/iperf3%E5%B8%A6%E5%AE%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">Iperf3带宽测试</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/net_safe/" class="dropdown-item">网络安全防护</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/net_speed_test/" class="dropdown-item">带宽测试</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/nfs/" class="dropdown-item">针对大数据组件的NFS挂载参数</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/nginx/" class="dropdown-item">nginx负载均衡</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/tcpdump%E6%8A%93%E5%8C%85/" class="dropdown-item">tcpdump抓包</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/update_centos7_kernel/" class="dropdown-item">Centos7 升级内核版本</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E4%BF%AE%E5%A4%8DCentos7%E7%9A%84SELINUX%E9%94%99%E8%AF%AF/" class="dropdown-item">修复Centos7的SELINUX错误</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" class="dropdown-item">新服务器基本配置流程</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4/" class="dropdown-item">网络安全防护</a>
+</li>
+                                    
+<li>
+    <a href="../../linux/%E9%92%88%E5%AF%B9%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6%E7%9A%84NFS%E6%8C%82%E8%BD%BD%E5%8F%82%E6%95%B0/" class="dropdown-item">针对大数据组件的NFS挂载参数</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Store <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../seaweedfs/" class="dropdown-item">Seaweedfs</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">同程旅行Seaweedfs最佳实践</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">中医 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E4%BA%94%E6%AD%A5%E5%AD%A6%E7%BA%AF%E6%AD%A3%E4%B8%AD%E5%8C%BB/" class="dropdown-item">倪海厦｜跟着这五个步骤学好纯正中医</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E5%A4%A7%E5%8C%BB%E7%B2%BE%E8%AF%9A/" class="dropdown-item">大医精诚</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E6%84%9F%E5%86%92%E7%BB%8F%E6%96%B9%E9%80%89%E8%8D%AF%E5%9B%BE/" class="dropdown-item">感冒经方选药图</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E6%B1%A4%E6%B6%B2%E7%BB%8F%E6%B3%95/" class="dropdown-item">汤液经法</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E8%8D%AF%E9%A3%9F%E5%90%8C%E6%BA%90%E7%9B%AE%E5%BD%952023/" class="dropdown-item">药食同源目录2023</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">灵枢</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E4%B8%AD%E5%8C%BB%E5%9F%BA%E7%A1%80/" class="dropdown-item">中医基础</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="dropdown-item">人纪针灸学习笔记</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E5%B0%8F%E5%84%BF%E4%B8%80%E8%88%AC%E6%84%9F%E5%86%92%E9%87%8D%E6%84%9F%E5%86%92%E7%A7%AF%E9%A3%9F%E7%9A%84%E6%8E%A8%E6%8B%BF%E6%89%8B%E6%B3%95/" class="dropdown-item">**小儿一般感冒重感冒积食的推拿手法**</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E5%B8%B8%E7%94%A8%E5%85%BB%E7%94%9F%E7%A9%B4%E4%BD%8D/" class="dropdown-item">常用养生穴位</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E7%83%A7%E5%B1%B1%E7%81%AB%E4%B8%8E%E9%80%8F%E5%A4%A9%E5%87%89%E6%89%8B%E6%B3%95/" class="dropdown-item">烧山火与透天凉手法</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E7%BB%8F%E7%BB%9C%E5%B9%B2%E6%94%AF/" class="dropdown-item">经络天干</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E9%AB%98%E8%A1%80%E5%8E%8B%E8%BE%A8%E8%AF%81%E4%B8%8E%E6%96%B9%E9%92%88/" class="dropdown-item">高血压辨证与方针</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%81%B5%E6%9E%A2/%E9%BA%A6%E7%B2%92%E8%82%BF%E8%BE%A9%E8%AF%81%E4%B8%8E%E6%96%B9%E9%92%88/" class="dropdown-item">麦粒肿辩证与方针</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">素问</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E5%B8%B8%E7%94%A8%E6%96%B9%E5%89%82/" class="dropdown-item">常用方剂</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E6%95%91%E5%91%BD%E7%A8%BB%E8%8D%89/" class="dropdown-item">救命稻草</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E6%96%B0%E6%96%87%E6%A1%A3/" class="dropdown-item">新文档</a>
+</li>
+            
+<li>
+    <a href="../../%E4%B8%AD%E5%8C%BB/%E7%B4%A0%E9%97%AE/%E9%BB%84%E5%B8%9D%E5%86%85%E7%BB%8F_%E5%85%BB%E7%94%9F/" class="dropdown-item">黄帝内经_养生</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">人工智能 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E4%BC%98%E7%BC%BA%E7%82%B9/" class="dropdown-item">常见算法优缺点</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8E%9F%E7%90%86/" class="dropdown-item">语言模型原理</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">修行 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E4%BF%AE%E8%A1%8C/%E4%BB%99%E4%BC%A0%E7%8E%84%E6%9C%BA%E5%8F%A3%E8%AF%80/" class="dropdown-item">仙传玄机口诀</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%BF%AE%E8%A1%8C/%E4%BF%AE%E8%A1%8C%E5%87%BA%E5%81%8F/" class="dropdown-item">修行出偏</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%BF%AE%E8%A1%8C/%E5%85%B3%E4%BA%8E%E4%B8%B9%E9%81%93%E4%B8%8B%E6%89%8B%E5%90%8E%E6%AC%B2%E6%9C%9B%E5%BC%BA%E7%83%88%E7%9A%84%E9%97%AE%E9%A2%98/" class="dropdown-item">关于丹道下手后欲望强烈的问题</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%BF%AE%E8%A1%8C/%E5%85%B3%E4%BA%8E%E4%B8%B9%E9%81%93%E5%88%9D%E5%AD%A6%E8%80%85%E4%B8%8B%E6%89%8B%E5%AE%9E%E4%BF%AE%E5%8A%9F%E5%A4%AB/" class="dropdown-item">关于丹道初学者下手实修功夫</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%BF%AE%E8%A1%8C/%E5%85%B3%E4%BA%8E%E4%B8%B9%E9%81%93%E6%B2%BB%E7%97%85/" class="dropdown-item">关于丹道治病</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%BF%AE%E8%A1%8C/%E5%A5%B3%E7%94%9F%E6%83%B3%E8%A6%81%E4%BF%AE%E9%81%93%E8%A6%81%E6%80%8E%E4%B9%88%E5%81%9A/" class="dropdown-item">女生修道怎么做-两篇</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%BF%AE%E8%A1%8C/%E6%96%B0%E4%BA%BA%E4%B8%B9%E9%81%93%E9%81%BF%E5%9D%91/" class="dropdown-item">新人丹道避坑</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%BF%AE%E8%A1%8C/%E6%9C%89%E4%BA%BA%E8%AF%B4%E4%B8%B9%E9%81%93%E7%81%AB%E5%80%99%E4%B8%8D%E8%83%BD%E9%9D%A0%E8%87%AA%E5%B7%B1%E6%8F%A3%E6%91%A9%EF%BC%8C%E5%8F%AA%E8%83%BD%E9%9D%A0%E5%B8%88%E6%89%BF%E5%8F%A3%E8%AF%80%E3%80%82%E9%82%A3%E4%B9%88%EF%BC%8C%E6%9C%80%E5%BC%80%E5%A7%8B%E7%9A%84%E5%8A%9F%E6%B3%95%E6%98%AF%E5%A6%82%E4%BD%95%E5%87%BA%E7%8E%B0%E7%9A%84/" class="dropdown-item">有人说丹道火候不能靠自己揣摩，只能靠师承口诀。那么，最开始的功法是如何出现的</a>
+</li>
+                                    
+<li>
+    <a href="../../%E4%BF%AE%E8%A1%8C/%E6%B8%85%E9%9D%99%E7%BB%8F/" class="dropdown-item">清静经</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">大数据 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/ElasticSearch/" class="dropdown-item">ElasticSearch技巧</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/ElasticSearch%E6%8A%80%E5%B7%A7/" class="dropdown-item">ElasticSearch技巧</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Flink_sql_ETL%E9%9B%86%E5%90%88/" class="dropdown-item">Flink-sql-ETL集合</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Flink%E5%B8%B8%E7%94%A8%E8%BF%9E%E6%8E%A5%E5%99%A8%E8%AF%BB%E5%86%99%E8%83%BD%E5%8A%9B%E6%B1%87%E6%80%BB/" class="dropdown-item">Flink常用connector支持情况</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/GP%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9/" class="dropdown-item">GP常用配置项</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Greenplum%E7%A7%BB%E9%99%A4Segment/" class="dropdown-item">Greenplum移除Segment</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E7%9B%B8%E5%85%B3/" class="dropdown-item">Kafka相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E7%B3%BB%E7%BB%9F%E8%B0%83%E4%BC%98%E6%B5%8B%E8%AF%95/" class="dropdown-item">kafka调优</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka%E8%B0%83%E4%BC%98%E7%9B%B8%E5%85%B3/" class="dropdown-item">Kafka调优相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/cdh_spark/" class="dropdown-item">cdh编写spark依赖问题</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/flink%E9%85%8D%E7%BD%AE%E8%B0%83%E4%BC%98/" class="dropdown-item">flink 配置调优</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/flink%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">flink集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/gp6%E5%BA%93%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">Gp6库性能测试</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/greenplum%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8/" class="dropdown-item">greenplum集群使用</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/greenplum%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">greenplum集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/kafka%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">[kafka性能测试](https://www.cnblogs.com/runnerjack/p/9105784.html)</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/mysql/" class="dropdown-item">Mysql</a>
+</li>
+                                    
+<li>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83kafka%E9%85%8D%E7%BD%AE/" class="dropdown-item">生产环境kafka配置说明</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">数据库 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Citus%E9%9B%86%E7%BE%A4%E4%BD%BF%E7%94%A8/" class="dropdown-item">Citus集群使用</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/GP_MDB%E9%9B%86%E7%BE%A4%E5%86%85%E5%AD%98%E9%85%8D%E7%BD%AE/" class="dropdown-item">gp/mdb集群内存配置</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Lcpg%E5%86%85%E9%83%A8%E5%8F%91%E8%A1%8C%E7%89%88%E4%BD%BF%E7%94%A8/" class="dropdown-item">Lcpg内部发行版使用</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Mariadb%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" class="dropdown-item">Mariadb主从复制</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Mariadb%E5%A4%9A%E4%B8%BB%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="dropdown-item">Mariadb多主集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D/" class="dropdown-item">mysql故障恢复</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Neo4j%E7%9B%B8%E5%85%B3/" class="dropdown-item">Neo4j相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Pg%E5%8E%9F%E7%94%9F%E9%9B%86%E7%BE%A4%E5%A4%8D%E5%88%B6%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/" class="dropdown-item">PG原生集群复制配置与高可用</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Postgresql/" class="dropdown-item">Postgresql相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Postgresql%E7%9B%B8%E5%85%B3/" class="dropdown-item">Postgresql相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Postgresql%E9%9B%86%E7%BE%A4/" class="dropdown-item">pg集群搭建</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3/" class="dropdown-item">Redis相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E9%9B%86%E7%BE%A4%E7%9B%B8%E5%85%B3/" class="dropdown-item">Redis集群相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/gp_mdb%E7%A1%AC%E4%BB%B6%E9%80%89%E5%9E%8B%E8%AE%A1%E5%88%92/" class="dropdown-item">gp与mdb硬件选型计划</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/mysql_mariadb/" class="dropdown-item">mysql/mariadb</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%88%A0%E9%99%A4%E5%A4%A7%E8%A1%A8/" class="dropdown-item">mysql删除大表</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%88%96mariadb/" class="dropdown-item">Mysql或mariadb</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/neo4j/" class="dropdown-item">Neo4j相关</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/pipelinedb/" class="dropdown-item">pipelinedb流式数据库介绍</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/pipelinedb%E6%B5%81%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D/" class="dropdown-item">Pipelinedb流式数据库介绍</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/timescaledb/" class="dropdown-item">Timescaledb</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" class="dropdown-item">时序数据库</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">架构设计 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/empty/" class="dropdown-item">占位置</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">经济 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../%E7%BB%8F%E6%B5%8E/%E8%B6%85%E4%BD%8E%E4%BB%B7%E9%A2%84%E5%94%AE%E5%A5%97%E8%B7%AF/" class="dropdown-item">超低价预售套路</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../seaweedfs/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../%E4%B8%AD%E5%8C%BB/%E4%BA%94%E6%AD%A5%E5%AD%A6%E7%BA%AF%E6%AD%A3%E4%B8%AD%E5%8C%BB/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#seaweedfs" class="nav-link">同程旅行Seaweedfs最佳实践</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="seaweedfs">同程旅行Seaweedfs最佳实践</h1>
+<h3 id="1">1. 背景与现状</h3>
+<p>Amazon S3 全称Amazon Simple Storage Service,旨在通过web服务接口提供业界领先的性能、速度、安全性、可伸缩性和数据可用性。该平台由亚马逊网络服务(AWS)开发，并于2006年3月14日首次推出,后续S3逐渐演变为对象存储的标准。</p>
+<p>随着公司的快速发展,公司内对各种图片、视频、文件等这类对象的存储需求越来越强烈。</p>
+<p>目前公司内的接入场景包括,二维码,景区推荐视频,图片,css,js,ML训练素材等资源,大约10亿+文件数。都是核心的业务场景,如果存储服务故障,影响的范围会比较大,比如扫不了入园二维码,访问不了图片等。</p>
+<p>由于历史的原因,现在公司内提供类似存储的服务有好几套,包括Ceph s3,FastDfs+Redis(做元数据存储),公有云 s3代理等,几套服务都有比较明显的问题。比如公有云 s3,使用成本相对比较高,而且走外网交互性能得不到保障,比如Ceph，想完全维护好需要投入大量的成本,性价比不是很高,再比如fastdfs+redis,接入不太友好,支持不了主流的S3。所以我们提供了一套新的对象存储服务来解决以上问题,本文会详细介绍,我们新的对象存储服务(OSS)是怎么做的。</p>
+<h3 id="2">2. 设计目标</h3>
+<p>整体的设计目标如下： - 可扩展: 至少需要支持到10亿+的对象数,并且需要有水平扩展的能力 - 高可用: 要做到高可用,至少要有隔离,多租户,限流,灾备/双活等能力,最核心业务甚至可以做到不同存储产品的灾备。 - 高性能: 需要足够快,类似ceph rados,后续需要可以作为分布式文件存储的存储底座 - 低成本: 可以用远低于ceph的成本支撑所有的业务 - 接入简单: 能够支持主流对象存储S3协议的接入 - 无缝升级: 可以在业务无感知的情况下,稳定的、无缝将业务从ceph s3,公有云 s3迁到新oss</p>
+<h3 id="3">3. 系统设计</h3>
+<p>简单来说,设计目标可以拆分成2个点: - 需要一个非常强大的对象存储oss服务 - 如何在架构层面解决业务无缝切换,存储无缝升级从而保障业务的稳定性</p>
+<p>下面我将从这2点来介绍下我们是怎么做的</p>
+<h3 id="oss">oss技术选型</h3>
+<p>近些年越来越火的开源+商业化的模式让每个方向都或多或少出现了一些比较好的开源产品,比如时序存储方向的TDengine,OLAP方向的ClickHouse等等,在对象存储选型的时候,我们也优先考虑开源产品,通过开源共建的方式来完成我们的产品,尽量不从0开始造轮子。 整个社区看下来,相对比较热门的有minio,SeaweedFS,fastdfs,ceph。其中ceph跟fastdfs不在考虑范围内,所以精力就放在minio跟SeaweedFS上,看是否能满足要求。</p>
+<h3 id="minio">minio</h3>
+<p>minio应该是目前最火的开源的对象存储,github 3w4的star数。</p>
+<p>minio的优点包括: - 友好的UI - 部署比较简单,很容易上手 - 支持文件级别的自愈,在节点故障时无需人工干预 - 全EC存储,成本相对比较低 - 中大文件性能比较好 - 基于文件系统设计,无需额外的存储来存储元数据</p>
+<p>同样minio的缺点也相对明显 - 仅支持EC,会存在io放大的问题,特别是在大量小文件的场景下 - 扩容不太友好,对等扩容时需要全集群停止服务 - 支持的文件数量有限,基于本地文件系统设计,在对象数变多以后,inode的查找都会变得很耗时</p>
+<p>minio是一款有明显优缺点的产品,在我们的需求背景下,minio不能够很好的满足,特别是不能够支持我们10亿+对象存储需求,而且在现有的架构设计下,也不太好改造,然后通过与社区共建的方式来满足我们海量小文件的需求。</p>
+<h3 id="seaweedfs_1">SeaweedFS</h3>
+<p>越来越火的对象存储开源方案,github star数1w5+,且增长速度比较喜人,社区也比较活跃。</p>
+<p>SeaweedFS官方介绍的核心点有2个 - to store billions of files! - to serve the files fast!</p>
+<p>跟我们的部分核心目标比较贴近</p>
+<p>核心优点包括: - 性能比较强大: 核心理论依据是基于 <a href="https://www.usenix.org/legacy/event/osdi10/tech/full_papers/Beaver.pdf">Facebook&#39;s Haystack design paper</a>,该paper的目标也是解决facebook内部图片视频等数据的存储查询问题 - 架构设计比较灵活: 系统设计参照了<a href="https://www.usenix.org/system/files/fast21-pan.pdf">Facebook’s Tectonic Filesystem</a>,特别是几个核心组件的设计,抽象的比较好,非常方便扩展不同的实现,并且整体架构上可以水平扩容,没有明显的瓶颈点 - 功能齐全: 存储比较关心的冷热分离,EC存储,TTL等功能都有支持 - 部署简单: 部署非常简单,很容易上手</p>
+<p>相比于优点,也会有些不足 - S3的适配不完全: 实现了大部分的常用接口,部分非常用接口未实现,比如Canned ACL等。 - 项目背景: 相比于minio等开源产品后面都是强大的商业化公司,该项目核心的作者只有 chrislusf 大神</p>
+<p>从各个维度来看,基于SeaweedFS开源共建的方式来打造我们的对象存储服务是目前比较合理的方案。</p>
+<h3 id="_1">系统架构</h3>
+<h3 id="_2">架构介绍</h3>
+<p>确定选型SeaweedFS后,下一步就是怎么来设计整体服务来满足我们的需求,简易架构如下</p>
+<p><img alt="" src="https://pic3.zhimg.com/80/v2-240c17b3ba7fe25c2e75faebf6812a6a_720w.webp" /></p>
+<p>)</p>
+<p>整体架构其实是一个比较常见的架构,非常简单 - Proxy层: 来适配不同的Api以及对业务做存储适配 - 存储层: 包括SeaweedFS,Ceph s3,公有云 s3. 公有云 s3的操作跟Ceph s3类似,本文就不展开了 - 管控平台: 可视化UI,做权限配置,配额配置,数据列表等</p>
+<p>名词解释 - 公有云 s3 Api: 公司内部之前封装的公有云 s3对外的Api - Efs Api: 公司内部之前封装的对外的静态资源相关的Api - S3 Api: 适配了S3的所有Api - StoreAdapter: 来根据配置来处理业务的请求,选择存储适配 - Filer/s3 Api: SeaweedFS用来对外暴露s3等相关Api的服务 - DCDB: 公司基于<a href="https://github.com/baidu/BaikalDB">BaiKalDB</a>共建的分布式数据库,下文会详细介绍 - BlobStorage: SeaweedFS中用来实际做对象存储的模块</p>
+<h3 id="_3">设计目标详解</h3>
+<h3 id="_4">可扩展</h3>
+<p>目标: 至少需要支持到10亿+的对象数,并且需要有水平扩展的能力</p>
+<p>proxy是无状态的,可以做到水平扩展,所以只需要SeaweedFS做到可以水平扩展就可以满足我们的需求了。</p>
+<p><img alt="" src="https://pic3.zhimg.com/80/v2-9d7fe1ccddb7ee496ea25df4a5e1964e_720w.webp" /></p>
+<p>从整体架构上来看,SeaweedFS核心的有2层(S3存储最核心的基本都是这2块) - File Storage: 用来做metadata元信息的存储以及做api的适配 - Blob Storage: 对象存储的底座</p>
+<p>metadata的能力是比较核心的一个环节,他至少需要做到:水平扩展能力,不丢数据,读写性能比较好,高可用。 类似的服务有:Cassandra,Tidb,YDB,toctonics用的ZippyDB等等。基于我们公司现状,我们选择了跟<a href="https://github.com/baidu/BaikalDB">BaiKalDB</a>共建的分布式数据库DCDB.</p>
+<p><img alt="" src="https://pic4.zhimg.com/80/v2-20fae5cc700abfe10d134b1eaadeb323_720w.webp" /></p>
+<p>DCDB在我们公司使用的比较多,性能得到了很好的验证,并且能够很好的匹配我们的诉求。在引入DCDB做元数据服务后,测试下来读写请求的平均耗时在1ms内,能够满足我们的需求。</p>
+<p><img alt="" src="https://pic1.zhimg.com/80/v2-4cbb6e3ddf93983a78e270c1e55d6a44_720w.webp" /></p>
+<p>以上是dcdb真实使用下来的监控数据,因为可以水平扩容,我们压测结果为即使数据量级到了几十亿,也没有出现性能瓶颈。</p>
+<p>有了DCDB的加持,比如整个读流程就会非常的简单,从DCDB获取元信息,返回数据对应的存储节点,直接跟存储节点交互获取数据,存储节点之间是没有直接关系的,可以做到水平扩展。</p>
+<p><img alt="" src="https://pic2.zhimg.com/80/v2-7d6710806ff2e03f0cb669ab769d8e65_720w.webp" /></p>
+<p>整体看下来,现在整个集群内没有明显的瓶颈点,所有的组件都可以做到水平扩容,可以很好的满足我们对规模的要求。</p>
+<h3 id="_5">高可用</h3>
+<p>需要做到高可用至少需要保障在单点故障(物理机故障等),预期外流量冲击,甚至单idc故障时服务要可用,以及要做到多租户之间相互隔离。下面分别介绍下这几种场景是怎么做的 - 隔离</p>
+<p><img alt="" src="https://pic3.zhimg.com/80/v2-d5e83a50cec4fb4c9f0e5d371c23c042_720w.webp" /></p>
+<p>业务隔离,我们做到了在nginx上做分流,不同的业务(bucket)使用不同的proxy,filer,volumeServer。做到了业务与业务之间物理隔离,相互不影响。 - 租户与限流</p>
+<p>除了物理隔离外,还需要至少做到业务级别的限流熔断功能。对象存储跟其它的大数据服务有个比较大的区别是流量特别大,比如并发上传1M的文件,很轻松就可以将流量打到几十上百GB,会造成网络上面的瓶颈,所以我们要做到可以给业务配置阈值,做到当某个业务有预期外的流量时,可以单独限制不能影响到整体服务,甚至造成网络故障。</p>
+<p>关于租户的限流我们pr了2个策略,一个是基于bucket级别的全局流量限制,一种是可以基于 <code>count</code>+<code>单文件下载限速</code>的流量控制可以比较好的使得整个集群可控。</p>
+<ul>
+<li>高可用</li>
+</ul>
+<p>proxy,filer,dcdb上文都介绍了,可以做到高可用,现在介绍一下数据是怎么做高可用的。数据高可用正常会有2种方式:多副本与EC纠删码</p>
+<p>SeaweedFS支持实时写数据使用副本方式,后期可以转换为EC. 都是可以做到数据高可用的。</p>
+<h3 id="_6">高性能</h3>
+<p>SeaweedFS官方介绍的其中一个特点是:to serve the files fast!</p>
+<p>核心实现思路是参照<a href="https://www.usenix.org/legacy/event/osdi10/tech/full_papers/Beaver.pdf">Facebook&#39;s Haystack design paper</a>,论文里面介绍的比较详细。</p>
+<p>工程实践后最终效果做到了,小文件合并后的顺序写以及 <code>O(1)</code>的硬盘读. 下图是我们6台256G,12*8TB SATA盘,压测的是1M的写,io优先到了瓶颈点。写入3000 TPS</p>
+<p><img alt="" src="https://pic2.zhimg.com/80/v2-69e747ef3f6f073dafd312cb8ab0ede1_720w.webp" /></p>
+<p>下图是我们6台256G,10TB SSD盘,压测的是1M的写,因为带宽限制,没有继续压,各个指标远没有到达瓶颈。 写入4000 TPS</p>
+<p><img alt="" src="https://pic4.zhimg.com/80/v2-0a99ef3e7ab8975fa8dbad7a9e73eeb3_720w.webp" /></p>
+<p>在写入,查询,删除混合场景(6:3:1)压测下,1M的文件 3500+ QPS</p>
+<p><img alt="" src="https://pic3.zhimg.com/80/v2-60706e8a776da426399a53065ae76c46_720w.webp" /></p>
+<p>以上结果仅用了6台机器测试,性能结果达到我们的需求,后期如果有更高的需求,可以做水平扩展。</p>
+<h3 id="_7">低成本</h3>
+<p><img alt="" src="https://pic4.zhimg.com/80/v2-ecf28f2c73894e037ca2ed9f8c1bde27_720w.webp" /></p>
+<p>对象存储最大的成本会是在存储上,数据量会非常大,几百TB,PB甚至EB都是可能的。如上图,各种云厂商也提供了不同存储的不同的计费,简单来说,就是冷的数据可以牺牲一部分性能来降低存储的成本。同样SeaweedFS也做了类似的功能。</p>
+<p><img alt="" src="https://pic2.zhimg.com/80/v2-e348fceb8620c9551e86073112c129b1_720w.webp" /></p>
+<p>补充个小知识点:多备份与EC的差异,可以清楚的看到成本角度,EC比多副本更有优势。</p>
+<p>现在我们可选的存储介质包括NVME,SATA SSD,HDD。可选的数据存储方式有多副本,EC。</p>
+<p><img alt="" src="https://pic4.zhimg.com/80/v2-c6676dbf06d559ad002df6636a2097f7_720w.webp" /></p>
+<p>如图,随着数据越来越冷,我们会慢慢从SSD迁移到HDD,以及从副本方式改为EC存储。做了性能与成本的取舍。</p>
+<h3 id="_8">无缝升级</h3>
+<p>上面介绍了SeaweedFS的一些功能,下面介绍一下我们是如何让业务无缝从ceph s3,公有云 s3,efs api等存储切到新的平台来。 目前场景以ceph为例:</p>
+<p><img alt="" src="https://pic4.zhimg.com/80/v2-49d9562634a39ffff765c9fd1ca11eaf_720w.webp" /></p>
+<h3 id="_9">流程适配</h3>
+<p>业务直接通过S3对ceph进行操作。我们要做的就是偷梁换柱,在业务无感知的情况下,将ceph s3替换为更高可用的SeaweedFS。大概需要做几个事情</p>
+<h3 id="-api">- 全api的适配</h3>
+<p><img alt="" src="https://pic1.zhimg.com/80/v2-1e96dfc6d94e2ae81f9605810d7d2f14_720w.webp" /></p>
+<p>proxy适配了我们原先所有对外的api,包括s3 api,公有云 s3 api,efs api,所有api解析完内部操作完全一致了,这样可以做到只需要域名解析调整到proxy就可以了。</p>
+<ul>
+<li>读流程的适配</li>
+</ul>
+<p><img alt="" src="https://pic4.zhimg.com/80/v2-14b8b3e33225d588d6c44f6fae89558b_720w.webp" /></p>
+<p>因为历史的原因,现在ceph s3以及公有云 s3里面存在了大量的不再使用的数据几百TB,这些数据是不需要导入到新存储的,如上图,我们proxy支持了一种策略s3 -&gt; S3的策略。主要特点有2个: - 存储级别的高可用:新存储故障自动切到备存储,做到存储级别的高可用 - 自动数据补齐:新存储无数据,备存储有数据,自动将该数据的元信息写入MQ</p>
+<p>同时我们还有一个补偿的程序来读取MQ中的数据,自动将被存储的数据补偿到新存储,这样可以做到一段时间后,所有热数据(有访问的数据)自动备份到新存储了,ceph s3/公有云 s3可以下线。</p>
+<p>注: 写MQ的时候需要注意,需要按照文件级别做顺序写入,防止数据有问题</p>
+<ul>
+<li>写流程的适配</li>
+</ul>
+<p><img alt="" src="https://pic1.zhimg.com/80/v2-2de4422a8e0ea1bfca316485f7d7dee8_720w.webp" /></p>
+<p>写入做了取舍,为了提升性能,写入只需要一个存储写成功就响应给业务,第二个存储的数据由补偿程序来完成。该流程可以做到任意存储故障时,业务都无感知。</p>
+<p>proxy中所有操作都是S3的标准接口操作,所以可以轻易做到SeaweedFS与ceph s3,SeaweedFS与公有云 s3,SeaweedFS与SeaweedFS的多种灾备方案。比如最核心的业务场景二维码,景区图片等,我们会先运行一阵SeaweedFS与公有云 s3的自动灾备,防止某种场景下触发了某个存储的bug,而造成大面积的影响</p>
+<p>写入MQ的数据还有一个用途,用来做双存储的数据校验,保障2个集群的数据最终一致性。</p>
+<p>注: - 图中默认写入MQ是成功的,实际proxy中有兜底策略,写MQ失败有另外的兜底策略,比较复杂,这里不做阐述 - 以上介绍了2个核心场景流程,还有部分场景稍有区别,如list api等</p>
+<h3 id="_10">升级步骤</h3>
+<p>除了理论上的无缝外,为了稳定的运行上线,上线流程也比较讲究,我们大概会分几步</p>
+<ul>
+<li>数据比对: 拿s3 api为例,切换之前我们会有个比对程序,订阅nginx的访问日志,来做2个存储的结果比对,核心比对结果主要包括文件的MD5,以及响应的header头</li>
+</ul>
+<p><img alt="" src="https://pic1.zhimg.com/80/v2-229743789e1da6534a4752fca0914a20_720w.webp" /></p>
+<ul>
+<li>策略调整: 因为业务比较核心,为了稳定的推进,每次只做最小化变更,推进过程分了3步: 1: 引入代理,保障代理功能正常 2: 引入SeaweedFS为主,做成SeaweedFS与ceph的双集群备份,这样可以做到即使SeaweedFS有问题,我们也可以快速的将流量回滚到ceph 3:下线ceph,最终形态,做成SeaweedFS的双集群备份</li>
+</ul>
+<p><img alt="" src="https://pic2.zhimg.com/80/v2-b9e5ca3db6c95187a2b6aea07ade689d_720w.webp" /></p>
+<h3 id="4">4. 落地收益</h3>
+<p>得益于开源的好处,我们仅仅投入了2个人力,整个迭代从选型到源码、原理研究到开始落地大概持续了3个月,该项目上线已经运行了接近3个月,运行良好,达到了预期的期望效果。 目前已接入 接近2000w对象,60TB的数据量,还在快速流量切换中。</p>
+<p><img alt="" src="https://pic1.zhimg.com/80/v2-3d5d8c10d38490d3b4950cb71066d274_720w.webp" /></p>
+<p><img alt="" src="https://pic2.zhimg.com/80/v2-daefdd15954f265685830788f2fab7fd_720w.webp" /></p>
+<p><img alt="" src="https://pic2.zhimg.com/80/v2-092fcb2663ffd4de6f92873c05d4317d_720w.webp" /></p>
+<p>以核心业务efs为例,之前存储使用的是公有云 s3,现在切换到了第二步(SeaweedFS为主集群,公有云 s3为备用集群)。切换后的收益 - 性能: 响应耗时有了质的提升,从150ms下降到3ms。 - 稳定性: 之前访问公有云 s3走的是公网,性能波动比较大,切换后耗时变得非常平稳。 - 成本: 目前到了第二步,公有云 s3还剩下了写入的流量,读的流量基本清0了,成本也下降了很多</p>
+<h3 id="5-tips">5. 使用tips</h3>
+<ul>
+<li>volumeGrowthCount: 这个需要调整,要做到尽量所有volumeServer都有writeable的volume,否则写入,查询性能会有影响</li>
+<li>fs.configure: SeaweedFS的设计是每个bucket都对应一个collection,这样可以方便的做生命周期管理,需要控制bucket数量,否则性能会影响比较大。我们内部先改版了取消这个绑定,做到性能最优,不过牺牲了一些bucket的统计功能,完整功能还在优化中</li>
+<li>filer.sync: 没有proxy的情况下,可以使用filer.sync的同步工作来做双集群灾备</li>
+</ul>
+<h3 id="6">6. 未来展望</h3>
+<p>定期备份: 核心bucket的增量、全量定期备份,做到跟db类似的效果,可以做到万一误删等问题也可以回滚</p>
+<p>开源共建: 到目前为止,我们也陆陆续续大大小小提交了20+pr,包括bug fix,性能功能优化,后续会持续的关注社区,跟社区一起成长。</p>
+<p>基于S3的存计分离方案: 现在很多主流的存储产品都适配了S3,比如prometheus,clickhouse等等。因为新oss的强大的性能,我们会在这些适配S3的存储上面试点存储与计算分离</p>
+<p>分布式文件存储: 类似ceph,可以基于对象存储rados打造分布式文件存储,以及现在比较火的juicefs或curvefs也是基于s3构建的。后期也计划基于该oss实现分布式文件存储,一期目标在除了对io latency要求非常高(mysql)的场景外落地,为业务赋能。</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

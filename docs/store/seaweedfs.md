@@ -1,6 +1,6 @@
-# seaweedfs
-
 > 简介:seaweedfs是一套基于go语言开发的分布式存储系统，目前最佳的海量小文件存储解决方案（大中型文件存储也没问题），支持fuse加载、支持api方式调用、支持设置有效期自动清理、支持多机房多机柜异地容灾等,项目地址：https://github.com/chrislusf/seaweedfs
+
+#seaweedfs#
 
 ## 搭建
 
@@ -8,7 +8,7 @@
 #最小化集群（master+volume+filer）
 ./weed server -dir data/vol1 -filer -ip localhost -master.dir data/mdir -volume.images.fix.orientation -volume.max 5000 - volume.port 9334
 #在另外的机器加一个vol节点
-./weed volume -dir data/vol2 -images.fix.orientation -port 9335 -ip localhost -max 5000 
+./weed volume -dir data/vol2 -images.fix.orientation -port 9335 -ip localhost -max 5000 -mserver master1:9333,master2:9333
 #在另外的机器加一个master节点（master节点需要单数个）
 ./weed master -ip localhost -mdir data/mdir -port 9333 -peers masterip1:9333,masterip2:9333
 #在另外机器加filer节点
@@ -17,12 +17,16 @@
 
 ## 注意事项
 
-- volume的max参数代表最大可创建的块数量，一个块默认为30GB，根据实例所在服务器的磁盘空间计算，保留必要的冗余之后可以尽可能多的设置。
-- 使用seaweedfs的filer组件存储图片如果出现502、503、各种timeout的错误在排除网络带宽、filer.toml设置的最大数据库连接数 的因素后可以尝试分流filer服务的流量，因为根据seaweedfs的wiki中说的filer要处理文件内容并完成网络请求的分发所以压力比较大，所以适时地扩充更多的filer节点能有效的降低或避免50x以及timeout的发生
+* volume的max参数代表最大可创建的块数量，一个块默认为30GB，根据实例所在服务器的磁盘空间计算，保留必要的冗余之后可以尽可能多的设置。
+* 使用seaweedfs的filer组件存储图片如果出现502、503、各种timeout的错误在排除网络带宽、filer.toml设置的最大数据库连接数 的因素后可以尝试分流filer服务的流量，因为根据seaweedfs的wiki中说的filer要处理文件内容并完成网络请求的分发所以压力比较大，所以适时地扩充更多的filer节点能有效的降低或避免50x以及timeout的发生
 
 ## 使用
 
 ```bash
+#通过master直接上传
+curl -F file=@/home/chris/myphoto.jpg http://localhost:9333/submit
+{"fid":"3,01fbe0dc6f1f38","fileName":"myphoto.jpg","fileUrl":"localhost:8080/3,01fbe0dc6f1f38","size":68231}
+# time to live, examples, 3m: 3 minutes, 4h: 4 hours, 5d: 5 days, 6w: 6 weeks, 7M: 7 months, 8y: 8 years
 #curl通过filer上传图片
 curl http://ipaddr:8888/testjpg.jpg -F "img=@/tmp/testjpg.jpg"
 #curl通过filer上传图片图片有效期1年
@@ -30,7 +34,7 @@ curl http://ipaddr:8888/testjpg.jpg?ttl=1y -F "img=@/tmp/testjpg.jpg"
 
 #不使用filer上传
 curl http://ipaddr:9333/dir/assign
-#不使用filer上传图片有效期1个月
+#不使用filer上传图片有效期1分钟
 curl http://ipaddr:9333/dir/assign?ttl=1m
 #返回:
 {"fid":"123,12312321312","url":"ipaddrreturnbymaster:9334","publicUrl":"ipaddr:9334","count":1}
@@ -38,9 +42,11 @@ curl http://ipaddr:9333/dir/assign?ttl=1m
 curl http://ipaddrreturnbymaster:9334/123,12312321312 -F "img=@/tmp/testjpg.jpg"
 #通过filer将文件挂载到本地操作
 weed mount -filer=localhost:8888 -dir=/some/existing/dir -filer.path=/one/remote/folder
+#通过api接口遍历文件
+curl -H "Accept: application/json" "http://filerip:port/?pretty=y"
 ```
 
-- 通过kotlin调用（java类似）
+* 通过kotlin调用（java类似）
 
 ```kotlin
 //使用javaclient操作seaweedfs filer接口
@@ -107,21 +113,21 @@ fun filerTest(){
 
 ## 性能优化
 
-- 增加并发写入支持
+* 增加并发写入支持
 
 ```bash
 #并发写入12个volume复制份数为2实际写入为24个volume并发写入（同时写入12个不同的）
 curl http://localhost:9333/vol/grow?count=12&replication=001
 ```
 
-- 增加并发读取支持
+* 增加并发读取支持
 
 ```bash
 #设置复制份数为2则同一个文件支持两个并发读取，不同的资源并发读取数量以volume分块数为准（非volume server节点数）
 curl http://localhost:9333/vol/grow?count=12&replication=001
 ```
 
-- 增加同时打开文件数量
+* 增加同时打开文件数量
 
 ```bash
 #先执行这个命令
@@ -132,9 +138,22 @@ ulimit -n 10240
 
 ## 问题处理
 
-- 修复丢失volume（有复制份数的情况下）,生产系统建议周期性的定时执行此任务
+* 修复丢失volume（有复制份数的情况下）,生产系统建议周期性的定时执行此任务
 
 ```
 weed shell -master masterip:9333
 volume.fix.replication
+```
+
+## seaweedfs空间清理
+
+当filer中有文件被**删除**后，seaweedfs不会立即清理而是会每15分钟检测一次，当达到30%的空间占用后
+
++ 使用Seaweedfs_java_client中的测试代码测试N次后本地data/vol1占用空间1.4GB，当前集群中实际存储文件共660MB
++ 通过调用强制清理：`http://localhost:9333/vol/vacuum?garbageThreshold=0.0001`后占用空间661MB
++ 或者使用shell `weed shell`执行(代表文件占用体积达到0.1%就执行回收，假如总空间特别大的话，此比例可以再放小些，否则没达到指定的比例不会执行回收操作)
+
+```bash
+lock
+volume.vacuum -garbageThreshold 0.001
 ```
