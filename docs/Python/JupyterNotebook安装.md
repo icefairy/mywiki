@@ -13,4 +13,4 @@ pip install jupyter_contrib_nbextensions jupyter_nbextensions_configurator
 jupyter contrib nbextension install
 jupyter nbextensions_configurator enable
 jupyter notebook
-``` 
+```

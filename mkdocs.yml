@@ -5,6 +5,5 @@ theme:
   highlightjs: true
   hljs_languages:
     - yaml
-    - cypher
+    - java
     - kotlin
-    - docker
