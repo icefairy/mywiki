@@ -8,7 +8,7 @@
         
         <link rel="canonical" href="https://wiki.xlz2021.cf/%E5%A4%A7%E6%95%B0%E6%8D%AE/kafka%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>[kafka性能测试](https://www.cnblogs.com/runnerjack/p/9105784.html) - 玄凌子知识库</title>
+        <title>kafka性能测试 - 玄凌子知识库</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -537,7 +537,7 @@
 </li>
                                     
 <li>
-    <a href="./" class="dropdown-item active">[kafka性能测试](https://www.cnblogs.com/runnerjack/p/9105784.html)</a>
+    <a href="./" class="dropdown-item active">kafka性能测试</a>
 </li>
                                     
 <li>
@@ -667,7 +667,11 @@
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/empty/" class="dropdown-item">占位置</a>
+    <a href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E6%96%B0%E4%B8%9C%E8%A5%BF%E7%A7%AF%E7%B4%AF/" class="dropdown-item">新东西积累</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%BB%8F%E9%AA%8C%E7%B4%AF%E7%A7%AF/" class="dropdown-item">经验累积</a>
 </li>
                                 </ul>
                             </li>
@@ -768,8 +772,8 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="kafka"><a href="https://www.cnblogs.com/runnerjack/p/9105784.html">kafka性能测试</a></h1>
-<p>​            Kafka 压力测试文档</p>
+<h1 id="kafka">kafka性能测试</h1>
+<p>Kafka 压力测试文档</p>
 <h1 id="1">1    概述</h1>
 <h2 id="11">1.1  <strong>测试背景</strong></h2>
 <p>在云平台研发SR IAD的过程中，出现SR IAD对硬件资源消耗较为严重的情况，其中在云平台研发中利用Kafka软件对流式数据进行数据处理。我们针对Kafka高吞吐量的特性，对kafka进行压力测试。</p>
@@ -990,9 +994,11 @@
 <h1 id="3">3    测试数据（部分样例）</h1>
 <p>3<strong>.1</strong> <strong>写入测试(only生产者)</strong></p>
 <h3 id="311-partition-vs-throughput"><strong>3.1.1</strong>   <strong>Partition VS. Throughput</strong></h3>
-<p>​    实验条件:3个Broker,1个Topic, Replication-factor=1，3个磁盘，throughput=1000w,num-records=2000w ，batch-size=16K ,1个客户端，1个producer</p>
+<pre><code>实验条件:3个Broker,1个Topic, Replication-factor=1，3个磁盘，throughput=1000w,num-records=2000w ，batch-size=16K ,1个客户端，1个producer
+</code></pre>
 <p>测试项目：分别测试1，3，6，12，15，20，30，50个partition时的吞吐量</p>
-<p>​              表1 partition影响因子</p>
+<pre><code>表1 partition影响因子
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -1083,7 +1089,8 @@
 <h3 id="312-replica-vs-throughput"><strong>3.1.2</strong>   <strong>Replica  VS. Throughput</strong></h3>
 <p>实验条件:3个Broker,1个Topic,3个磁盘，throughput=35w,num-records=5000w ，batch-size=16K ,1个客户端，1个producer</p>
 <p>测试项目：分别测试replication-factor为1，2，3，6时的吞吐量</p>
-<p>​             表2 Repica影响因子</p>
+<pre><code>表2 Repica影响因子
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -1134,7 +1141,8 @@
 <h3 id="313-thread-vs-throughput"><strong>3.1.3</strong>   <strong>Thread VS. Throughput</strong></h3>
 <p>实验条件:3个Broker,1个Topic,3个磁盘，3个partitions , throughput=1000w,num-records=1000w ，batch-size=16K ,1个客户端，1个producer</p>
 <p>测试项目：分别测试thread为1，2，3，4，5时的吞吐量</p>
-<p>​           表3 Thread 影响因子</p>
+<pre><code>表3 Thread 影响因子
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -1199,7 +1207,6 @@
 <h3 id="314-vs-throughput"><strong>3.1.4</strong>   <strong>磁盘</strong> <strong>VS. Throughput</strong></h3>
 <p>实验条件:3个Broker,1个Topic，throughput=1000w,num-records=1000w ，batch-size=16K ,1个客户端，1个producer</p>
 <p>测试项目：分别测试磁盘个数为3，6，9时的吞吐量</p>
-<p>​          </p>
 <p>表4 磁盘影响因子</p>
 <table>
 <thead>
@@ -1308,7 +1315,8 @@
 <p>由表所示，增加网络线程数可以提高吞吐量，但随着生产者线程数增加逐渐趋于平稳，此时CPU最大值为998.2%，对于16核的CPU约占到10核。</p>
 <p><strong>2</strong><strong>、测试客户机的影响</strong></p>
 <p>由于在单个客户机测试时，网卡硬件条件的限制会影响测试的吞吐量，因此换用3台客户机测试，吞吐量的测试结果即为三个客户机吞吐总量。分别测试6个磁盘和9个磁盘在不同分区和线程数的情况，测试结果如表6所示。</p>
-<p>​             表6 客户机影响因素</p>
+<pre><code>表6 客户机影响因素
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -1438,14 +1446,15 @@
 </table>
 <p>由表6可以看出，在三台测试机下，同时向一个topic产生数据，生产者的数据总量是在增大的。在网络稳定的情况下，曾测试3个磁盘3个partition最大吞吐量在18000条左右 ，大小为1683.31MB/s，如图1所示。</p>
 <p>其中在单个broker上cpu最大上线为700%-800%，内存利用率为10%-20%。在单台测试机情况下，曾测试单台测试下最大吞吐为80w条左右，大小约为80MB/s，由于资源限制三台机器总量可能达不到一台机器3倍的量。</p>
-<p>​    </p>
-<p>​            图1 3台机器的吞吐量</p>
+<pre><code>图1 3台机器的吞吐量
+</code></pre>
 <p><strong>3</strong><strong>、IO线程数</strong></p>
 <p>IO线程数即broker处理磁盘IO的线程数</p>
 <p>实验条件:3个Broker,1个Topic，throughput=1000w,num-records=5000w ，batch-size=16K ,3个客户端，1个producer，6个磁盘，6个partitions</p>
 <p>测试项目：分别测试线程个数为8，12时的吞吐量</p>
 <p>图2  线程数为8</p>
-<p>​             图3 线程数为12</p>
+<pre><code>图3 线程数为12
+</code></pre>
 <p>由图2，3可知，当线程数增加后，吞吐量有所增加，但增加比较缓和。</p>
 <p><strong>4、生产者的个数</strong></p>
 <p>实验条件:3个Broker,1个Topic，throughput=1000w,num-records=5000w ，batch-size=16K ,3个客户端，1个producer，9个磁盘，9个partitions</p>
@@ -1554,8 +1563,8 @@
 <p>测试命令：</p>
 <p>./ppt.sh --topic py --num-records 50000000 --record-size 1000 --throughput 10000000 --threads 3 --producer-props bootstrap.servers=192.168.17.68:9092,192.168.17.69:9092,192.168.17.70:9092 compression.type=gzip</p>
 <p>通过运行时初始化参数看到修改值生效，如图所示。</p>
-<p>​          图4 初始化参数</p>
-<p>​           </p>
+<pre><code>图4 初始化参数
+</code></pre>
 <p>表8 压缩因素</p>
 <table>
 <thead>
@@ -1618,7 +1627,8 @@
 <h3 id="321-thread-vs-throughput"><strong>3.2.1</strong>   <strong>Thread VS. Throughput</strong></h3>
 <p>实验条件:3个Broker,1个Topic,3个磁盘，throughput=1000w,num-records=5000w ，1个客户端</p>
 <p>测试项目：分别测试thread为1，2，3，6时的吞吐量</p>
-<p>​             表9  线程因素</p>
+<pre><code>表9  线程因素
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -1658,7 +1668,8 @@
 <h3 id="323-vs-throughput"><strong>3.2.3</strong> <strong>磁盘</strong> <strong>VS. Throughput</strong></h3>
 <p>实验条件:3个Broker,1个Topic, throughput=1000w,num-records=5000w ，1个客户端</p>
 <p>测试项目：分别测试消费者为3，6，9时的吞吐量</p>
-<p>​               表10 磁盘影响因素</p>
+<pre><code>表10 磁盘影响因素
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -1695,7 +1706,8 @@
 <p>实验条件:3个Broker,1个Topic, throughput=1000w,num-records=5000w ，3个客户端，即三个消费者</p>
 <p>测试项目：分别测试磁盘为3，6，9时的吞吐量</p>
 <p>（1） Producer</p>
-<p>​      表11 生产者吞吐量</p>
+<pre><code>表11 生产者吞吐量
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -1733,7 +1745,8 @@
 </tbody>
 </table>
 <p>（2） Consumer</p>
-<p>​            表12 消费者吞吐量</p>
+<pre><code>表12 消费者吞吐量
+</code></pre>
 <table>
 <thead>
 <tr>

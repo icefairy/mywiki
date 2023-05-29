@@ -537,7 +537,7 @@
 </li>
                                     
 <li>
-    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/kafka%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">[kafka性能测试](https://www.cnblogs.com/runnerjack/p/9105784.html)</a>
+    <a href="../../%E5%A4%A7%E6%95%B0%E6%8D%AE/kafka%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="dropdown-item">kafka性能测试</a>
 </li>
                                     
 <li>
@@ -667,7 +667,11 @@
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/empty/" class="dropdown-item">占位置</a>
+    <a href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E6%96%B0%E4%B8%9C%E8%A5%BF%E7%A7%AF%E7%B4%AF/" class="dropdown-item">新东西积累</a>
+</li>
+                                    
+<li>
+    <a href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%BB%8F%E9%AA%8C%E7%B4%AF%E7%A7%AF/" class="dropdown-item">经验累积</a>
 </li>
                                 </ul>
                             </li>
@@ -765,7 +769,7 @@
 <h3 id="_1">系统架构</h3>
 <h3 id="_2">架构介绍</h3>
 <p>确定选型SeaweedFS后,下一步就是怎么来设计整体服务来满足我们的需求,简易架构如下</p>
-<p><img alt="" src="https://pic3.zhimg.com/80/v2-240c17b3ba7fe25c2e75faebf6812a6a_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328520.webp" /></p>
 <p>)</p>
 <p>整体架构其实是一个比较常见的架构,非常简单 - Proxy层: 来适配不同的Api以及对业务做存储适配 - 存储层: 包括SeaweedFS,Ceph s3,公有云 s3. 公有云 s3的操作跟Ceph s3类似,本文就不展开了 - 管控平台: 可视化UI,做权限配置,配额配置,数据列表等</p>
 <p>名词解释 - 公有云 s3 Api: 公司内部之前封装的公有云 s3对外的Api - Efs Api: 公司内部之前封装的对外的静态资源相关的Api - S3 Api: 适配了S3的所有Api - StoreAdapter: 来根据配置来处理业务的请求,选择存储适配 - Filer/s3 Api: SeaweedFS用来对外暴露s3等相关Api的服务 - DCDB: 公司基于<a href="https://github.com/baidu/BaikalDB">BaiKalDB</a>共建的分布式数据库,下文会详细介绍 - BlobStorage: SeaweedFS中用来实际做对象存储的模块</p>
@@ -773,19 +777,19 @@
 <h3 id="_4">可扩展</h3>
 <p>目标: 至少需要支持到10亿+的对象数,并且需要有水平扩展的能力</p>
 <p>proxy是无状态的,可以做到水平扩展,所以只需要SeaweedFS做到可以水平扩展就可以满足我们的需求了。</p>
-<p><img alt="" src="https://pic3.zhimg.com/80/v2-9d7fe1ccddb7ee496ea25df4a5e1964e_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328540.webp" /></p>
 <p>从整体架构上来看,SeaweedFS核心的有2层(S3存储最核心的基本都是这2块) - File Storage: 用来做metadata元信息的存储以及做api的适配 - Blob Storage: 对象存储的底座</p>
 <p>metadata的能力是比较核心的一个环节,他至少需要做到:水平扩展能力,不丢数据,读写性能比较好,高可用。 类似的服务有:Cassandra,Tidb,YDB,toctonics用的ZippyDB等等。基于我们公司现状,我们选择了跟<a href="https://github.com/baidu/BaikalDB">BaiKalDB</a>共建的分布式数据库DCDB.</p>
-<p><img alt="" src="https://pic4.zhimg.com/80/v2-20fae5cc700abfe10d134b1eaadeb323_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328546.webp" /></p>
 <p>DCDB在我们公司使用的比较多,性能得到了很好的验证,并且能够很好的匹配我们的诉求。在引入DCDB做元数据服务后,测试下来读写请求的平均耗时在1ms内,能够满足我们的需求。</p>
-<p><img alt="" src="https://pic1.zhimg.com/80/v2-4cbb6e3ddf93983a78e270c1e55d6a44_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328550.webp" /></p>
 <p>以上是dcdb真实使用下来的监控数据,因为可以水平扩容,我们压测结果为即使数据量级到了几十亿,也没有出现性能瓶颈。</p>
 <p>有了DCDB的加持,比如整个读流程就会非常的简单,从DCDB获取元信息,返回数据对应的存储节点,直接跟存储节点交互获取数据,存储节点之间是没有直接关系的,可以做到水平扩展。</p>
-<p><img alt="" src="https://pic2.zhimg.com/80/v2-7d6710806ff2e03f0cb669ab769d8e65_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328556.webp" /></p>
 <p>整体看下来,现在整个集群内没有明显的瓶颈点,所有的组件都可以做到水平扩容,可以很好的满足我们对规模的要求。</p>
 <h3 id="_5">高可用</h3>
 <p>需要做到高可用至少需要保障在单点故障(物理机故障等),预期外流量冲击,甚至单idc故障时服务要可用,以及要做到多租户之间相互隔离。下面分别介绍下这几种场景是怎么做的 - 隔离</p>
-<p><img alt="" src="https://pic3.zhimg.com/80/v2-d5e83a50cec4fb4c9f0e5d371c23c042_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328562.webp" /></p>
 <p>业务隔离,我们做到了在nginx上做分流,不同的业务(bucket)使用不同的proxy,filer,volumeServer。做到了业务与业务之间物理隔离,相互不影响。 - 租户与限流</p>
 <p>除了物理隔离外,还需要至少做到业务级别的限流熔断功能。对象存储跟其它的大数据服务有个比较大的区别是流量特别大,比如并发上传1M的文件,很轻松就可以将流量打到几十上百GB,会造成网络上面的瓶颈,所以我们要做到可以给业务配置阈值,做到当某个业务有预期外的流量时,可以单独限制不能影响到整体服务,甚至造成网络故障。</p>
 <p>关于租户的限流我们pr了2个策略,一个是基于bucket级别的全局流量限制,一种是可以基于 <code>count</code>+<code>单文件下载限速</code>的流量控制可以比较好的使得整个集群可控。</p>
@@ -798,39 +802,39 @@
 <p>SeaweedFS官方介绍的其中一个特点是:to serve the files fast!</p>
 <p>核心实现思路是参照<a href="https://www.usenix.org/legacy/event/osdi10/tech/full_papers/Beaver.pdf">Facebook&#39;s Haystack design paper</a>,论文里面介绍的比较详细。</p>
 <p>工程实践后最终效果做到了,小文件合并后的顺序写以及 <code>O(1)</code>的硬盘读. 下图是我们6台256G,12*8TB SATA盘,压测的是1M的写,io优先到了瓶颈点。写入3000 TPS</p>
-<p><img alt="" src="https://pic2.zhimg.com/80/v2-69e747ef3f6f073dafd312cb8ab0ede1_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328568.webp" /></p>
 <p>下图是我们6台256G,10TB SSD盘,压测的是1M的写,因为带宽限制,没有继续压,各个指标远没有到达瓶颈。 写入4000 TPS</p>
-<p><img alt="" src="https://pic4.zhimg.com/80/v2-0a99ef3e7ab8975fa8dbad7a9e73eeb3_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328573.webp" /></p>
 <p>在写入,查询,删除混合场景(6:3:1)压测下,1M的文件 3500+ QPS</p>
-<p><img alt="" src="https://pic3.zhimg.com/80/v2-60706e8a776da426399a53065ae76c46_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328577.webp" /></p>
 <p>以上结果仅用了6台机器测试,性能结果达到我们的需求,后期如果有更高的需求,可以做水平扩展。</p>
 <h3 id="_7">低成本</h3>
-<p><img alt="" src="https://pic4.zhimg.com/80/v2-ecf28f2c73894e037ca2ed9f8c1bde27_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328581.webp" /></p>
 <p>对象存储最大的成本会是在存储上,数据量会非常大,几百TB,PB甚至EB都是可能的。如上图,各种云厂商也提供了不同存储的不同的计费,简单来说,就是冷的数据可以牺牲一部分性能来降低存储的成本。同样SeaweedFS也做了类似的功能。</p>
-<p><img alt="" src="https://pic2.zhimg.com/80/v2-e348fceb8620c9551e86073112c129b1_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328586.webp" /></p>
 <p>补充个小知识点:多备份与EC的差异,可以清楚的看到成本角度,EC比多副本更有优势。</p>
 <p>现在我们可选的存储介质包括NVME,SATA SSD,HDD。可选的数据存储方式有多副本,EC。</p>
-<p><img alt="" src="https://pic4.zhimg.com/80/v2-c6676dbf06d559ad002df6636a2097f7_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328592.webp" /></p>
 <p>如图,随着数据越来越冷,我们会慢慢从SSD迁移到HDD,以及从副本方式改为EC存储。做了性能与成本的取舍。</p>
 <h3 id="_8">无缝升级</h3>
 <p>上面介绍了SeaweedFS的一些功能,下面介绍一下我们是如何让业务无缝从ceph s3,公有云 s3,efs api等存储切到新的平台来。 目前场景以ceph为例:</p>
-<p><img alt="" src="https://pic4.zhimg.com/80/v2-49d9562634a39ffff765c9fd1ca11eaf_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328597.webp" /></p>
 <h3 id="_9">流程适配</h3>
 <p>业务直接通过S3对ceph进行操作。我们要做的就是偷梁换柱,在业务无感知的情况下,将ceph s3替换为更高可用的SeaweedFS。大概需要做几个事情</p>
 <h3 id="-api">- 全api的适配</h3>
-<p><img alt="" src="https://pic1.zhimg.com/80/v2-1e96dfc6d94e2ae81f9605810d7d2f14_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328601.webp" /></p>
 <p>proxy适配了我们原先所有对外的api,包括s3 api,公有云 s3 api,efs api,所有api解析完内部操作完全一致了,这样可以做到只需要域名解析调整到proxy就可以了。</p>
 <ul>
 <li>读流程的适配</li>
 </ul>
-<p><img alt="" src="https://pic4.zhimg.com/80/v2-14b8b3e33225d588d6c44f6fae89558b_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328606.webp" /></p>
 <p>因为历史的原因,现在ceph s3以及公有云 s3里面存在了大量的不再使用的数据几百TB,这些数据是不需要导入到新存储的,如上图,我们proxy支持了一种策略s3 -&gt; S3的策略。主要特点有2个: - 存储级别的高可用:新存储故障自动切到备存储,做到存储级别的高可用 - 自动数据补齐:新存储无数据,备存储有数据,自动将该数据的元信息写入MQ</p>
 <p>同时我们还有一个补偿的程序来读取MQ中的数据,自动将被存储的数据补偿到新存储,这样可以做到一段时间后,所有热数据(有访问的数据)自动备份到新存储了,ceph s3/公有云 s3可以下线。</p>
 <p>注: 写MQ的时候需要注意,需要按照文件级别做顺序写入,防止数据有问题</p>
 <ul>
 <li>写流程的适配</li>
 </ul>
-<p><img alt="" src="https://pic1.zhimg.com/80/v2-2de4422a8e0ea1bfca316485f7d7dee8_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328612.webp" /></p>
 <p>写入做了取舍,为了提升性能,写入只需要一个存储写成功就响应给业务,第二个存储的数据由补偿程序来完成。该流程可以做到任意存储故障时,业务都无感知。</p>
 <p>proxy中所有操作都是S3的标准接口操作,所以可以轻易做到SeaweedFS与ceph s3,SeaweedFS与公有云 s3,SeaweedFS与SeaweedFS的多种灾备方案。比如最核心的业务场景二维码,景区图片等,我们会先运行一阵SeaweedFS与公有云 s3的自动灾备,防止某种场景下触发了某个存储的bug,而造成大面积的影响</p>
 <p>写入MQ的数据还有一个用途,用来做双存储的数据校验,保障2个集群的数据最终一致性。</p>
@@ -840,16 +844,16 @@
 <ul>
 <li>数据比对: 拿s3 api为例,切换之前我们会有个比对程序,订阅nginx的访问日志,来做2个存储的结果比对,核心比对结果主要包括文件的MD5,以及响应的header头</li>
 </ul>
-<p><img alt="" src="https://pic1.zhimg.com/80/v2-229743789e1da6534a4752fca0914a20_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328618.webp" /></p>
 <ul>
 <li>策略调整: 因为业务比较核心,为了稳定的推进,每次只做最小化变更,推进过程分了3步: 1: 引入代理,保障代理功能正常 2: 引入SeaweedFS为主,做成SeaweedFS与ceph的双集群备份,这样可以做到即使SeaweedFS有问题,我们也可以快速的将流量回滚到ceph 3:下线ceph,最终形态,做成SeaweedFS的双集群备份</li>
 </ul>
-<p><img alt="" src="https://pic2.zhimg.com/80/v2-b9e5ca3db6c95187a2b6aea07ade689d_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328623.webp" /></p>
 <h3 id="4">4. 落地收益</h3>
 <p>得益于开源的好处,我们仅仅投入了2个人力,整个迭代从选型到源码、原理研究到开始落地大概持续了3个月,该项目上线已经运行了接近3个月,运行良好,达到了预期的期望效果。 目前已接入 接近2000w对象,60TB的数据量,还在快速流量切换中。</p>
-<p><img alt="" src="https://pic1.zhimg.com/80/v2-3d5d8c10d38490d3b4950cb71066d274_720w.webp" /></p>
-<p><img alt="" src="https://pic2.zhimg.com/80/v2-daefdd15954f265685830788f2fab7fd_720w.webp" /></p>
-<p><img alt="" src="https://pic2.zhimg.com/80/v2-092fcb2663ffd4de6f92873c05d4317d_720w.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328628.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328638.webp" /></p>
+<p><img alt="" src="https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328697.webp" /></p>
 <p>以核心业务efs为例,之前存储使用的是公有云 s3,现在切换到了第二步(SeaweedFS为主集群,公有云 s3为备用集群)。切换后的收益 - 性能: 响应耗时有了质的提升,从150ms下降到3ms。 - 稳定性: 之前访问公有云 s3走的是公网,性能波动比较大,切换后耗时变得非常平稳。 - 成本: 目前到了第二步,公有云 s3还剩下了写入的流量,读的流量基本清0了,成本也下降了很多</p>
 <h3 id="5-tips">5. 使用tips</h3>
 <ul>
