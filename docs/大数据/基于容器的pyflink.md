@@ -19,7 +19,7 @@ jobmanager.memory.process.size: 8192m
 historyserver.archive.fs.dir: file:///tmp/flink-cmpdir
 jobmanager.archive.fs.dir: file:///tmp/flink-cmpdir
 "
-docker run  -itd   --name=jobmanager -v /data/flinkjobmgr:/tmp --hostname jobmanager  --net pynet -p 8081:8081 -p 8082:8082 -p 6123:6123 --restart=always  -e FLINK_PROPERTIES="${FLINK_PROPERTIES}"     icefairy/flink:1.16.1_cdc jobmanager
+docker run  -itd   --name=jobmanager -v /data/flinkjobmgr:/tmp --hostname jobmanager  --net pynet -p 8081:8081 -p 8082:8082 -p 6123:6123 --restart=always  -e FLINK_PROPERTIES="${FLINK_PROPERTIES}"     icefairy/flink:1.13.6_cdc jobmanager
 #批量构建taskmanager
 mkdir /data/flinktm -p;
 chmod 777 -R /data/flinktm;
@@ -38,7 +38,7 @@ restart-strategy.fixed-delay.delay: 10s
 table.dynamic-table-options.enabled: true
 taskmanager.numberOfTaskSlots: 6
 "
-docker run -itd --name tm$i -v /data/flinktm:/tmp --hostname taskmanager$i --net pynet --restart=always -e FLINK_PROPERTIES="${FLINK_PROPERTIES}" icefairy/flink:1.16.1_cdc taskmanager
+docker run -itd --name tm$i -v /data/flinktm:/tmp --hostname taskmanager$i --net pynet --restart=always -e FLINK_PROPERTIES="${FLINK_PROPERTIES}" icefairy/flink:1.13.6_cdc taskmanager
 
 done
 docker ps 

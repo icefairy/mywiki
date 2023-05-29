@@ -1,8 +1,8 @@
 # ES性能指标
 
-![1675674673219](image/ES性能指标/1675674673219.png)
+![1675674673219](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328773.png)
 
-![1675674683329](image/ES性能指标/1675674683329.png)
+![1675674683329](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328779.png)
 
 240.80:9201最原始的keyword形式使用
 

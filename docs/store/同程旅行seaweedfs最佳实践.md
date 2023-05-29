@@ -54,7 +54,7 @@ SeaweedFS官方介绍的核心点有2个 - to store billions of files! - to serv
 
 确定选型SeaweedFS后,下一步就是怎么来设计整体服务来满足我们的需求,简易架构如下
 
-![](https://pic3.zhimg.com/80/v2-240c17b3ba7fe25c2e75faebf6812a6a_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328520.webp)
 
 )
 
@@ -70,23 +70,23 @@ SeaweedFS官方介绍的核心点有2个 - to store billions of files! - to serv
 
 proxy是无状态的,可以做到水平扩展,所以只需要SeaweedFS做到可以水平扩展就可以满足我们的需求了。
 
-![](https://pic3.zhimg.com/80/v2-9d7fe1ccddb7ee496ea25df4a5e1964e_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328540.webp)
 
 从整体架构上来看,SeaweedFS核心的有2层(S3存储最核心的基本都是这2块) - File Storage: 用来做metadata元信息的存储以及做api的适配 - Blob Storage: 对象存储的底座
 
 metadata的能力是比较核心的一个环节,他至少需要做到:水平扩展能力,不丢数据,读写性能比较好,高可用。 类似的服务有:Cassandra,Tidb,YDB,toctonics用的ZippyDB等等。基于我们公司现状,我们选择了跟[BaiKalDB](https://github.com/baidu/BaikalDB)共建的分布式数据库DCDB.
 
-![](https://pic4.zhimg.com/80/v2-20fae5cc700abfe10d134b1eaadeb323_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328546.webp)
 
 DCDB在我们公司使用的比较多,性能得到了很好的验证,并且能够很好的匹配我们的诉求。在引入DCDB做元数据服务后,测试下来读写请求的平均耗时在1ms内,能够满足我们的需求。
 
-![](https://pic1.zhimg.com/80/v2-4cbb6e3ddf93983a78e270c1e55d6a44_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328550.webp)
 
 以上是dcdb真实使用下来的监控数据,因为可以水平扩容,我们压测结果为即使数据量级到了几十亿,也没有出现性能瓶颈。
 
 有了DCDB的加持,比如整个读流程就会非常的简单,从DCDB获取元信息,返回数据对应的存储节点,直接跟存储节点交互获取数据,存储节点之间是没有直接关系的,可以做到水平扩展。
 
-![](https://pic2.zhimg.com/80/v2-7d6710806ff2e03f0cb669ab769d8e65_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328556.webp)
 
 整体看下来,现在整个集群内没有明显的瓶颈点,所有的组件都可以做到水平扩容,可以很好的满足我们对规模的要求。
 
@@ -94,7 +94,7 @@ DCDB在我们公司使用的比较多,性能得到了很好的验证,并且能�
 
 需要做到高可用至少需要保障在单点故障(物理机故障等),预期外流量冲击,甚至单idc故障时服务要可用,以及要做到多租户之间相互隔离。下面分别介绍下这几种场景是怎么做的 - 隔离
 
-![](https://pic3.zhimg.com/80/v2-d5e83a50cec4fb4c9f0e5d371c23c042_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328562.webp)
 
 业务隔离,我们做到了在nginx上做分流,不同的业务(bucket)使用不同的proxy,filer,volumeServer。做到了业务与业务之间物理隔离,相互不影响。 - 租户与限流
 
@@ -116,31 +116,31 @@ SeaweedFS官方介绍的其中一个特点是:to serve the files fast!
 
 工程实践后最终效果做到了,小文件合并后的顺序写以及 `O(1)`的硬盘读. 下图是我们6台256G,12*8TB SATA盘,压测的是1M的写,io优先到了瓶颈点。写入3000 TPS
 
-![](https://pic2.zhimg.com/80/v2-69e747ef3f6f073dafd312cb8ab0ede1_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328568.webp)
 
 下图是我们6台256G,10TB SSD盘,压测的是1M的写,因为带宽限制,没有继续压,各个指标远没有到达瓶颈。 写入4000 TPS
 
-![](https://pic4.zhimg.com/80/v2-0a99ef3e7ab8975fa8dbad7a9e73eeb3_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328573.webp)
 
 在写入,查询,删除混合场景(6:3:1)压测下,1M的文件 3500+ QPS
 
-![](https://pic3.zhimg.com/80/v2-60706e8a776da426399a53065ae76c46_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328577.webp)
 
 以上结果仅用了6台机器测试,性能结果达到我们的需求,后期如果有更高的需求,可以做水平扩展。
 
 ### 低成本
 
-![](https://pic4.zhimg.com/80/v2-ecf28f2c73894e037ca2ed9f8c1bde27_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328581.webp)
 
 对象存储最大的成本会是在存储上,数据量会非常大,几百TB,PB甚至EB都是可能的。如上图,各种云厂商也提供了不同存储的不同的计费,简单来说,就是冷的数据可以牺牲一部分性能来降低存储的成本。同样SeaweedFS也做了类似的功能。
 
-![](https://pic2.zhimg.com/80/v2-e348fceb8620c9551e86073112c129b1_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328586.webp)
 
 补充个小知识点:多备份与EC的差异,可以清楚的看到成本角度,EC比多副本更有优势。
 
 现在我们可选的存储介质包括NVME,SATA SSD,HDD。可选的数据存储方式有多副本,EC。
 
-![](https://pic4.zhimg.com/80/v2-c6676dbf06d559ad002df6636a2097f7_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328592.webp)
 
 如图,随着数据越来越冷,我们会慢慢从SSD迁移到HDD,以及从副本方式改为EC存储。做了性能与成本的取舍。
 
@@ -148,7 +148,7 @@ SeaweedFS官方介绍的其中一个特点是:to serve the files fast!
 
 上面介绍了SeaweedFS的一些功能,下面介绍一下我们是如何让业务无缝从ceph s3,公有云 s3,efs api等存储切到新的平台来。 目前场景以ceph为例:
 
-![](https://pic4.zhimg.com/80/v2-49d9562634a39ffff765c9fd1ca11eaf_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328597.webp)
 
 ### 流程适配
 
@@ -156,13 +156,13 @@ SeaweedFS官方介绍的其中一个特点是:to serve the files fast!
 
 ### - 全api的适配
 
-![](https://pic1.zhimg.com/80/v2-1e96dfc6d94e2ae81f9605810d7d2f14_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328601.webp)
 
 proxy适配了我们原先所有对外的api,包括s3 api,公有云 s3 api,efs api,所有api解析完内部操作完全一致了,这样可以做到只需要域名解析调整到proxy就可以了。
 
 * 读流程的适配
 
-![](https://pic4.zhimg.com/80/v2-14b8b3e33225d588d6c44f6fae89558b_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328606.webp)
 
 因为历史的原因,现在ceph s3以及公有云 s3里面存在了大量的不再使用的数据几百TB,这些数据是不需要导入到新存储的,如上图,我们proxy支持了一种策略s3 -> S3的策略。主要特点有2个: - 存储级别的高可用:新存储故障自动切到备存储,做到存储级别的高可用 - 自动数据补齐:新存储无数据,备存储有数据,自动将该数据的元信息写入MQ
 
@@ -172,7 +172,7 @@ proxy适配了我们原先所有对外的api,包括s3 api,公有云 s3 api,efs a
 
 * 写流程的适配
 
-![](https://pic1.zhimg.com/80/v2-2de4422a8e0ea1bfca316485f7d7dee8_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328612.webp)
 
 写入做了取舍,为了提升性能,写入只需要一个存储写成功就响应给业务,第二个存储的数据由补偿程序来完成。该流程可以做到任意存储故障时,业务都无感知。
 
@@ -188,21 +188,21 @@ proxy中所有操作都是S3的标准接口操作,所以可以轻易做到Seawee
 
 * 数据比对: 拿s3 api为例,切换之前我们会有个比对程序,订阅nginx的访问日志,来做2个存储的结果比对,核心比对结果主要包括文件的MD5,以及响应的header头
 
-![](https://pic1.zhimg.com/80/v2-229743789e1da6534a4752fca0914a20_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328618.webp)
 
 * 策略调整: 因为业务比较核心,为了稳定的推进,每次只做最小化变更,推进过程分了3步: 1: 引入代理,保障代理功能正常 2: 引入SeaweedFS为主,做成SeaweedFS与ceph的双集群备份,这样可以做到即使SeaweedFS有问题,我们也可以快速的将流量回滚到ceph 3:下线ceph,最终形态,做成SeaweedFS的双集群备份
 
-![](https://pic2.zhimg.com/80/v2-b9e5ca3db6c95187a2b6aea07ade689d_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328623.webp)
 
 ### 4. 落地收益
 
 得益于开源的好处,我们仅仅投入了2个人力,整个迭代从选型到源码、原理研究到开始落地大概持续了3个月,该项目上线已经运行了接近3个月,运行良好,达到了预期的期望效果。 目前已接入 接近2000w对象,60TB的数据量,还在快速流量切换中。
 
-![](https://pic1.zhimg.com/80/v2-3d5d8c10d38490d3b4950cb71066d274_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328628.webp)
 
-![](https://pic2.zhimg.com/80/v2-daefdd15954f265685830788f2fab7fd_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328638.webp)
 
-![](https://pic2.zhimg.com/80/v2-092fcb2663ffd4de6f92873c05d4317d_720w.webp)
+![](https://gitee.com/icefairy/noteimgs/raw/master/2023/05/upgit_20230529_1685328697.webp)
 
 以核心业务efs为例,之前存储使用的是公有云 s3,现在切换到了第二步(SeaweedFS为主集群,公有云 s3为备用集群)。切换后的收益 - 性能: 响应耗时有了质的提升,从150ms下降到3ms。 - 稳定性: 之前访问公有云 s3走的是公网,性能波动比较大,切换后耗时变得非常平稳。 - 成本: 目前到了第二步,公有云 s3还剩下了写入的流量,读的流量基本清0了,成本也下降了很多
 

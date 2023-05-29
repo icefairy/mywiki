@@ -9,6 +9,7 @@ SET 'execution.checkpointing.interval' = '30min';
 SET 'execution.checkpointing.timeout' = '30min';
 set 'execution.checkpointing.unaligned'= 'true';
 set 'state.checkpoints.num-retained'='1';
+set 'table.exec.state.ttl'='60min';
 set 'execution.checkpointing.aligned-checkpoint-timeout' = '20min';
 SET 'execution.checkpointing.min-pause' = '20min';
 SET 'execution.checkpointing.max-concurrent-checkpoints' = '1';
